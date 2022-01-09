@@ -1,5 +1,3 @@
-/src/main/resources/external-application.properties
-
 ### Default ###
 HELP.md
 target/

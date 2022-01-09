@@ -1,11 +1,11 @@
-package ua.knu.csc.iss.primitivebank;
+package ua.knu.csc.iss.mvpbank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PrimitiveBankApplication {
+public class MvpBankApplication {
   public static void main(String[] args) {
-    SpringApplication.run(PrimitiveBankApplication.class, args);
+    SpringApplication.run(MvpBankApplication.class, args);
   }
 }
