@@ -7,8 +7,8 @@ import java.util.Map;
 
 @RestController
 public class TestRestController {
-    @GetMapping("/test-rest")
-    public Object getTest() {
-        return Map.of("name", "eee", "age", 6);
-    }
+  @GetMapping("/test-rest")
+  public Object getTest() {
+    return Map.of("name", "eee", "age", 6);
+  }
 }

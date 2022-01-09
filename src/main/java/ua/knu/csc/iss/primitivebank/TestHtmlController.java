@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class TestHtmlController {
-    @GetMapping("/test-html/{message}")
-    public String mainWithParam(Model model, @PathVariable String message) {
-        model.addAttribute("message", message);
-        return "login";
-    }
+  @GetMapping("/test-html/{message}")
+  public String mainWithParam(Model model, @PathVariable String message) {
+    model.addAttribute("message", message);
+    return "login";
+  }
 }
