@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EmailService {
   public void sendConfirmEmail(String token) {
+    // TODO send email
     System.out.println("_______________________________________________________________");
     System.out.println(token);
     System.out.println(token);
