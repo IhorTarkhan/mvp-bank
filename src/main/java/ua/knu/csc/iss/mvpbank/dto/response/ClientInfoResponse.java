@@ -1,4 +1,4 @@
-package ua.knu.csc.iss.mvpbank.dto.request;
+package ua.knu.csc.iss.mvpbank.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerEmailConfirmRequest {
-  private String token;
+public class ClientInfoResponse {
+  private String email;
+  private boolean emailVerified;
 }

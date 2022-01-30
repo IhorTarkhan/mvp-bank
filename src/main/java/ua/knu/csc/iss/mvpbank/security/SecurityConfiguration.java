@@ -15,10 +15,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ua.knu.csc.iss.mvpbank.entity.Customer;
+import ua.knu.csc.iss.mvpbank.entity.Client;
 import ua.knu.csc.iss.mvpbank.entity.SuperAdmin;
-import ua.knu.csc.iss.mvpbank.security.filter.CustomerSecurityFilter;
-import ua.knu.csc.iss.mvpbank.security.filter.SuperAdminCustomerFilter;
+import ua.knu.csc.iss.mvpbank.security.filter.ClientSecurityFilter;
+import ua.knu.csc.iss.mvpbank.security.filter.SuperAdminSecurityFilter;
 
 import static org.springframework.http.HttpMethod.OPTIONS;
 
@@ -27,8 +27,8 @@ import static org.springframework.http.HttpMethod.OPTIONS;
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-  private final CustomerSecurityFilter customerSecurityFilter;
-  private final SuperAdminCustomerFilter superAdminCustomerFilter;
+  private final ClientSecurityFilter clientSecurityFilter;
+  private final SuperAdminSecurityFilter superAdminSecurityFilter;
   private final UserDetailsService userService;
 
   @Override
@@ -48,17 +48,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         // add filters
-        .addFilterBefore(customerSecurityFilter, UsernamePasswordAuthenticationFilter.class)
-        .addFilterBefore(superAdminCustomerFilter, UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(clientSecurityFilter, UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(superAdminSecurityFilter, UsernamePasswordAuthenticationFilter.class)
         // permit OPTIONS request
         .authorizeRequests()
         .antMatchers(OPTIONS, "/**")
         .permitAll()
-        // set access to "CUSTOMER" role
-        .antMatchers("/customer/register", "/customer/login", "/customer/confirm-email")
+        // set access to "CLIENT" role
+        .antMatchers("/client/register", "/client/login", "/client/confirm-email")
         .permitAll()
-        .antMatchers("/customer/**")
-        .hasRole(Customer.ROLE)
+        .antMatchers("/client/**")
+        .hasRole(Client.ROLE)
         // set access to "SUPER_ADMIN" role
         .antMatchers("/super-admin/register", "/super-admin/login", "/super-admin/confirm-email")
         .permitAll()

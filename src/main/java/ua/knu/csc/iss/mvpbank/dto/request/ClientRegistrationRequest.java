@@ -1,4 +1,4 @@
-package ua.knu.csc.iss.mvpbank.dto.response;
+package ua.knu.csc.iss.mvpbank.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerInfoResponse {
-  private String email;
-  private boolean emailVerified;
+public class ClientRegistrationRequest {
+  private String username;
+  private String password;
 }

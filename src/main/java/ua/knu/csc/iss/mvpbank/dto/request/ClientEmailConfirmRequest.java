@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerLoginRequest {
-  private String username;
-  private String password;
+public class ClientEmailConfirmRequest {
+  private String token;
 }

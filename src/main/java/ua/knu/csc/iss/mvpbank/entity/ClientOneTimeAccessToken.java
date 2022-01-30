@@ -11,8 +11,8 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "customer_one_time_access_token")
-public class CustomerOneTimeAccessToken {
+@Table(name = "client_one_time_access_token")
+public class ClientOneTimeAccessToken {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
@@ -24,7 +24,7 @@ public class CustomerOneTimeAccessToken {
   @Column(name = "expires_at")
   private ZonedDateTime expiresAt;
 
-  @ManyToOne(targetEntity = Customer.class, fetch = FetchType.LAZY)
+  @ManyToOne(targetEntity = Client.class, fetch = FetchType.LAZY)
   @JoinColumn
-  private Customer customer;
+  private Client client;
 }

@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
-import ua.knu.csc.iss.mvpbank.repository.CustomerRepository;
+import ua.knu.csc.iss.mvpbank.repository.ClientRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -18,11 +18,11 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
 public class SpringBootJPAIntegrationTest {
   @Autowired TestRestTemplate restTemplate;
-  @Autowired private CustomerRepository customerRepository;
+  @Autowired private ClientRepository clientRepository;
 
   @Test
   public void repositoryTest() {
-    assertEquals(0, customerRepository.count());
+    assertEquals(0, clientRepository.count());
   }
 
   @Test
