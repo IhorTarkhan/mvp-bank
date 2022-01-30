@@ -6,22 +6,18 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.5.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ua.knu.csc.iss</groupId>
-    <artifactId>primitive-bank</artifactId>
+    <artifactId>mvp-bank</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>primitive-bank</name>
+    <name>mvc-bank</name>
     <description>Sample bank system</description>
     <properties>
         <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -31,15 +27,46 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!--  thymeleaf  -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.rakugakibox.spring.boot</groupId>
+            <artifactId>logback-access-spring-boot-starter</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+        <!--  spring-security  -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+        <!--  spring-security-end  -->
     </dependencies>
 
     <build>
@@ -48,8 +75,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ua.knu.csc.iss.primitivebank.PrimitiveBankApplication</mainClass>
-                    <finalName>PrimitiveBank</finalName>
+                    <mainClass>ua.knu.csc.iss.mvcbank.MvcBankApplication</mainClass>
+                    <finalName>MvpBank</finalName>
                 </configuration>
             </plugin>
         </plugins>
