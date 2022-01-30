@@ -32,7 +32,7 @@ public abstract class AbstractSecurityFilter extends OncePerRequestFilter {
       HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
     getJwtFromRequest(request)
-        .flatMap(this::getAuthCustomerFromToken)
+        .flatMap(this::getAuthUserFromToken)
         .ifPresent(user -> setContext(request, user));
     filterChain.doFilter(request, response);
   }
@@ -45,7 +45,7 @@ public abstract class AbstractSecurityFilter extends OncePerRequestFilter {
     return Optional.empty();
   }
 
-  private Optional<? extends UserDetails> getAuthCustomerFromToken(String jwt) {
+  private Optional<? extends UserDetails> getAuthUserFromToken(String jwt) {
     if (jwtTokenProvider.isValid(jwt)) {
       Long id = Long.valueOf(jwtTokenProvider.getSubject(jwt));
       return userRepository.findById(id).filter(UserDetails::isEnabled);

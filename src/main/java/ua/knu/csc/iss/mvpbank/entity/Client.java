@@ -15,9 +15,9 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "customer")
-public class Customer implements UserDetails {
-  public static final String ROLE = "CUSTOMER";
+@Table(name = "client")
+public class Client implements UserDetails {
+  public static final String ROLE = "CLIENT";
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

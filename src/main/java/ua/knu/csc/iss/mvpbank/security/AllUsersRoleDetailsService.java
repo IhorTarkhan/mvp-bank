@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import ua.knu.csc.iss.mvpbank.exceptions.NotFoundException;
-import ua.knu.csc.iss.mvpbank.repository.CustomerRepository;
+import ua.knu.csc.iss.mvpbank.repository.ClientRepository;
 import ua.knu.csc.iss.mvpbank.repository.SuperAdminRepository;
 
 import java.util.Optional;
@@ -15,14 +15,14 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AllUsersRoleDetailsService implements UserDetailsService {
-  private final CustomerRepository customerRepository;
+  private final ClientRepository clientRepository;
   private final SuperAdminRepository superAdminRepository;
 
   @Override
   public UserDetails loadUserByUsername(String username) {
-    Optional<? extends UserDetails> customer = customerRepository.findByEmail(username);
-    if (customer.isPresent()) {
-      return customer.get();
+    Optional<? extends UserDetails> client = clientRepository.findByEmail(username);
+    if (client.isPresent()) {
+      return client.get();
     }
     Optional<? extends UserDetails> superAdmin = superAdminRepository.findByEmail(username);
     if (superAdmin.isPresent()) {

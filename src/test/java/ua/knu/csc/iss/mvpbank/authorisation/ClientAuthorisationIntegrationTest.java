@@ -9,10 +9,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
-import ua.knu.csc.iss.mvpbank.dto.request.CustomerEmailConfirmRequest;
-import ua.knu.csc.iss.mvpbank.dto.request.CustomerLoginRequest;
-import ua.knu.csc.iss.mvpbank.dto.request.CustomerRegistrationRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.CustomerInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.request.ClientEmailConfirmRequest;
+import ua.knu.csc.iss.mvpbank.dto.request.ClientLoginRequest;
+import ua.knu.csc.iss.mvpbank.dto.request.ClientRegistrationRequest;
+import ua.knu.csc.iss.mvpbank.dto.response.ClientInfoResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.service.EmailService;
 
@@ -31,7 +31,7 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
-public class CustomerAuthorisationIntegrationTest {
+public class ClientAuthorisationIntegrationTest {
   @Autowired TestRestTemplate restTemplate;
   @MockBean EmailService emailService;
 
@@ -42,10 +42,10 @@ public class CustomerAuthorisationIntegrationTest {
 
     ResponseEntity<JwtResponse> response =
         restTemplate.exchange(
-            "/customer/login",
+            "/client/login",
             POST,
             new HttpEntity<>(
-                CustomerLoginRequest.builder().username(email).password(password).build()),
+                ClientLoginRequest.builder().username(email).password(password).build()),
             JwtResponse.class);
     assertEquals(NOT_FOUND, response.getStatusCode());
   }
@@ -57,10 +57,10 @@ public class CustomerAuthorisationIntegrationTest {
 
     ResponseEntity<JwtResponse> response =
         restTemplate.exchange(
-            "/customer/register",
+            "/client/register",
             POST,
             new HttpEntity<>(
-                CustomerRegistrationRequest.builder().username(email).password(password).build()),
+                ClientRegistrationRequest.builder().username(email).password(password).build()),
             JwtResponse.class);
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
@@ -74,17 +74,17 @@ public class CustomerAuthorisationIntegrationTest {
     String password = "test-password";
 
     restTemplate.exchange(
-        "/customer/register",
+        "/client/register",
         POST,
         new HttpEntity<>(
-            CustomerRegistrationRequest.builder().username(email).password(password).build()),
+            ClientRegistrationRequest.builder().username(email).password(password).build()),
         JwtResponse.class);
     ResponseEntity<JwtResponse> response =
         restTemplate.exchange(
-            "/customer/register",
+            "/client/register",
             POST,
             new HttpEntity<>(
-                CustomerRegistrationRequest.builder().username(email).password(password).build()),
+                ClientRegistrationRequest.builder().username(email).password(password).build()),
             JwtResponse.class);
     assertEquals(CONFLICT, response.getStatusCode());
   }
@@ -96,18 +96,18 @@ public class CustomerAuthorisationIntegrationTest {
     String validPassword = "test-password";
 
     restTemplate.exchange(
-        "/customer/register",
+        "/client/register",
         POST,
         new HttpEntity<>(
-            CustomerRegistrationRequest.builder().username(email).password(validPassword).build()),
+            ClientRegistrationRequest.builder().username(email).password(validPassword).build()),
         JwtResponse.class);
 
     ResponseEntity<JwtResponse> response =
         restTemplate.exchange(
-            "/customer/login",
+            "/client/login",
             POST,
             new HttpEntity<>(
-                CustomerLoginRequest.builder().username(email).password(invalidPassword).build()),
+                ClientLoginRequest.builder().username(email).password(invalidPassword).build()),
             JwtResponse.class);
     assertEquals(FORBIDDEN, response.getStatusCode());
   }
@@ -118,18 +118,18 @@ public class CustomerAuthorisationIntegrationTest {
     String password = "test-password";
 
     restTemplate.exchange(
-        "/customer/register",
+        "/client/register",
         POST,
         new HttpEntity<>(
-            CustomerRegistrationRequest.builder().username(email).password(password).build()),
+            ClientRegistrationRequest.builder().username(email).password(password).build()),
         JwtResponse.class);
 
     ResponseEntity<JwtResponse> response =
         restTemplate.exchange(
-            "/customer/login",
+            "/client/login",
             POST,
             new HttpEntity<>(
-                CustomerLoginRequest.builder().username(email).password(password).build()),
+                ClientLoginRequest.builder().username(email).password(password).build()),
             JwtResponse.class);
 
     assertEquals(OK, response.getStatusCode());
@@ -144,20 +144,20 @@ public class CustomerAuthorisationIntegrationTest {
     String invalidBearer = "Bearer invalid.invalid.invalid";
 
     restTemplate.exchange(
-        "/customer/register",
+        "/client/register",
         POST,
         new HttpEntity<>(
-            CustomerRegistrationRequest.builder().username(email).password(password).build()),
+            ClientRegistrationRequest.builder().username(email).password(password).build()),
         JwtResponse.class);
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, invalidBearer);
-    ResponseEntity<CustomerInfoResponse> response =
+    ResponseEntity<ClientInfoResponse> response =
         restTemplate.exchange(
-            "/customer/get-current-customer",
+            "/client/get-current-client",
             GET,
             new HttpEntity<>(headers),
-            CustomerInfoResponse.class);
+            ClientInfoResponse.class);
     assertEquals(FORBIDDEN, response.getStatusCode());
   }
 
@@ -169,21 +169,21 @@ public class CustomerAuthorisationIntegrationTest {
 
     var registration =
         restTemplate.exchange(
-            "/customer/register",
+            "/client/register",
             POST,
             new HttpEntity<>(
-                CustomerRegistrationRequest.builder().username(email).password(password).build()),
+                ClientRegistrationRequest.builder().username(email).password(password).build()),
             JwtResponse.class);
     bearer = Objects.requireNonNull(registration.getBody()).getAuthorization();
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<CustomerInfoResponse> response =
+    ResponseEntity<ClientInfoResponse> response =
         restTemplate.exchange(
-            "/customer/get-current-customer",
+            "/client/get-current-client",
             GET,
             new HttpEntity<>(headers),
-            CustomerInfoResponse.class);
+            ClientInfoResponse.class);
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertEquals(email, response.getBody().getEmail());
@@ -198,21 +198,21 @@ public class CustomerAuthorisationIntegrationTest {
 
     var registration =
         restTemplate.exchange(
-            "/customer/register",
+            "/client/register",
             POST,
             new HttpEntity<>(
-                CustomerRegistrationRequest.builder().username(email).password(password).build()),
+                ClientRegistrationRequest.builder().username(email).password(password).build()),
             JwtResponse.class);
     bearer = Objects.requireNonNull(registration.getBody()).getAuthorization();
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<CustomerInfoResponse> response =
+    ResponseEntity<ClientInfoResponse> response =
         restTemplate.exchange(
             "/super-admin/get-current-super-admin",
             GET,
             new HttpEntity<>(headers),
-            CustomerInfoResponse.class);
+            ClientInfoResponse.class);
     assertEquals(FORBIDDEN, response.getStatusCode());
   }
 
@@ -223,18 +223,18 @@ public class CustomerAuthorisationIntegrationTest {
     String invalidEmailConfirmToken = "IN-VA-LI-D";
 
     restTemplate.exchange(
-        "/customer/register",
+        "/client/register",
         POST,
         new HttpEntity<>(
-            CustomerRegistrationRequest.builder().username(email).password(password).build()),
+            ClientRegistrationRequest.builder().username(email).password(password).build()),
         JwtResponse.class);
 
     ResponseEntity<Object> response =
         restTemplate.exchange(
-            "/customer/confirm-email",
+            "/client/confirm-email",
             POST,
             new HttpEntity<>(
-                CustomerEmailConfirmRequest.builder().token(invalidEmailConfirmToken).build()),
+                ClientEmailConfirmRequest.builder().token(invalidEmailConfirmToken).build()),
             Object.class);
     assertEquals(NOT_FOUND, response.getStatusCode());
   }
@@ -254,17 +254,17 @@ public class CustomerAuthorisationIntegrationTest {
         .sendConfirmEmail(anyString());
 
     restTemplate.exchange(
-        "/customer/register",
+        "/client/register",
         POST,
         new HttpEntity<>(
-            CustomerRegistrationRequest.builder().username(email).password(password).build()),
+            ClientRegistrationRequest.builder().username(email).password(password).build()),
         JwtResponse.class);
 
     ResponseEntity<Object> response =
         restTemplate.exchange(
-            "/customer/confirm-email",
+            "/client/confirm-email",
             POST,
-            new HttpEntity<>(CustomerEmailConfirmRequest.builder().token(token.get()).build()),
+            new HttpEntity<>(ClientEmailConfirmRequest.builder().token(token.get()).build()),
             Object.class);
     assertEquals(OK, response.getStatusCode());
   }
@@ -286,27 +286,27 @@ public class CustomerAuthorisationIntegrationTest {
 
     var registration =
         restTemplate.exchange(
-            "/customer/register",
+            "/client/register",
             POST,
             new HttpEntity<>(
-                CustomerRegistrationRequest.builder().username(email).password(password).build()),
+                ClientRegistrationRequest.builder().username(email).password(password).build()),
             JwtResponse.class);
     bearer = Objects.requireNonNull(registration.getBody()).getAuthorization();
 
     restTemplate.exchange(
-        "/customer/confirm-email",
+        "/client/confirm-email",
         POST,
-        new HttpEntity<>(CustomerEmailConfirmRequest.builder().token(token.get()).build()),
+        new HttpEntity<>(ClientEmailConfirmRequest.builder().token(token.get()).build()),
         Object.class);
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<CustomerInfoResponse> response =
+    ResponseEntity<ClientInfoResponse> response =
         restTemplate.exchange(
-            "/customer/get-current-customer",
+            "/client/get-current-client",
             GET,
             new HttpEntity<>(headers),
-            CustomerInfoResponse.class);
+            ClientInfoResponse.class);
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertEquals(email, response.getBody().getEmail());

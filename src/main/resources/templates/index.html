@@ -10,7 +10,7 @@
 <body>
 <script>
     if (localStorage.getItem("jwt")) {
-        fetch("http://localhost:8080/customer/get-current-customer", {
+        fetch("http://localhost:8080/client/get-current-client", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem("jwt"),
@@ -33,7 +33,7 @@
             "<button id=\"register\">register</button>" +
             "<button id=\"login\">login</button>"
         document.getElementById("register").addEventListener("click", () => {
-            fetch("http://localhost:8080/customer/register", {
+            fetch("http://localhost:8080/client/register", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -48,7 +48,7 @@
                 });
         })
         document.getElementById("login").addEventListener("click", () => {
-            fetch("http://localhost:8080/customer/login", {
+            fetch("http://localhost:8080/client/login", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

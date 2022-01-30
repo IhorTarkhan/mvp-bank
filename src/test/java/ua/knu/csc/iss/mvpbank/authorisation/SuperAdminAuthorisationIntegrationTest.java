@@ -212,7 +212,7 @@ public class SuperAdminAuthorisationIntegrationTest {
     headers.set(AUTHORIZATION, bearer);
     ResponseEntity<SuperAdminInfoResponse> response =
         restTemplate.exchange(
-            "/customer/get-current-super-admin",
+            "/client/get-current-super-admin",
             GET,
             new HttpEntity<>(headers),
             SuperAdminInfoResponse.class);
