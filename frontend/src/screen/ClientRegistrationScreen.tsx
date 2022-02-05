@@ -26,6 +26,8 @@ import jwtDecode from "jwt-decode";
 import { CLIENT_JWT_COOKIE } from "../constant/cookie";
 import { axios } from "../util/AxiosInterceptor";
 import { AxiosResponse } from "axios";
+import { CLIENT_REGISTRATION_SUCCESS_ROUTE } from "../constant/route";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +42,7 @@ const useStyles = makeStyles({
 
 export const ClientRegistrationScreen = (): ReactElement => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
   const [isWarning, setIsWarning] = React.useState(false);
 
@@ -107,6 +110,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
           path: "/",
           expires: new Date(decoded.exp * 1000),
         });
+        navigate(CLIENT_REGISTRATION_SUCCESS_ROUTE);
       })
       .catch((reason: number) => {
         if (reason === 409) {
@@ -154,7 +158,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
                   </IconButton>
                 }
               />
-              <FormHelperText error id="accountId-error">
+              <FormHelperText error id={"accountId-error"}>
                 {(touched.password && errors.password) || " "}
               </FormHelperText>
             </FormControl>
