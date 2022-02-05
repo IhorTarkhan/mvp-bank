@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 export const ClientRegistrationSuccessScreen = (): ReactElement => {
   const classes = useStyles();
 
-  const clientRegistrationSuccess = "Success, todo";
+  const clientRegistrationSuccess = "Success, todo"; // TODO
 
   return <Box className={classes.root}>{clientRegistrationSuccess}</Box>;
 };

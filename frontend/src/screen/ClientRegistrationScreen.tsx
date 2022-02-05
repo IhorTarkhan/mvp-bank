@@ -1,6 +1,5 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import {
-  Alert,
   Box,
   Button,
   FormControl,
@@ -8,7 +7,6 @@ import {
   IconButton,
   InputLabel,
   OutlinedInput,
-  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -28,6 +26,7 @@ import { axios } from "../util/AxiosInterceptor";
 import { AxiosResponse } from "axios";
 import { CLIENT_REGISTRATION_SUCCESS_ROUTE } from "../constant/route";
 import { useNavigate } from "react-router-dom";
+import { Toast } from "../component/Toast";
 
 const useStyles = makeStyles({
   root: {
@@ -44,7 +43,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
   const classes = useStyles();
   const navigate = useNavigate();
   const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
-  const [isWarning, setIsWarning] = React.useState(false);
+  const [isWarning, setIsWarning] = useState(false);
 
   const registrationLabel = "Registration";
   const emailLabel = "Email";
@@ -179,16 +178,12 @@ export const ClientRegistrationScreen = (): ReactElement => {
           </>
         )}
       </Formik>
-      <Snackbar
-        open={isWarning}
-        autoHideDuration={6000}
-        onClose={() => setIsWarning(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert onClose={() => setIsWarning(false)} severity={"warning"}>
-          {duplicatingEmail}
-        </Alert>
-      </Snackbar>
+      <Toast
+        text={duplicatingEmail}
+        type={"warning"}
+        isOpen={isWarning}
+        setIsOpen={setIsWarning}
+      />
     </Box>
   );
 };
