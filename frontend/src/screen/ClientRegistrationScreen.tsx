@@ -179,10 +179,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
         open={isWarning}
         autoHideDuration={6000}
         onClose={() => setIsWarning(false)}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert onClose={() => setIsWarning(false)} severity={"warning"}>
           {duplicatingEmail}
