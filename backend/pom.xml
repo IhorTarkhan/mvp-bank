@@ -75,7 +75,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ua.knu.csc.iss.mvcbank.MvcBankApplication</mainClass>
+                    <mainClass>ua.knu.csc.iss.mvpbank.MvpBankApplication</mainClass>
                     <finalName>MvpBank</finalName>
                 </configuration>
             </plugin>
