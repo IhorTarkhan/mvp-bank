@@ -11,13 +11,13 @@ import { ClientConfirmEmailScreen } from "./screen/ClientConfirmEmailScreen";
 import { PREFIX_PARAM, TOKEN_PARAM } from "./constant/routeParams";
 import { ClientRegistrationSuccessScreen } from "./screen/ClientRegistrationSuccessScreen";
 import { ClientAuthorisationStatusResponse } from "./dto/response/ClientAuthorisationStatusResponse";
-import { Box } from "@mui/material";
 import { axios } from "./util/AxiosInterceptor";
 import { CLIENT_AUTHORISATION_STATUS_API } from "./constant/api";
 import { AxiosResponse } from "axios";
 import { BACKEND_URL } from "./constant/environment";
 import { useCookies } from "react-cookie";
 import { CLIENT_JWT_COOKIE } from "./constant/cookie";
+import { Spinner } from "./component/Spinner";
 
 export const ClientRouting = (): ReactElement => {
   const [, , removeCookie] = useCookies([CLIENT_JWT_COOKIE]);
@@ -36,7 +36,7 @@ export const ClientRouting = (): ReactElement => {
   }, []);
 
   if (!client) {
-    return <Box>Loading...</Box>; // TODO
+    return <Spinner />;
   }
 
   if (!client.emailVerified) {
