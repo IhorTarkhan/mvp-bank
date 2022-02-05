@@ -1,6 +1,8 @@
 package ua.knu.csc.iss.mvpbank.entity;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -25,6 +27,7 @@ public class ClientOneTimeAccessToken {
   private ZonedDateTime expiresAt;
 
   @ManyToOne(targetEntity = Client.class, fetch = FetchType.LAZY)
+  @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn
   private Client client;
 }

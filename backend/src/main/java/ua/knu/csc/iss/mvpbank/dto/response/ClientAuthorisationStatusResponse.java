@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SuperAdminInfoResponse {
+public class ClientAuthorisationStatusResponse {
   private String email;
   private boolean emailVerified;
 }

@@ -10,7 +10,7 @@ import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminRegistrationRequest;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
-import ua.knu.csc.iss.mvpbank.dto.response.SuperAdminInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.SuperAdminAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.service.SuperAdminAuthorisationService;
 
 @Slf4j
@@ -34,8 +34,8 @@ public class SuperAdminAuthorisationController {
     superAdminAuthorisationService.confirmEmail(request);
   }
 
-  @GetMapping("/super-admin/get-current-super-admin")
-  public SuperAdminInfoResponse getCurrentSuperAdmin() {
+  @GetMapping("/super-admin/authorisation-status")
+  public SuperAdminAuthorisationStatusResponse getCurrentSuperAdmin() {
     return superAdminAuthorisationService.getCurrentSuperAdmin();
   }
 }

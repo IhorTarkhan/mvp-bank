@@ -13,7 +13,7 @@ import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminRegistrationRequest;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
-import ua.knu.csc.iss.mvpbank.dto.response.SuperAdminInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.SuperAdminAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.service.EmailService;
 
 import java.util.Objects;
@@ -155,12 +155,12 @@ public class SuperAdminAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, invalidBearer);
-    ResponseEntity<SuperAdminInfoResponse> response =
+    ResponseEntity<SuperAdminAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/super-admin/get-current-super-admin",
+            "/super-admin/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            SuperAdminInfoResponse.class);
+            SuperAdminAuthorisationStatusResponse.class);
     assertEquals(FORBIDDEN, response.getStatusCode());
   }
 
@@ -181,12 +181,12 @@ public class SuperAdminAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<SuperAdminInfoResponse> response =
+    ResponseEntity<SuperAdminAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/super-admin/get-current-super-admin",
+            "/super-admin/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            SuperAdminInfoResponse.class);
+            SuperAdminAuthorisationStatusResponse.class);
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertEquals(email, response.getBody().getEmail());
@@ -210,12 +210,12 @@ public class SuperAdminAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<SuperAdminInfoResponse> response =
+    ResponseEntity<SuperAdminAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/client/get-current-super-admin",
+            "/client/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            SuperAdminInfoResponse.class);
+            SuperAdminAuthorisationStatusResponse.class);
     assertEquals(FORBIDDEN, response.getStatusCode());
   }
 
@@ -304,12 +304,12 @@ public class SuperAdminAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<SuperAdminInfoResponse> response =
+    ResponseEntity<SuperAdminAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/super-admin/get-current-super-admin",
+            "/super-admin/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            SuperAdminInfoResponse.class);
+            SuperAdminAuthorisationStatusResponse.class);
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertEquals(email, response.getBody().getEmail());

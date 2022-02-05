@@ -10,7 +10,7 @@ import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.SuperAdminRegistrationRequest;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
-import ua.knu.csc.iss.mvpbank.dto.response.SuperAdminInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.SuperAdminAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.entity.SuperAdmin;
 import ua.knu.csc.iss.mvpbank.entity.SuperAdminOneTimeAccessToken;
 import ua.knu.csc.iss.mvpbank.exceptions.ConflictException;
@@ -70,9 +70,9 @@ public class SuperAdminAuthorisationService {
     superAdminRepository.save(currentSuperAdmin);
   }
 
-  public SuperAdminInfoResponse getCurrentSuperAdmin() {
+  public SuperAdminAuthorisationStatusResponse getCurrentSuperAdmin() {
     SuperAdmin currentSuperAdmin = userSecurityService.getCurrentSuperAdmin();
-    return SuperAdminInfoResponse.builder()
+    return SuperAdminAuthorisationStatusResponse.builder()
         .email(currentSuperAdmin.getEmail())
         .emailVerified(currentSuperAdmin.isEmailVerified())
         .build();

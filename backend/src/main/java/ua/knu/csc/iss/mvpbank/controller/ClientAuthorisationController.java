@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientRegistrationRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.ClientInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.ClientAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.service.ClientAuthorisationService;
 
@@ -34,8 +34,8 @@ public class ClientAuthorisationController {
     clientAuthorisationService.confirmEmail(request);
   }
 
-  @GetMapping("/client/get-current-client")
-  public ClientInfoResponse getCurrentClient() {
+  @GetMapping("/client/authorisation-status")
+  public ClientAuthorisationStatusResponse getCurrentClient() {
     return clientAuthorisationService.getCurrentClient();
   }
 }

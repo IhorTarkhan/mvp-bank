@@ -12,7 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientRegistrationRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.ClientInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.ClientAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.service.EmailService;
 
@@ -152,12 +152,12 @@ public class ClientAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, invalidBearer);
-    ResponseEntity<ClientInfoResponse> response =
+    ResponseEntity<ClientAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/client/get-current-client",
+            "/client/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            ClientInfoResponse.class);
+            ClientAuthorisationStatusResponse.class);
     assertEquals(FORBIDDEN, response.getStatusCode());
   }
 
@@ -178,12 +178,12 @@ public class ClientAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<ClientInfoResponse> response =
+    ResponseEntity<ClientAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/client/get-current-client",
+            "/client/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            ClientInfoResponse.class);
+            ClientAuthorisationStatusResponse.class);
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertEquals(email, response.getBody().getEmail());
@@ -207,12 +207,12 @@ public class ClientAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<ClientInfoResponse> response =
+    ResponseEntity<ClientAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/super-admin/get-current-super-admin",
+            "/super-admin/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            ClientInfoResponse.class);
+            ClientAuthorisationStatusResponse.class);
     assertEquals(FORBIDDEN, response.getStatusCode());
   }
 
@@ -301,12 +301,12 @@ public class ClientAuthorisationIntegrationTest {
 
     HttpHeaders headers = new HttpHeaders();
     headers.set(AUTHORIZATION, bearer);
-    ResponseEntity<ClientInfoResponse> response =
+    ResponseEntity<ClientAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/client/get-current-client",
+            "/client/authorisation-status",
             GET,
             new HttpEntity<>(headers),
-            ClientInfoResponse.class);
+            ClientAuthorisationStatusResponse.class);
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertEquals(email, response.getBody().getEmail());
