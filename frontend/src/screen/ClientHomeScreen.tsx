@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { Box, Link } from "@mui/material";
 import { CLIENT_REGISTRATION_ROUTE } from "../constant/route";
 
-export const HomeScreen = (): ReactElement => {
+export const ClientHomeScreen = (): ReactElement => {
   return (
     <Box>
       Home Screen

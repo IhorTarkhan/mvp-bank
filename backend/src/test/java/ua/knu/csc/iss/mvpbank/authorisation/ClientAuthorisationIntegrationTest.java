@@ -65,7 +65,8 @@ public class ClientAuthorisationIntegrationTest {
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertNotNull(response.getBody().getAuthorization());
-    assertEquals("Bearer ", response.getBody().getAuthorization().substring(0, 7));
+    String authorization = response.getBody().getAuthorization();
+    assertEquals(2, authorization.length() - authorization.replaceAll("\\.", "").length());
   }
 
   @Test
@@ -177,7 +178,7 @@ public class ClientAuthorisationIntegrationTest {
     bearer = Objects.requireNonNull(registration.getBody()).getAuthorization();
 
     HttpHeaders headers = new HttpHeaders();
-    headers.set(AUTHORIZATION, bearer);
+    headers.set(AUTHORIZATION, "Bearer " + bearer);
     ResponseEntity<ClientAuthorisationStatusResponse> response =
         restTemplate.exchange(
             "/client/authorisation-status",
@@ -300,7 +301,7 @@ public class ClientAuthorisationIntegrationTest {
         Object.class);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.set(AUTHORIZATION, bearer);
+    headers.set(AUTHORIZATION, "Bearer " + bearer);
     ResponseEntity<ClientAuthorisationStatusResponse> response =
         restTemplate.exchange(
             "/client/authorisation-status",

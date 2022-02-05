@@ -44,7 +44,7 @@ public class ClientAuthorisationService {
         clientOneTimeAccessTokenService.generateVerifyEmailToken(savedClient);
     emailService.sendConfirmEmail(clientOneTimeAccessToken.getToken());
     return JwtResponse.builder()
-        .authorization("Bearer " + jwtTokenProvider.generateToken(savedClient.getId().toString()))
+        .authorization(jwtTokenProvider.generateToken(savedClient.getId().toString()))
         .build();
   }
 
@@ -56,7 +56,7 @@ public class ClientAuthorisationService {
             .findByEmail(request.getUsername())
             .orElseThrow(() -> new NotFoundException("Client doesn't exists"));
     return JwtResponse.builder()
-        .authorization("Bearer " + jwtTokenProvider.generateToken(client.getId().toString()))
+        .authorization(jwtTokenProvider.generateToken(client.getId().toString()))
         .build();
   }
 

@@ -65,7 +65,8 @@ public class SuperAdminAuthorisationIntegrationTest {
     assertEquals(OK, response.getStatusCode());
     assertNotNull(response.getBody());
     assertNotNull(response.getBody().getAuthorization());
-    assertEquals("Bearer ", response.getBody().getAuthorization().substring(0, 7));
+    String authorization = response.getBody().getAuthorization();
+    assertEquals(2, authorization.length() - authorization.replaceAll("\\.", "").length());
   }
 
   @Test
@@ -180,7 +181,7 @@ public class SuperAdminAuthorisationIntegrationTest {
     bearer = Objects.requireNonNull(registration.getBody()).getAuthorization();
 
     HttpHeaders headers = new HttpHeaders();
-    headers.set(AUTHORIZATION, bearer);
+    headers.set(AUTHORIZATION, "Bearer " + bearer);
     ResponseEntity<SuperAdminAuthorisationStatusResponse> response =
         restTemplate.exchange(
             "/super-admin/authorisation-status",
@@ -303,7 +304,7 @@ public class SuperAdminAuthorisationIntegrationTest {
         Object.class);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.set(AUTHORIZATION, bearer);
+    headers.set(AUTHORIZATION, "Bearer " + bearer);
     ResponseEntity<SuperAdminAuthorisationStatusResponse> response =
         restTemplate.exchange(
             "/super-admin/authorisation-status",

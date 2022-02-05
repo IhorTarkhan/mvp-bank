@@ -44,8 +44,7 @@ public class SuperAdminAuthorisationService {
         superAdminOneTimeAccessTokenService.generateVerifyEmailToken(savedSuperAdmin);
     emailService.sendConfirmEmail(superAdminOneTimeAccessToken.getToken());
     return JwtResponse.builder()
-        .authorization(
-            "Bearer " + jwtTokenProvider.generateToken(savedSuperAdmin.getId().toString()))
+        .authorization(jwtTokenProvider.generateToken(savedSuperAdmin.getId().toString()))
         .build();
   }
 
@@ -57,7 +56,7 @@ public class SuperAdminAuthorisationService {
             .findByEmail(request.getUsername())
             .orElseThrow(() -> new NotFoundException("Super Admin doesn't exists"));
     return JwtResponse.builder()
-        .authorization("Bearer " + jwtTokenProvider.generateToken(superAdmin.getId().toString()))
+        .authorization(jwtTokenProvider.generateToken(superAdmin.getId().toString()))
         .build();
   }
 

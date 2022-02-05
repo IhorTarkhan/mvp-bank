@@ -102,9 +102,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
     axios
       .post(BACKEND_URL + CLIENT_REGISTER_API, request)
       .then((response: AxiosResponse<JwtResponse>) => {
-        const decoded = jwtDecode<{ exp: number }>(
-          response.data.authorization.substring(7)
-        );
+        const decoded = jwtDecode<{ exp: number }>(response.data.authorization);
         setCookie(CLIENT_JWT_COOKIE, response.data.authorization, {
           path: "/",
           expires: new Date(decoded.exp * 1000),
