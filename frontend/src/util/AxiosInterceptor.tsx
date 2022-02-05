@@ -1,4 +1,5 @@
 import { CLIENT_JWT_COOKIE } from "../constant/cookie";
+import { AxiosResponse } from "axios";
 
 export const axios = require("axios");
 
@@ -12,3 +13,14 @@ axios.interceptors.request.use((req: { headers: any; url: string }) => {
   req.headers["Authorization"] = clientHeader || "";
   return req;
 });
+
+axios.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  (error: any) => {
+    console.error(error);
+    if (error.toJSON().status === 500) {
+      alert(500);
+    }
+    return Promise.reject({ ...error }.response.status);
+  }
+);

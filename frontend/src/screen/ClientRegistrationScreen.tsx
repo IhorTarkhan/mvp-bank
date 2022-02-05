@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import {
+  Alert,
   Box,
   Button,
   FormControl,
@@ -7,6 +8,7 @@ import {
   IconButton,
   InputLabel,
   OutlinedInput,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -39,6 +41,7 @@ const useStyles = makeStyles({
 export const ClientRegistrationScreen = (): ReactElement => {
   const classes = useStyles();
   const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
+  const [isWarning, setIsWarning] = React.useState(false);
 
   const registrationLabel = "Registration";
   const emailLabel = "Email";
@@ -50,6 +53,8 @@ export const ClientRegistrationScreen = (): ReactElement => {
   const invalidEmailAddress = "Invalid email address";
   const chooseLongerPassword = "Choose a longer password, at less 8 characters";
   const passwordsNotMatch = "Passwords do not match";
+
+  const duplicatingEmail = "Email already using!";
 
   type FormikData = {
     email: string;
@@ -102,6 +107,11 @@ export const ClientRegistrationScreen = (): ReactElement => {
           path: "/",
           expires: new Date(decoded.exp * 1000),
         });
+      })
+      .catch((reason: number) => {
+        if (reason === 409) {
+          setIsWarning(true);
+        }
       });
   };
 
@@ -165,6 +175,19 @@ export const ClientRegistrationScreen = (): ReactElement => {
           </>
         )}
       </Formik>
+      <Snackbar
+        open={isWarning}
+        autoHideDuration={6000}
+        onClose={() => setIsWarning(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <Alert onClose={() => setIsWarning(false)} severity={"warning"}>
+          {duplicatingEmail}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
