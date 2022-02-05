@@ -3,31 +3,35 @@ import { ReactElement } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { HomeScreen } from "./screen/HomeScreen";
 import {
-  CLIENT_CABINET,
-  CLIENT_CONFIRM_EMAIL,
-  CLIENT_REGISTRATION,
-  HOME,
+  CLIENT_CABINET_ROUTE,
+  CLIENT_CONFIRM_EMAIL_ROUTE,
+  CLIENT_REGISTRATION_ROUTE,
+  HOME_ROUTE,
 } from "./constant/route";
 import { ClientCabinetScreen } from "./screen/ClientCabinetScreen";
 import { ClientConfirmEmailScreen } from "./screen/ClientConfirmEmailScreen";
-import { PARAM_PREFIX, TOKEN_PARAM } from "./constant/routeParams";
+import { PREFIX_PARAM, TOKEN_PARAM } from "./constant/routeParams";
 import { ClientRegistrationScreen } from "./screen/ClientRegistrationScreen";
+import { useCookies } from "react-cookie";
+import { CLIENT_JWT_COOKIE } from "./constant/cookie";
 
 export const Routing = (): ReactElement => {
+  const [cookie] = useCookies([CLIENT_JWT_COOKIE]);
+  console.log(cookie);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={HOME} element={<HomeScreen />} />
-        <Route path={CLIENT_CABINET} element={<ClientCabinetScreen />} />
+        <Route path={HOME_ROUTE} element={<HomeScreen />} />
+        <Route path={CLIENT_CABINET_ROUTE} element={<ClientCabinetScreen />} />
         <Route
-          path={CLIENT_REGISTRATION}
+          path={CLIENT_REGISTRATION_ROUTE}
           element={<ClientRegistrationScreen />}
         />
         <Route
-          path={CLIENT_CONFIRM_EMAIL + PARAM_PREFIX + TOKEN_PARAM}
+          path={CLIENT_CONFIRM_EMAIL_ROUTE + PREFIX_PARAM + TOKEN_PARAM}
           element={<ClientConfirmEmailScreen />}
         />
-        <Route path={"/*"} element={<Navigate to={HOME} />} />
+        <Route path={"/*"} element={<Navigate to={HOME_ROUTE} />} />
       </Routes>
     </BrowserRouter>
   );

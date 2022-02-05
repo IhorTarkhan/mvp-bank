@@ -1,2 +1,2 @@
-export const PARAM_PREFIX = "/:";
+export const PREFIX_PARAM = "/:";
 export const TOKEN_PARAM = "token";

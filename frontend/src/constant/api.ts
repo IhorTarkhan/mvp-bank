@@ -1,1 +1,1 @@
-export const clientRegister = "/client/register";
+export const CLIENT_REGISTER_API = "/client/register";

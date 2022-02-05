@@ -15,6 +15,15 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Formik } from "formik";
 import { makeStyles } from "@mui/styles";
 import { FormicErrors } from "../util/FormicUtil";
+import { BACKEND_URL } from "../constant/environment";
+import { JwtResponse } from "../dto/response/JwtResponse";
+import { ClientRegistrationRequest } from "../dto/request/ClientRegistrationRequest";
+import { CLIENT_REGISTER_API } from "../constant/api";
+import { useCookies } from "react-cookie";
+import jwtDecode from "jwt-decode";
+import { CLIENT_JWT_COOKIE } from "../constant/cookie";
+import { axios } from "../util/AxiosInterceptor";
+import { AxiosResponse } from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +38,7 @@ const useStyles = makeStyles({
 
 export const ClientRegistrationScreen = (): ReactElement => {
   const classes = useStyles();
+  const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
 
   const registrationLabel = "Registration";
   const emailLabel = "Email";
@@ -78,12 +88,26 @@ export const ClientRegistrationScreen = (): ReactElement => {
   };
 
   const submit = (values: FormikData) => {
-    console.log(values);
+    const request: ClientRegistrationRequest = {
+      username: values.email,
+      password: values.password,
+    };
+    axios
+      .post(BACKEND_URL + CLIENT_REGISTER_API, request)
+      .then((response: AxiosResponse<JwtResponse>) => {
+        const decoded = jwtDecode<{ exp: number }>(
+          response.data.authorization.substring(7)
+        );
+        setCookie(CLIENT_JWT_COOKIE, response.data.authorization, {
+          path: "/",
+          expires: new Date(decoded.exp * 1000),
+        });
+      });
   };
 
   return (
     <Box className={classes.root}>
-      <Typography variant={"h4"} mb={"20px"}>
+      <Typography variant={"h4"} marginBottom={"20px"}>
         {registrationLabel}
       </Typography>
       <Formik initialValues={initDate} validate={validate} onSubmit={submit}>
