@@ -12,7 +12,6 @@ public class WebConfiguration implements WebMvcConfigurer {
         .addMapping("/**")
         .allowedMethods("*")
         .allowedOrigins(
-//            "http://localhost:3000", "http://127.0.0.1:3000", "http://mvp-bank.ihor-tarkhan.com");
-            "*");
+            "http://localhost:3000", "http://127.0.0.1:3000", "http://mvp-bank.ihor-tarkhan.com");
   }
 }
