@@ -7,10 +7,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { Logo } from "./Logo";
+import { AccountCircle } from "@mui/icons-material";
+import { MAIN_APP_COLOR, TEXT_ON_MAIN_COLOR } from "../constant/colors";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -22,6 +23,7 @@ export const Header = () => {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -37,76 +39,62 @@ export const Header = () => {
   return (
     <>
       <AppBar>
-        <Toolbar>
-          <Typography
-            variant={"h6"}
-            noWrap
-            component={"div"}
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-          >
-            LOGO
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+        <Toolbar style={{ background: MAIN_APP_COLOR }}>
+          <Box display={["none", "none", "flex"]} flexGrow={1}>
+            <Logo marginRight={5} />
+            <Box display={"flex"} flexGrow={1}>
+              {pages.map((page, id) => (
+                <Button
+                  key={id}
+                  onClick={handleCloseNavMenu}
+                  style={{ color: TEXT_ON_MAIN_COLOR }}
+                >
+                  {page}
+                </Button>
+              ))}
+            </Box>
+          </Box>
+          <Box display={["flex", "flex", "none"]} flexGrow={1}>
+            <Box flexGrow={1}>
+              <IconButton
+                aria-controls={"menu-appbar"}
+                onClick={handleOpenNavMenu}
+                style={{ color: TEXT_ON_MAIN_COLOR }}
+                aria-haspopup
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id={"menu-appbar"}
+                anchorEl={anchorElNav}
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                keepMounted
+                transformOrigin={{ vertical: "top", horizontal: "left" }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{ display: { xs: "block", md: "none" } }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign={"center"}>{page}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <Logo flexGrow={1} />
+          </Box>
+          <Box>
             <IconButton
-              size={"large"}
-              aria-label={"account of current user"}
-              aria-controls={"menu-appbar"}
-              aria-haspopup={"true"}
-              onClick={handleOpenNavMenu}
-              color={"inherit"}
+              aria-controls={"avatar-appbar"}
+              onClick={handleOpenUserMenu}
+              style={{ color: TEXT_ON_MAIN_COLOR }}
+              aria-haspopup
             >
-              <MenuIcon />
+              <AccountCircle />
             </IconButton>
             <Menu
-              id={"menu-appbar"}
-              anchorEl={anchorElNav}
-              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-              keepMounted
-              transformOrigin={{ vertical: "top", horizontal: "left" }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: "block", md: "none" } }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign={"center"}>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Typography
-            variant={"h6"}
-            noWrap
-            component={"div"}
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title={"Open settings"}>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt={"Remy Sharp"}
-                  src={"/static/images/avatar/2.jpg"}
-                />
-              </IconButton>
-            </Tooltip>
-            <Menu
               sx={{ mt: "45px" }}
-              id={"menu-appbar"}
+              id={"avatar-appbar"}
               anchorEl={anchorElUser}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
               keepMounted
@@ -114,8 +102,8 @@ export const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {settings.map((setting, id) => (
+                <MenuItem key={id} onClick={handleCloseUserMenu}>
                   <Typography textAlign={"center"}>{setting}</Typography>
                 </MenuItem>
               ))}
