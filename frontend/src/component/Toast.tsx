@@ -1,33 +1,5 @@
-import React, { ReactElement, useState } from "react";
-import {
-  Alert,
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  IconButton,
-  InputLabel,
-  OutlinedInput,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Formik } from "formik";
-import { makeStyles } from "@mui/styles";
-import { FormicErrors } from "../util/FormicUtil";
-import { BACKEND_URL } from "../constant/environment";
-import { JwtResponse } from "../dto/response/JwtResponse";
-import { ClientRegistrationRequest } from "../dto/request/ClientRegistrationRequest";
-import { CLIENT_REGISTER_API } from "../constant/api";
-import { useCookies } from "react-cookie";
-import jwtDecode from "jwt-decode";
-import { CLIENT_JWT_COOKIE } from "../constant/cookie";
-import { axios } from "../util/AxiosInterceptor";
-import { AxiosResponse } from "axios";
-import { CLIENT_REGISTRATION_SUCCESS_ROUTE } from "../constant/route";
-import { useNavigate } from "react-router-dom";
+import React, { ReactElement } from "react";
+import { Alert, Snackbar } from "@mui/material";
 
 type Props = {
   text: string;

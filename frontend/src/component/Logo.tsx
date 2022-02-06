@@ -1,12 +1,6 @@
 import * as React from "react";
-import Typography from "@mui/material/Typography";
-import { BoxProps } from "@mui/material/Box/Box";
-import { Box } from "@mui/material";
+import { CSSProperties, ReactElement } from "react";
 
-export const Logo = (props: BoxProps) => {
-  return (
-    <Box marginY={"auto"} marginX={"auto"} {...props}>
-      <Typography variant={"h6"}>LOGO (in dev)</Typography>
-    </Box>
-  );
+export const Logo = (props: CSSProperties): ReactElement => {
+  return <img alt={"logo"} src={"image/logo.svg"} height={40} style={props} />;
 };

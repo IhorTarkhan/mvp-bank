@@ -1,15 +1,14 @@
 import * as React from "react";
-import { CSSProperties, ReactElement, useState } from "react";
-import IconButton from "@mui/material/IconButton";
+import { ReactElement, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import { v4 as uuidV4 } from "uuid";
+import { Box } from "@mui/material";
 
 type Props = {
   children: ReactElement;
   fields: { name: string; onClick: () => void }[];
-  iconStyles?: CSSProperties;
 };
 
 export const AriaWithPopupMenu = (props: Props): ReactElement => {
@@ -20,21 +19,15 @@ export const AriaWithPopupMenu = (props: Props): ReactElement => {
     setAnchor(event.currentTarget);
   };
 
-  const handleCloseMenu = (action?: () => void) => {
-    action && action();
+  const handleCloseMenu = () => {
     setAnchor(null);
   };
 
   return (
     <>
-      <IconButton
-        aria-controls={uuid}
-        onClick={handleOpenMenu}
-        style={props.iconStyles}
-        aria-haspopup
-      >
+      <Box aria-controls={uuid} onClick={handleOpenMenu} aria-haspopup>
         {props.children}
-      </IconButton>
+      </Box>
       <Menu
         id={uuid}
         open={!!anchor}
@@ -43,8 +36,14 @@ export const AriaWithPopupMenu = (props: Props): ReactElement => {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        {props.fields.map((field, id) => (
-          <MenuItem key={id} onClick={() => handleCloseMenu(field.onClick)}>
+        {props.fields.map((field, index) => (
+          <MenuItem
+            key={index}
+            onClick={() => {
+              field.onClick();
+              handleCloseMenu();
+            }}
+          >
             <Typography>{field.name}</Typography>
           </MenuItem>
         ))}
