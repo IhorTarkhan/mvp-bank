@@ -6,8 +6,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 
 type Props = {
   children: ReactElement;
@@ -17,6 +15,7 @@ type Props = {
 
 export const AreaWithSideMenu = (props: Props): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
+  const isAnyIcon: boolean = props.fields.filter((it) => it.icon).length > 0;
 
   const open = () => {
     setIsOpen(true);
@@ -28,9 +27,7 @@ export const AreaWithSideMenu = (props: Props): ReactElement => {
 
   return (
     <>
-      <Box onClick={open} aria-haspopup>
-        {props.children}
-      </Box>
+      <Box onClick={open}>{props.children}</Box>
       <Drawer anchor={props.anchor} open={isOpen} onClose={close}>
         <Box sx={{ width: 250 }} role="presentation">
           <List>
@@ -43,11 +40,8 @@ export const AreaWithSideMenu = (props: Props): ReactElement => {
                   close();
                 }}
               >
-                <ListItemIcon>
-                  {field.icon}
-                  {index % 2 ? <MailIcon /> : <InboxIcon />}
-                </ListItemIcon>
-                <ListItemText primary={field} />
+                {isAnyIcon && <ListItemIcon>{field.icon}</ListItemIcon>}
+                <ListItemText primary={field.name} />
               </ListItem>
             ))}
           </List>

@@ -10,11 +10,45 @@ import { AccountCircle } from "@mui/icons-material";
 import { MAIN_APP_COLOR, TEXT_ON_MAIN_COLOR } from "../constant/colors";
 import { AriaWithPopupMenu } from "./AriaWithPopupMenu";
 import { IconButton } from "@mui/material";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { AreaWithSideMenu } from "./AreaWithSideMenu";
+import MailIcon from "@mui/icons-material/Mail";
 
 export const Header = (): ReactElement => {
+  const pages = [
+    {
+      name: "Products",
+      onClick: () => console.log("page = Products"),
+      icon: <MailIcon />,
+    },
+    {
+      name: "Pricing",
+      onClick: () => console.log("page = Pricing"),
+      icon: undefined,
+    },
+    {
+      name: "Blog",
+      onClick: () => console.log("page = Blog"),
+      icon: undefined,
+    },
+  ];
+  const settings = [
+    {
+      name: "Profile",
+      onClick: () => console.log("setting = Profile"),
+    },
+    {
+      name: "Account",
+      onClick: () => console.log("setting = Account"),
+    },
+    {
+      name: "Dashboard",
+      onClick: () => console.log("setting = Dashboard"),
+    },
+    {
+      name: "Logout",
+      onClick: () => console.log("setting = Logout"),
+    },
+  ];
   return (
     <>
       <AppBar>
@@ -25,33 +59,23 @@ export const Header = (): ReactElement => {
               {pages.map((page, index) => (
                 <Button
                   key={index}
-                  onClick={() => console.log("page =", page)}
+                  onClick={page.onClick}
                   style={{ color: TEXT_ON_MAIN_COLOR }}
                 >
-                  {page}
+                  {page.name}
                 </Button>
               ))}
             </Box>
           </Box>
           <Box display={["flex", "flex", "none"]} flexGrow={1}>
-            <AriaWithPopupMenu
-              fields={pages.map((page) => ({
-                name: page,
-                onClick: () => console.log("page =", page),
-              }))}
-            >
+            <AreaWithSideMenu fields={pages}>
               <IconButton style={{ color: TEXT_ON_MAIN_COLOR }}>
                 <MenuIcon />
               </IconButton>
-            </AriaWithPopupMenu>
+            </AreaWithSideMenu>
             <Logo flexGrow={1} justifySelf={"center"} alignSelf={"center"} />
           </Box>
-          <AriaWithPopupMenu
-            fields={settings.map((set) => ({
-              name: set,
-              onClick: () => console.log("settings =", set),
-            }))}
-          >
+          <AriaWithPopupMenu fields={settings}>
             <IconButton style={{ color: TEXT_ON_MAIN_COLOR }}>
               <AccountCircle />
             </IconButton>
