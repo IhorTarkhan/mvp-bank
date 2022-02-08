@@ -10,7 +10,6 @@ import ListItemText from "@mui/material/ListItemText";
 type Props = {
   children: ReactElement;
   fields: { name: string; onClick: () => void; icon?: ReactElement }[];
-  anchor?: "left" | "top" | "right" | "bottom";
 };
 
 export const AreaWithSideMenu = (props: Props): ReactElement => {
@@ -28,7 +27,7 @@ export const AreaWithSideMenu = (props: Props): ReactElement => {
   return (
     <>
       <Box onClick={open}>{props.children}</Box>
-      <Drawer anchor={props.anchor} open={isOpen} onClose={close}>
+      <Drawer open={isOpen} onClose={close}>
         <Box sx={{ width: 250 }} role="presentation">
           <List>
             {props.fields.map((field, index) => (
