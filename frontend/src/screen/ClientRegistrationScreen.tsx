@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 import { Toast } from "../component/Toast";
 import { useLocale } from "../i18n/i18n";
 import { VALID_EMAIL_REGEX } from "../constant/regex";
+import { MAIN_APP_COLOR } from "../constant/colors";
 
 const useStyles = makeStyles({
   root: {
@@ -181,7 +182,11 @@ export const ClientRegistrationScreen = (): ReactElement => {
                   : " "
               }
             />
-            <Button variant={"contained"} onClick={() => handleSubmit()}>
+            <Button
+              variant={"contained"}
+              onClick={() => handleSubmit()}
+              style={{ background: MAIN_APP_COLOR }}
+            >
               {locale.registrationScreen.submitLabel}
             </Button>
           </>

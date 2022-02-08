@@ -1,6 +1,13 @@
 import { en } from "./en";
 
 export const ua: typeof en = {
+  header: {
+    language: {
+      languageLabel: "Мова",
+      english: "Англійська",
+      ukrainian: "Українська",
+    },
+  },
   registrationScreen: {
     registrationLabel: "Регестрація",
     emailLabel: "Email",

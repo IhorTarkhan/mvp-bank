@@ -25,13 +25,18 @@ export const AriaWithPopupMenu = (props: Props): ReactElement => {
 
   return (
     <>
-      <Box aria-controls={uuid} onClick={handleOpenMenu} aria-haspopup>
+      <Box
+        aria-controls={uuid}
+        onClick={handleOpenMenu}
+        aria-haspopup
+        style={{ cursor: "pointer" }}
+      >
         {props.children}
       </Box>
       <Menu
         id={uuid}
         open={!!anchor}
-        onClose={() => handleCloseMenu()}
+        onClose={handleCloseMenu}
         anchorEl={anchor}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}

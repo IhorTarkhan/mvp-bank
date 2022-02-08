@@ -12,8 +12,11 @@ import { AriaWithPopupMenu } from "./AriaWithPopupMenu";
 import { IconButton } from "@mui/material";
 import { AreaWithSideMenu } from "./AreaWithSideMenu";
 import MailIcon from "@mui/icons-material/Mail";
+import { Language, useLocale } from "../i18n/i18n";
 
 export const Header = (): ReactElement => {
+  const [locale, setLanguage] = useLocale();
+
   const pages = [
     {
       name: "Products",
@@ -49,12 +52,22 @@ export const Header = (): ReactElement => {
       onClick: () => console.log("setting = Logout"),
     },
   ];
+  const languages = [
+    {
+      name: locale.header.language.english,
+      onClick: () => setLanguage(Language.EN),
+    },
+    {
+      name: locale.header.language.ukrainian,
+      onClick: () => setLanguage(Language.UA),
+    },
+  ];
   return (
     <>
       <AppBar>
         <Toolbar style={{ background: MAIN_APP_COLOR }}>
           <Box display={["none", "none", "flex"]} flexGrow={1}>
-            <Logo marginRight={5} />
+            <Logo marginRight={5} width={56} />
             <Box display={"flex"} flexGrow={1}>
               {pages.map((page, index) => (
                 <Button
@@ -73,10 +86,13 @@ export const Header = (): ReactElement => {
                 <MenuIcon />
               </IconButton>
             </AreaWithSideMenu>
-            <Logo flexGrow={1} justifySelf={"center"} alignSelf={"center"} />
+            <Logo position={"fixed"} width={56} left={"calc(50% - 28px)"} />
           </Box>
+          <AriaWithPopupMenu fields={languages}>
+            <>{locale.header.language.languageLabel}</>
+          </AriaWithPopupMenu>
           <AriaWithPopupMenu fields={settings}>
-            <IconButton style={{ color: TEXT_ON_MAIN_COLOR }}>
+            <IconButton style={{ color: TEXT_ON_MAIN_COLOR, marginLeft: 10 }}>
               <AccountCircle />
             </IconButton>
           </AriaWithPopupMenu>

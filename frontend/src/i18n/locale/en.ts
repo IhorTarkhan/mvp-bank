@@ -1,4 +1,11 @@
 export const en = {
+  header: {
+    language: {
+      languageLabel: "Language",
+      english: "English",
+      ukrainian: "Ukrainian",
+    },
+  },
   registrationScreen: {
     registrationLabel: "Registration",
     emailLabel: "Email",
