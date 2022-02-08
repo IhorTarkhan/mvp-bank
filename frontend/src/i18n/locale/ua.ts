@@ -15,4 +15,15 @@ export const ua: typeof en = {
       duplicatingEmail: "Користувач з таким Email вже існує!",
     },
   },
+  loginScreen: {
+    loginLabel: "Вхід",
+    emailLabel: "Email",
+    passwordLabel: "Пароль",
+    submitLabel: "Ввійти",
+    errors: {
+      required: "Обовязкове поле",
+      invalidEmailAddress: "Email некоректно вказаний",
+      invalidCredentials: "Неправильні данні для входу",
+    },
+  },
 };

@@ -14,7 +14,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Formik } from "formik";
 import { makeStyles } from "@mui/styles";
-import { FormicErrors, getTranslateErrorOf } from "../util/FormicUtil";
+import { FormicErrors, getTranslateError } from "../util/FormicUtil";
 import { BACKEND_URL } from "../constant/environment";
 import { JwtResponse } from "../dto/response/JwtResponse";
 import { ClientRegistrationRequest } from "../dto/request/ClientRegistrationRequest";
@@ -122,7 +122,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
               error={!!(touched.email && errors.email)}
               helperText={
                 touched.email && errors.email
-                  ? getTranslateErrorOf(
+                  ? getTranslateError(
                       locale.registrationScreen.errors,
                       errors.email
                     )
@@ -156,7 +156,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
               />
               <FormHelperText error id={"accountId-error"}>
                 {touched.password && errors.password
-                  ? getTranslateErrorOf(
+                  ? getTranslateError(
                       locale.registrationScreen.errors,
                       errors.password
                     )
@@ -174,7 +174,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
               error={!!(touched.confirmPassword && errors.confirmPassword)}
               helperText={
                 touched.confirmPassword && errors.confirmPassword
-                  ? getTranslateErrorOf(
+                  ? getTranslateError(
                       locale.registrationScreen.errors,
                       errors.confirmPassword
                     )

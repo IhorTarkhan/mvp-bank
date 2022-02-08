@@ -13,4 +13,15 @@ export const en = {
       duplicatingEmail: "Email already using!",
     },
   },
+  loginScreen: {
+    loginLabel: "Login",
+    emailLabel: "Email",
+    passwordLabel: "Password",
+    submitLabel: "Submit",
+    errors: {
+      required: "Required",
+      invalidEmailAddress: "Invalid email address",
+      invalidCredentials: "Invalid credentials",
+    },
+  },
 };
