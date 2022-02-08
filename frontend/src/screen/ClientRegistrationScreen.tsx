@@ -30,6 +30,7 @@ import { Toast } from "../component/Toast";
 import { useLocale } from "../i18n/i18n";
 import { VALID_EMAIL_REGEX } from "../constant/regex";
 import { MAIN_APP_COLOR } from "../constant/colors";
+import { Header } from "../component/Header";
 
 const useStyles = makeStyles({
   root: {
@@ -109,6 +110,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
+      <Header />
       <Typography variant={"h4"} marginBottom={"20px"}>
         {locale.registrationScreen.registrationLabel}
       </Typography>

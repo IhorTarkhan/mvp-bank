@@ -13,7 +13,7 @@ export const ua: typeof en = {
     emailLabel: "Email",
     passwordLabel: "Пароль",
     confirmPasswordLabel: "Підтвердити пароль",
-    submitLabel: "Підтвердити реєстрауію",
+    submitLabel: "Підтвердити реєстрацію",
     errors: {
       required: "Обовязкове поле",
       invalidEmailAddress: "Email некоректно вказаний",

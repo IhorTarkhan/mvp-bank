@@ -28,6 +28,7 @@ import { ClientLoginRequest } from "../dto/request/ClientLoginRequest";
 import { VALID_EMAIL_REGEX } from "../constant/regex";
 import { useLocale } from "../i18n/i18n";
 import { MAIN_APP_COLOR } from "../constant/colors";
+import { Header } from "../component/Header";
 
 const useStyles = makeStyles({
   root: {
@@ -94,6 +95,7 @@ export const ClientLoginScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
+      <Header />
       <Typography variant={"h4"} marginBottom={"20px"}>
         {locale.loginScreen.loginLabel}
       </Typography>
