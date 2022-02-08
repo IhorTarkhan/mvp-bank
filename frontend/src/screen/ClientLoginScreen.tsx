@@ -28,7 +28,7 @@ import { ClientLoginRequest } from "../dto/request/ClientLoginRequest";
 import { VALID_EMAIL_REGEX } from "../constant/regex";
 import { useLocale } from "../i18n/i18n";
 import { MAIN_APP_COLOR } from "../constant/colors";
-import { Header } from "../component/Header";
+import { Header } from "../component/client/Header";
 
 const useStyles = makeStyles({
   root: {

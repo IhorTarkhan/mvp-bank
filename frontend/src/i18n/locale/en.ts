@@ -6,6 +6,9 @@ export const en = {
       ukrainian: "Ukrainian",
     },
   },
+  pages: {
+    about: "About us",
+  },
   registrationScreen: {
     registrationLabel: "Registration",
     emailLabel: "Email",
@@ -30,5 +33,8 @@ export const en = {
       invalidEmailAddress: "Invalid email address",
       invalidCredentials: "Invalid credentials",
     },
+  },
+  aboutUs: {
+    title: "About us",
   },
 };
