@@ -14,7 +14,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Formik } from "formik";
 import { makeStyles } from "@mui/styles";
-import { FormicErrors } from "../util/FormicUtil";
+import { FormicErrors, getTranslateError } from "../util/FormicUtil";
 import { BACKEND_URL } from "../constant/environment";
 import { JwtResponse } from "../dto/response/JwtResponse";
 import { CLIENT_LOGIN_API } from "../constant/api";
@@ -23,10 +23,12 @@ import jwtDecode from "jwt-decode";
 import { CLIENT_JWT_COOKIE } from "../constant/cookie";
 import { axios } from "../util/AxiosInterceptor";
 import { AxiosResponse } from "axios";
-import { CLIENT_CABINET_ROUTE } from "../constant/route";
-import { useNavigate } from "react-router-dom";
 import { Toast } from "../component/Toast";
 import { ClientLoginRequest } from "../dto/request/ClientLoginRequest";
+import { VALID_EMAIL_REGEX } from "../constant/regex";
+import { useLocale } from "../i18n/i18n";
+import { MAIN_APP_COLOR } from "../constant/colors";
+import { Header } from "../component/Header";
 
 const useStyles = makeStyles({
   root: {
@@ -41,18 +43,9 @@ const useStyles = makeStyles({
 
 export const ClientLoginScreen = (): ReactElement => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  const [locale] = useLocale();
   const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
   const [isWarning, setIsWarning] = useState(false);
-
-  const loginLabel = "Login";
-  const emailLabel = "Email";
-  const passwordLabel = "Password";
-
-  const required = "Required";
-  const invalidEmailAddress = "Invalid email address";
-
-  const invalidCredentials = "Invalid credentials";
 
   type FormikData = {
     email: string;
@@ -69,12 +62,12 @@ export const ClientLoginScreen = (): ReactElement => {
   const validate = (values: FormikData) => {
     const errors: FormicErrors<FormikData> = {};
     if (!values.email) {
-      errors.email = required;
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = invalidEmailAddress;
+      errors.email = "required";
+    } else if (!VALID_EMAIL_REGEX.test(values.email)) {
+      errors.email = "invalidEmailAddress";
     }
     if (!values.password) {
-      errors.password = required;
+      errors.password = "required";
     }
     return errors;
   };
@@ -102,28 +95,35 @@ export const ClientLoginScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
+      <Header />
       <Typography variant={"h4"} marginBottom={"20px"}>
-        {loginLabel}
+        {locale.loginScreen.loginLabel}
       </Typography>
       <Formik initialValues={initDate} validate={validate} onSubmit={submit}>
         {({ values, errors, touched, handleSubmit, setFieldValue }) => (
           <>
             <TextField
               variant={"outlined"}
-              label={emailLabel}
+              label={locale.loginScreen.emailLabel}
               value={values.email}
               onChange={(event) => setFieldValue("email", event.target.value)}
               error={!!(touched.email && errors.email)}
-              helperText={(touched.email && errors.email) || " "}
+              helperText={
+                touched.email && errors.email
+                  ? getTranslateError(locale.loginScreen.errors, errors.email)
+                  : " "
+              }
             />
             <FormControl
               variant={"outlined"}
               error={!!(touched.password && errors.password)}
             >
-              <InputLabel htmlFor={"password"}>{passwordLabel}</InputLabel>
+              <InputLabel htmlFor={"password"}>
+                {locale.loginScreen.passwordLabel}
+              </InputLabel>
               <OutlinedInput
                 id={"password"}
-                label={passwordLabel}
+                label={locale.loginScreen.passwordLabel}
                 type={values.isShowPassword ? "text" : "password"}
                 value={values.password}
                 onChange={(event) =>
@@ -140,17 +140,26 @@ export const ClientLoginScreen = (): ReactElement => {
                 }
               />
               <FormHelperText error id={"accountId-error"}>
-                {(touched.password && errors.password) || " "}
+                {touched.password && errors.password
+                  ? getTranslateError(
+                      locale.loginScreen.errors,
+                      errors.password
+                    )
+                  : " "}
               </FormHelperText>
             </FormControl>
-            <Button variant={"contained"} onClick={() => handleSubmit()}>
-              {loginLabel}
+            <Button
+              variant={"contained"}
+              onClick={() => handleSubmit()}
+              style={{ background: MAIN_APP_COLOR }}
+            >
+              {locale.loginScreen.submitLabel}
             </Button>
           </>
         )}
       </Formik>
       <Toast
-        text={invalidCredentials}
+        text={locale.loginScreen.errors.invalidCredentials}
         type={"warning"}
         isOpen={isWarning}
         setIsOpen={setIsWarning}

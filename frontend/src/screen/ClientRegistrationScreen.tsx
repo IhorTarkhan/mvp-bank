@@ -14,7 +14,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Formik } from "formik";
 import { makeStyles } from "@mui/styles";
-import { FormicErrors } from "../util/FormicUtil";
+import { FormicErrors, getTranslateError } from "../util/FormicUtil";
 import { BACKEND_URL } from "../constant/environment";
 import { JwtResponse } from "../dto/response/JwtResponse";
 import { ClientRegistrationRequest } from "../dto/request/ClientRegistrationRequest";
@@ -27,6 +27,10 @@ import { AxiosResponse } from "axios";
 import { CLIENT_REGISTRATION_SUCCESS_ROUTE } from "../constant/route";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "../component/Toast";
+import { useLocale } from "../i18n/i18n";
+import { VALID_EMAIL_REGEX } from "../constant/regex";
+import { MAIN_APP_COLOR } from "../constant/colors";
+import { Header } from "../component/Header";
 
 const useStyles = makeStyles({
   root: {
@@ -42,21 +46,9 @@ const useStyles = makeStyles({
 export const ClientRegistrationScreen = (): ReactElement => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const [locale] = useLocale();
   const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
   const [isWarning, setIsWarning] = useState(false);
-
-  const registrationLabel = "Registration";
-  const emailLabel = "Email";
-  const passwordLabel = "Password";
-  const confirmPasswordLabel = "Confirm password";
-  const submitLabel = "Submit";
-
-  const required = "Required";
-  const invalidEmailAddress = "Invalid email address";
-  const chooseLongerPassword = "Choose a longer password, at less 8 characters";
-  const passwordsNotMatch = "Passwords do not match";
-
-  const duplicatingEmail = "Email already using!";
 
   type FormikData = {
     email: string;
@@ -75,20 +67,20 @@ export const ClientRegistrationScreen = (): ReactElement => {
   const validate = (values: FormikData) => {
     const errors: FormicErrors<FormikData> = {};
     if (!values.email) {
-      errors.email = required;
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = invalidEmailAddress;
+      errors.email = "required";
+    } else if (!VALID_EMAIL_REGEX.test(values.email)) {
+      errors.email = "invalidEmailAddress";
     }
     if (!values.password) {
-      errors.password = required;
+      errors.password = "required";
     } else if (values.password.length < 8) {
-      errors.password = chooseLongerPassword;
+      errors.password = "chooseLongerPassword";
     }
     if (!errors.password) {
       if (!values.confirmPassword) {
-        errors.confirmPassword = required;
+        errors.confirmPassword = "required";
       } else if (values.confirmPassword !== values.password) {
-        errors.confirmPassword = passwordsNotMatch;
+        errors.confirmPassword = "passwordsNotMatch";
       }
     }
     return errors;
@@ -118,28 +110,38 @@ export const ClientRegistrationScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
+      <Header />
       <Typography variant={"h4"} marginBottom={"20px"}>
-        {registrationLabel}
+        {locale.registrationScreen.registrationLabel}
       </Typography>
       <Formik initialValues={initDate} validate={validate} onSubmit={submit}>
         {({ values, errors, touched, handleSubmit, setFieldValue }) => (
           <>
             <TextField
               variant={"outlined"}
-              label={emailLabel}
+              label={locale.registrationScreen.emailLabel}
               value={values.email}
               onChange={(event) => setFieldValue("email", event.target.value)}
               error={!!(touched.email && errors.email)}
-              helperText={(touched.email && errors.email) || " "}
+              helperText={
+                touched.email && errors.email
+                  ? getTranslateError(
+                      locale.registrationScreen.errors,
+                      errors.email
+                    )
+                  : " "
+              }
             />
             <FormControl
               variant={"outlined"}
               error={!!(touched.password && errors.password)}
             >
-              <InputLabel htmlFor={"password"}>{passwordLabel}</InputLabel>
+              <InputLabel htmlFor={"password"}>
+                {locale.registrationScreen.passwordLabel}
+              </InputLabel>
               <OutlinedInput
                 id={"password"}
-                label={passwordLabel}
+                label={locale.registrationScreen.passwordLabel}
                 type={values.isShowPassword ? "text" : "password"}
                 value={values.password}
                 onChange={(event) =>
@@ -156,28 +158,44 @@ export const ClientRegistrationScreen = (): ReactElement => {
                 }
               />
               <FormHelperText error id={"accountId-error"}>
-                {(touched.password && errors.password) || " "}
+                {touched.password && errors.password
+                  ? getTranslateError(
+                      locale.registrationScreen.errors,
+                      errors.password
+                    )
+                  : " "}
               </FormHelperText>
             </FormControl>
             <TextField
               variant={"outlined"}
-              label={confirmPasswordLabel}
+              label={locale.registrationScreen.confirmPasswordLabel}
               type={values.isShowPassword ? "text" : "password"}
               value={values.confirmPassword}
               onChange={(event) =>
                 setFieldValue("confirmPassword", event.target.value)
               }
-              error={!!(touched.email && errors.confirmPassword)}
-              helperText={(touched.email && errors.confirmPassword) || " "}
+              error={!!(touched.confirmPassword && errors.confirmPassword)}
+              helperText={
+                touched.confirmPassword && errors.confirmPassword
+                  ? getTranslateError(
+                      locale.registrationScreen.errors,
+                      errors.confirmPassword
+                    )
+                  : " "
+              }
             />
-            <Button variant={"contained"} onClick={() => handleSubmit()}>
-              {submitLabel}
+            <Button
+              variant={"contained"}
+              onClick={() => handleSubmit()}
+              style={{ background: MAIN_APP_COLOR }}
+            >
+              {locale.registrationScreen.submitLabel}
             </Button>
           </>
         )}
       </Formik>
       <Toast
-        text={duplicatingEmail}
+        text={locale.registrationScreen.errors.duplicatingEmail}
         type={"warning"}
         isOpen={isWarning}
         setIsOpen={setIsWarning}
