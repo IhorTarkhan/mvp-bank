@@ -11,6 +11,10 @@ export const ua: typeof en = {
   pages: {
     about: "Про нас",
   },
+  settings: {
+    myCabinet: "Мій кабінет",
+    logout: "Вийти",
+  },
   registrationScreen: {
     registrationLabel: "Регестрація",
     emailLabel: "Email",

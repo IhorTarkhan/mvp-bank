@@ -9,6 +9,10 @@ export const en = {
   pages: {
     about: "About us",
   },
+  settings: {
+    myCabinet: "My cabinet",
+    logout: "Logout",
+  },
   registrationScreen: {
     registrationLabel: "Registration",
     emailLabel: "Email",

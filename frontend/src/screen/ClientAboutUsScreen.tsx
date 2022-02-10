@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Container, Typography } from "@mui/material";
-import { ClientUnauthorizedHeader } from "../component/client/ClientUnauthorizedHeader";
+import { ClientUnauthorizedHeader } from "../component/header/ClientUnauthorizedHeader";
 import { useLocale } from "../i18n/i18n";
 
 export const ClientAboutUsScreen = (): ReactElement => {
