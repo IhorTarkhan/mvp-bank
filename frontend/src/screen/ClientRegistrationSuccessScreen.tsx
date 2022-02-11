@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ClientUnauthorizedHeader } from "../component/header/ClientUnauthorizedHeader";
+import { ClientAuthorizedNotConfirmedHeader } from "../component/header/ClientAuthorizedNotConfirmedHeader";
 
 const useStyles = makeStyles({
   root: {
@@ -21,7 +21,7 @@ export const ClientRegistrationSuccessScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
-      <ClientUnauthorizedHeader />
+      <ClientAuthorizedNotConfirmedHeader />
       {clientRegistrationSuccess}
     </Box>
   );

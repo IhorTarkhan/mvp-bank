@@ -33,7 +33,7 @@ export const ClientRouting = (): ReactElement => {
       .catch(() => {
         removeCookie(CLIENT_JWT_COOKIE);
       });
-  }, []);
+  }, [removeCookie]);
 
   if (!client) {
     return <Spinner />;
