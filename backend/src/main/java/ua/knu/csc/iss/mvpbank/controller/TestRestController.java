@@ -1,10 +1,10 @@
 package ua.knu.csc.iss.mvpbank.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ua.knu.csc.iss.mvpbank.service.SendEmailService;
-
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class TestRestController {
   }
 
   @GetMapping("/sendEmail")
-  public String getTest(
+  public String sendTextEmail(
       @RequestParam("to") String to,
       @RequestParam("subject") String subject,
       @RequestParam("text") String text) {
@@ -25,9 +25,12 @@ public class TestRestController {
     return "Hello MVP Bank";
   }
 
-  @PostMapping("/sendEmail")
-  public String getTest(@RequestBody Map<String, String> request) {
-    sendEmailService.sendTextEmail(request.get("to"), request.get("subject"), request.get("text"));
+  @GetMapping("/sendTextEmailHtml")
+  public String sendTextEmailHtml(
+      @RequestParam("to") String to,
+      @RequestParam("subject") String subject,
+      @RequestParam("text") String text) {
+    sendEmailService.sendTextEmailHtml(to, subject, text);
     return "Hello MVP Bank";
   }
 }
