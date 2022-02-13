@@ -28,7 +28,7 @@ public class ClientAuthorisationService {
   private final ClientRepository clientRepository;
   private final UserSecurityService userSecurityService;
   private final ClientOneTimeAccessTokenService clientOneTimeAccessTokenService;
-  private final EmailService emailService;
+  private final ClientEmailService clientEmailService;
 
   public JwtResponse register(ClientRegistrationRequest request) {
     if (clientRepository.findByEmail(request.getUsername()).isPresent())
@@ -42,7 +42,8 @@ public class ClientAuthorisationService {
     Client savedClient = clientRepository.save(newClient);
     ClientOneTimeAccessToken clientOneTimeAccessToken =
         clientOneTimeAccessTokenService.generateVerifyEmailToken(savedClient);
-    emailService.sendConfirmEmail(clientOneTimeAccessToken.getToken());
+    clientEmailService.sendConfirmEmail(
+        savedClient.getEmail(), clientOneTimeAccessToken.getToken());
     return JwtResponse.builder()
         .authorization(jwtTokenProvider.generateToken(savedClient.getId().toString()))
         .build();

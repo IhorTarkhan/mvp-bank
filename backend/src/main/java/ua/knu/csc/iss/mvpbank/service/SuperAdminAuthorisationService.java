@@ -28,7 +28,7 @@ public class SuperAdminAuthorisationService {
   private final SuperAdminRepository superAdminRepository;
   private final UserSecurityService userSecurityService;
   private final SuperAdminOneTimeAccessTokenService superAdminOneTimeAccessTokenService;
-  private final EmailService emailService;
+  private final ClientEmailService clientEmailService;
 
   public JwtResponse register(SuperAdminRegistrationRequest request) {
     if (superAdminRepository.findByEmail(request.getUsername()).isPresent())
@@ -42,7 +42,8 @@ public class SuperAdminAuthorisationService {
     SuperAdmin savedSuperAdmin = superAdminRepository.save(newSuperAdmin);
     SuperAdminOneTimeAccessToken superAdminOneTimeAccessToken =
         superAdminOneTimeAccessTokenService.generateVerifyEmailToken(savedSuperAdmin);
-    emailService.sendConfirmEmail(superAdminOneTimeAccessToken.getToken());
+    clientEmailService.sendConfirmEmail(
+        savedSuperAdmin.getEmail(), superAdminOneTimeAccessToken.getToken());
     return JwtResponse.builder()
         .authorization(jwtTokenProvider.generateToken(savedSuperAdmin.getId().toString()))
         .build();
