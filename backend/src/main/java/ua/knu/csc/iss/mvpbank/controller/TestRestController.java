@@ -25,7 +25,7 @@ public class TestRestController {
     return "Hello MVP Bank";
   }
 
-  @GetMapping("/sendTextEmailHtml")
+  @GetMapping("/sendEmailHtml")
   public String sendTextEmailHtml(
       @RequestParam("to") String to,
       @RequestParam("subject") String subject,
