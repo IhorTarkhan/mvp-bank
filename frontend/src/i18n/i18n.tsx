@@ -9,7 +9,11 @@ export enum Language {
   UA = "UA",
 }
 
-export const useLocale = (): [typeof en, (language: Language) => void] => {
+export const useLocale = (): [
+  typeof en,
+  (language: Language) => void,
+  Language
+] => {
   const YEAR_IN_MS = 31_536_000_000;
   const [cookie, setCookie] = useCookies([LOCALE_COOKIE]);
   const [language, setLanguage] = useState<Language>(Language.EN);
@@ -49,5 +53,5 @@ export const useLocale = (): [typeof en, (language: Language) => void] => {
     }
   }, [language]);
 
-  return [locale, setLocaleToCookie];
+  return [locale, setLocaleToCookie, language];
 };

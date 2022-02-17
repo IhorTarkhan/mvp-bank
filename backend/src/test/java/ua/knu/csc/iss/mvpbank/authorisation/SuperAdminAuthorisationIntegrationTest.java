@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -33,8 +34,7 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
 public class SuperAdminAuthorisationIntegrationTest {
   @Autowired TestRestTemplate restTemplate;
-  @MockBean
-  ClientEmailService clientEmailService;
+  @MockBean ClientEmailService clientEmailService;
 
   @Test
   void notExistUserLogin_test() {
@@ -258,7 +258,7 @@ public class SuperAdminAuthorisationIntegrationTest {
               return null;
             })
         .when(clientEmailService)
-        .sendConfirmEmail(anyString(), anyString());
+        .sendConfirmEmail(any(), anyString(), anyString());
 
     restTemplate.exchange(
         "/super-admin/register",
@@ -291,7 +291,7 @@ public class SuperAdminAuthorisationIntegrationTest {
               return null;
             })
         .when(clientEmailService)
-        .sendConfirmEmail(anyString(), anyString());
+        .sendConfirmEmail(any(), anyString(), anyString());
 
     var registration =
         restTemplate.exchange(

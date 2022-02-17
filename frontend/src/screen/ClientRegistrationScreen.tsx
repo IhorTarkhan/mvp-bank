@@ -46,7 +46,7 @@ const useStyles = makeStyles({
 export const ClientRegistrationScreen = (): ReactElement => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [locale] = useLocale();
+  const [locale, , language] = useLocale();
   const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
   const [isWarning, setIsWarning] = useState(false);
 
@@ -90,6 +90,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
     const request: ClientRegistrationRequest = {
       username: values.email,
       password: values.password,
+      language: language,
     };
     axios
       .post(BACKEND_URL + CLIENT_REGISTER_API, request)

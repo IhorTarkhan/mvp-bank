@@ -42,7 +42,7 @@ public class ClientAuthorisationService {
     Client savedClient = clientRepository.save(newClient);
     ClientOneTimeAccessToken clientOneTimeAccessToken =
         clientOneTimeAccessTokenService.generateVerifyEmailToken(savedClient);
-    clientEmailService.sendConfirmEmail(
+    clientEmailService.sendConfirmEmail(request.getLanguage(),
         savedClient.getEmail(), clientOneTimeAccessToken.getToken());
     return JwtResponse.builder()
         .authorization(jwtTokenProvider.generateToken(savedClient.getId().toString()))
