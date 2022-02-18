@@ -4,6 +4,9 @@ import { makeStyles } from "@mui/styles";
 import { ClientAuthorizedNotConfirmedHeader } from "../component/header/ClientAuthorizedNotConfirmedHeader";
 import { useLocale } from "../i18n/i18n";
 import { Toast } from "../component/Toast";
+import { axios } from "../util/AxiosInterceptor";
+import { BACKEND_URL } from "../constant/environment";
+import { CLIENT_RESEND_CONFIRM_EMAIL_API } from "../constant/api";
 
 const useStyles = makeStyles({
   root: {
@@ -18,13 +21,23 @@ const useStyles = makeStyles({
 
 export const ClientRegistrationSuccessScreen = (): ReactElement => {
   const classes = useStyles();
-  const [fullLocale] = useLocale();
+  const [fullLocale, , language] = useLocale();
   const locale = fullLocale.registrationSuccessScreen;
   const [isEmailSending, setIsEmailSending] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(true);
 
   const resendEmail = () => {
-    setIsEmailSending(!isEmailSending);
+    setIsEmailSending((prevState) => !prevState);
+    axios
+      .post(BACKEND_URL + CLIENT_RESEND_CONFIRM_EMAIL_API, {
+        language: language,
+      })
+      .then(() => {
+        setIsMessageOpen(true);
+      })
+      .finally(() => {
+        setIsEmailSending(false);
+      });
   };
 
   return (
@@ -38,7 +51,7 @@ export const ClientRegistrationSuccessScreen = (): ReactElement => {
         </Button>
       </Typography>
       <Toast isOpen={isMessageOpen} setIsOpen={setIsMessageOpen}>
-        AAA
+        {locale.emailSent}
       </Toast>
     </Box>
   );

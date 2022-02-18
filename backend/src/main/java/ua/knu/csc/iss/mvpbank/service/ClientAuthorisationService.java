@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientRegistrationRequest;
+import ua.knu.csc.iss.mvpbank.dto.request.ClientResendConfirmEmailRequest;
 import ua.knu.csc.iss.mvpbank.dto.response.ClientAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.entity.Client;
@@ -68,6 +69,14 @@ public class ClientAuthorisationService {
     Client currentClient = oneTimeAccessToken.getClient();
     currentClient.setEmailVerified(true);
     clientRepository.save(currentClient);
+  }
+
+  public void resendConfirmEmail(ClientResendConfirmEmailRequest request) {
+    Client currentClient = userSecurityService.getCurrentClient();
+    ClientOneTimeAccessToken clientOneTimeAccessToken =
+            clientOneTimeAccessTokenService.generateVerifyEmailToken(currentClient);
+    clientEmailService.sendConfirmEmail(request.getLanguage(),
+            currentClient.getEmail(), clientOneTimeAccessToken.getToken());
   }
 
   public ClientAuthorisationStatusResponse getCurrentClient() {

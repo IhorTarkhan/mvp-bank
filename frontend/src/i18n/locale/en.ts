@@ -42,6 +42,7 @@ export const en = {
     title: "Please confirm email",
     text: "You have successfully register in our super MVP Bank application. Please confirm your email by following link we sent you",
     resendEmail: "Resend email",
+    emailSent: "Email Sent",
   },
   aboutUsScreen: {
     title: "About us",
