@@ -7,13 +7,13 @@ export const ua: typeof en = {
       english: "Англійська",
       ukrainian: "Українська",
     },
-  },
-  pages: {
-    about: "Про нас",
-  },
-  settings: {
-    myCabinet: "Мій кабінет",
-    logout: "Вийти",
+    pages: {
+      about: "Про нас",
+    },
+    settings: {
+      myCabinet: "Мій кабінет",
+      logout: "Вийти",
+    },
   },
   registrationScreen: {
     registrationLabel: "Регестрація",
@@ -40,7 +40,7 @@ export const ua: typeof en = {
       invalidCredentials: "Неправильні данні для входу",
     },
   },
-  aboutUs: {
+  aboutUsScreen: {
     title: "Пр нас",
   },
 };

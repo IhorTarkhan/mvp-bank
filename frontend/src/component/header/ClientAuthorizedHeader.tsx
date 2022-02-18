@@ -20,7 +20,7 @@ export const ClientAuthorizedHeader = (): ReactElement => {
 
   const pages = [
     {
-      name: locale.pages.about,
+      name: locale.header.pages.about,
       onClick: () => navigate(CLIENT_ABOUT_US_ROUTE),
       icon: <InfoIcon />,
     },
@@ -28,12 +28,12 @@ export const ClientAuthorizedHeader = (): ReactElement => {
 
   const settings = [
     {
-      name: locale.settings.myCabinet,
+      name: locale.header.settings.myCabinet,
       onClick: () => navigate(CLIENT_CABINET_ROUTE),
       icon: <AccountCircleIcon />,
     },
     {
-      name: locale.settings.logout,
+      name: locale.header.settings.logout,
       onClick: () => {
         removeCookie(CLIENT_JWT_COOKIE, { path: "/" });
       },

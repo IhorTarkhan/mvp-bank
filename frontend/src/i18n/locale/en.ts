@@ -5,13 +5,13 @@ export const en = {
       english: "English",
       ukrainian: "Ukrainian",
     },
-  },
-  pages: {
-    about: "About us",
-  },
-  settings: {
-    myCabinet: "My cabinet",
-    logout: "Logout",
+    pages: {
+      about: "About us",
+    },
+    settings: {
+      myCabinet: "My cabinet",
+      logout: "Logout",
+    },
   },
   registrationScreen: {
     registrationLabel: "Registration",
@@ -38,7 +38,7 @@ export const en = {
       invalidCredentials: "Invalid credentials",
     },
   },
-  aboutUs: {
+  aboutUsScreen: {
     title: "About us",
   },
 };
