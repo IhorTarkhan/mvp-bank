@@ -12,11 +12,11 @@ export const ua: typeof en = {
     },
     settings: {
       myCabinet: "Мій кабінет",
-      logout: "Вийти",
+      logout: "Вихід",
     },
   },
   registrationScreen: {
-    registrationLabel: "Регестрація",
+    registrationLabel: "Реєстрація",
     emailLabel: "Email",
     passwordLabel: "Пароль",
     confirmPasswordLabel: "Підтвердити пароль",
@@ -24,7 +24,7 @@ export const ua: typeof en = {
     errors: {
       required: "Обовязкове поле",
       invalidEmailAddress: "Email некоректно вказаний",
-      chooseLongerPassword: "Виберіть довший пароль, щонайменьше 8 символів",
+      chooseLongerPassword: "Виберіть довший пароль, щонайменше 8 символів",
       passwordsNotMatch: "Паролі не співпадають",
       duplicatingEmail: "Користувач з таким Email вже існує!",
     },
@@ -40,7 +40,12 @@ export const ua: typeof en = {
       invalidCredentials: "Неправильні данні для входу",
     },
   },
+  registrationSuccessScreen: {
+    title: "Будь ласка, підтвердьте електронну адресу",
+    text: "Ви успішно зареєструвалися в нашій супер програмі MVP Bank. Будь ласка, підтвердьте свою електронну пошту, перейшовши за посиланням, яке ми вам надіслали",
+    resendEmail: "Надіслати знову",
+  },
   aboutUsScreen: {
-    title: "Пр нас",
+    title: "Про нас",
   },
 };

@@ -38,6 +38,11 @@ export const en = {
       invalidCredentials: "Invalid credentials",
     },
   },
+  registrationSuccessScreen: {
+    title: "Please confirm email",
+    text: "You have successfully register in our super MVP Bank application. Please confirm your email by following link we sent you",
+    resendEmail: "Resend email",
+  },
   aboutUsScreen: {
     title: "About us",
   },

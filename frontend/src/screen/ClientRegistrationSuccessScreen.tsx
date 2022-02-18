@@ -1,8 +1,9 @@
-import React, { ReactElement } from "react";
-import { Box } from "@mui/material";
+import React, { ReactElement, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ClientAuthorizedNotConfirmedHeader } from "../component/header/ClientAuthorizedNotConfirmedHeader";
-import {useLocale} from "../i18n/i18n";
+import { useLocale } from "../i18n/i18n";
+import { Toast } from "../component/Toast";
 
 const useStyles = makeStyles({
   root: {
@@ -17,14 +18,28 @@ const useStyles = makeStyles({
 
 export const ClientRegistrationSuccessScreen = (): ReactElement => {
   const classes = useStyles();
-  const [locale] = useLocale()
+  const [fullLocale] = useLocale();
+  const locale = fullLocale.registrationSuccessScreen;
+  const [isEmailSending, setIsEmailSending] = useState(false);
+  const [isMessageOpen, setIsMessageOpen] = useState(true);
 
-  const clientRegistrationSuccess = "Success, todo"; // TODO
+  const resendEmail = () => {
+    setIsEmailSending(!isEmailSending);
+  };
 
   return (
     <Box className={classes.root}>
       <ClientAuthorizedNotConfirmedHeader />
-      {clientRegistrationSuccess}
+      <Typography variant={"h4"}>{locale.title}</Typography>
+      <Typography>{locale.text}</Typography>
+      <Typography>
+        <Button onClick={resendEmail} disabled={isEmailSending}>
+          {locale.resendEmail}
+        </Button>
+      </Typography>
+      <Toast isOpen={isMessageOpen} setIsOpen={setIsMessageOpen}>
+        AAA
+      </Toast>
     </Box>
   );
 };

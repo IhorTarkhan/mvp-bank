@@ -158,12 +158,9 @@ export const ClientLoginScreen = (): ReactElement => {
           </>
         )}
       </Formik>
-      <Toast
-        text={locale.loginScreen.errors.invalidCredentials}
-        type={"warning"}
-        isOpen={isWarning}
-        setIsOpen={setIsWarning}
-      />
+      <Toast type={"warning"} isOpen={isWarning} setIsOpen={setIsWarning}>
+        {locale.loginScreen.errors.invalidCredentials}
+      </Toast>
     </Box>
   );
 };
