@@ -15,6 +15,7 @@ import ua.knu.csc.iss.mvpbank.entity.SuperAdmin;
 import ua.knu.csc.iss.mvpbank.entity.SuperAdminOneTimeAccessToken;
 import ua.knu.csc.iss.mvpbank.exceptions.ConflictException;
 import ua.knu.csc.iss.mvpbank.exceptions.NotFoundException;
+import ua.knu.csc.iss.mvpbank.locales.Language;
 import ua.knu.csc.iss.mvpbank.repository.SuperAdminRepository;
 import ua.knu.csc.iss.mvpbank.security.JwtTokenProvider;
 
@@ -28,7 +29,7 @@ public class SuperAdminAuthorisationService {
   private final SuperAdminRepository superAdminRepository;
   private final UserSecurityService userSecurityService;
   private final SuperAdminOneTimeAccessTokenService superAdminOneTimeAccessTokenService;
-  private final EmailService emailService;
+  private final ClientEmailService clientEmailService;
 
   public JwtResponse register(SuperAdminRegistrationRequest request) {
     if (superAdminRepository.findByEmail(request.getUsername()).isPresent())
@@ -42,7 +43,8 @@ public class SuperAdminAuthorisationService {
     SuperAdmin savedSuperAdmin = superAdminRepository.save(newSuperAdmin);
     SuperAdminOneTimeAccessToken superAdminOneTimeAccessToken =
         superAdminOneTimeAccessTokenService.generateVerifyEmailToken(savedSuperAdmin);
-    emailService.sendConfirmEmail(superAdminOneTimeAccessToken.getToken());
+    clientEmailService.sendConfirmEmail(
+        Language.EN, savedSuperAdmin.getEmail(), superAdminOneTimeAccessToken.getToken());
     return JwtResponse.builder()
         .authorization(jwtTokenProvider.generateToken(savedSuperAdmin.getId().toString()))
         .build();

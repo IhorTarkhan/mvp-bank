@@ -14,12 +14,13 @@ import ua.knu.csc.iss.mvpbank.dto.request.ClientLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientRegistrationRequest;
 import ua.knu.csc.iss.mvpbank.dto.response.ClientAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
-import ua.knu.csc.iss.mvpbank.service.EmailService;
+import ua.knu.csc.iss.mvpbank.service.ClientEmailService;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -33,7 +34,7 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 @DirtiesContext(classMode = BEFORE_EACH_TEST_METHOD)
 public class ClientAuthorisationIntegrationTest {
   @Autowired TestRestTemplate restTemplate;
-  @MockBean EmailService emailService;
+  @MockBean ClientEmailService clientEmailService;
 
   @Test
   void notExistUserLogin_test() {
@@ -248,11 +249,13 @@ public class ClientAuthorisationIntegrationTest {
 
     doAnswer(
             invocation -> {
-              token.set(invocation.getArgument(0).toString());
+              // get second argument (index in `getArgument`, starting from 0)
+              String newValue = invocation.getArgument(1).toString();
+              token.set(newValue);
               return null;
             })
-        .when(emailService)
-        .sendConfirmEmail(anyString());
+        .when(clientEmailService)
+        .sendConfirmEmail(any(), anyString(), anyString());
 
     restTemplate.exchange(
         "/client/register",
@@ -279,11 +282,13 @@ public class ClientAuthorisationIntegrationTest {
 
     doAnswer(
             invocation -> {
-              token.set(invocation.getArgument(0).toString());
+              // get second argument (index in `getArgument`, starting from 0)
+              String newValue = invocation.getArgument(1).toString();
+              token.set(newValue);
               return null;
             })
-        .when(emailService)
-        .sendConfirmEmail(anyString());
+        .when(clientEmailService)
+        .sendConfirmEmail(any(), anyString(), anyString());
 
     var registration =
         restTemplate.exchange(
