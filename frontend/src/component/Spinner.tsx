@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { CircularProgress } from "@mui/material";
+import { MAIN_APP_COLOR } from "../constant/colors";
 
 export const Spinner = (): ReactElement => {
   return (
@@ -11,6 +12,7 @@ export const Spinner = (): ReactElement => {
         left: "50%",
         marginTop: -20,
         marginLeft: -20,
+        color: MAIN_APP_COLOR,
       }}
     />
   );

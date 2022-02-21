@@ -8,6 +8,13 @@ export const ua: typeof en = {
       ukrainian: "Українська",
     },
   },
+  pages: {
+    about: "Про нас",
+  },
+  settings: {
+    myCabinet: "Мій кабінет",
+    logout: "Вийти",
+  },
   registrationScreen: {
     registrationLabel: "Регестрація",
     emailLabel: "Email",
@@ -32,5 +39,8 @@ export const ua: typeof en = {
       invalidEmailAddress: "Email некоректно вказаний",
       invalidCredentials: "Неправильні данні для входу",
     },
+  },
+  aboutUs: {
+    title: "Пр нас",
   },
 };

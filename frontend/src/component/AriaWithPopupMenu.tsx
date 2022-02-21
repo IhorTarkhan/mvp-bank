@@ -2,18 +2,19 @@ import * as React from "react";
 import { ReactElement, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
 import { v4 as uuidV4 } from "uuid";
 import { Box } from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 type Props = {
   children: ReactElement;
-  fields: { name: string; onClick: () => void }[];
+  fields: { name: string; onClick: () => void; icon?: ReactElement }[];
 };
 
 export const AriaWithPopupMenu = (props: Props): ReactElement => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const [uuid] = useState<string>(uuidV4());
+  const isAnyIcon: boolean = props.fields.filter((it) => it.icon).length > 0;
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(event.currentTarget);
@@ -49,7 +50,8 @@ export const AriaWithPopupMenu = (props: Props): ReactElement => {
               handleCloseMenu();
             }}
           >
-            <Typography>{field.name}</Typography>
+            {isAnyIcon && <ListItemIcon>{field.icon}</ListItemIcon>}
+            <>{field.name}</>
           </MenuItem>
         ))}
       </Menu>

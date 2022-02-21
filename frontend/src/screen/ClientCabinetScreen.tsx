@@ -1,5 +1,12 @@
 import React, { ReactElement } from "react";
+import { Container } from "@mui/material";
+import { ClientAuthorizedHeader } from "../component/header/ClientAuthorizedHeader";
 
 export const ClientCabinetScreen = (): ReactElement => {
-  return <div>Client Cabinet Screen</div>;
+  return (
+    <Container>
+      <ClientAuthorizedHeader />
+      Client Cabinet Screen
+    </Container>
+  );
 };
