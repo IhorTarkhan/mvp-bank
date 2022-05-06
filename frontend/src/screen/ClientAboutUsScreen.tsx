@@ -9,7 +9,7 @@ export const ClientAboutUsScreen = (): ReactElement => {
   return (
     <Container maxWidth={false}>
       <ClientUnauthorizedHeader />
-      <Typography variant={"h4"}>{local.aboutUs.title}</Typography>
+      <Typography variant={"h4"}>{local.aboutUsScreen.title}</Typography>
     </Container>
   );
 };

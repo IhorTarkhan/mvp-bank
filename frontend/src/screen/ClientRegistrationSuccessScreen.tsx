@@ -1,7 +1,12 @@
-import React, { ReactElement } from "react";
-import { Box } from "@mui/material";
+import React, { ReactElement, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ClientAuthorizedNotConfirmedHeader } from "../component/header/ClientAuthorizedNotConfirmedHeader";
+import { useLocale } from "../i18n/i18n";
+import { Toast } from "../component/Toast";
+import { axios } from "../util/AxiosInterceptor";
+import { BACKEND_URL } from "../constant/environment";
+import { CLIENT_RESEND_CONFIRM_EMAIL_API } from "../constant/api";
 
 const useStyles = makeStyles({
   root: {
@@ -9,20 +14,45 @@ const useStyles = makeStyles({
     flexDirection: "column",
     maxWidth: "500px",
     marginInline: "auto",
-    marginTop: "100px",
+    marginTop: "50px",
     rowGap: "7px",
   },
 });
 
 export const ClientRegistrationSuccessScreen = (): ReactElement => {
   const classes = useStyles();
+  const [fullLocale, , language] = useLocale();
+  const locale = fullLocale.registrationSuccessScreen;
+  const [isEmailSending, setIsEmailSending] = useState(false);
+  const [isMessageOpen, setIsMessageOpen] = useState(true);
 
-  const clientRegistrationSuccess = "Success, todo"; // TODO
+  const resendEmail = () => {
+    setIsEmailSending((prevState) => !prevState);
+    axios
+      .post(BACKEND_URL + CLIENT_RESEND_CONFIRM_EMAIL_API, {
+        language: language,
+      })
+      .then(() => {
+        setIsMessageOpen(true);
+      })
+      .finally(() => {
+        setIsEmailSending(false);
+      });
+  };
 
   return (
     <Box className={classes.root}>
       <ClientAuthorizedNotConfirmedHeader />
-      {clientRegistrationSuccess}
+      <Typography variant={"h4"}>{locale.title}</Typography>
+      <Typography>{locale.text}</Typography>
+      <Typography>
+        <Button onClick={resendEmail} disabled={isEmailSending}>
+          {locale.resendEmail}
+        </Button>
+      </Typography>
+      <Toast isOpen={isMessageOpen} setIsOpen={setIsMessageOpen}>
+        {locale.emailSent}
+      </Toast>
     </Box>
   );
 };

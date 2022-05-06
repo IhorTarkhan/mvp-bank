@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.ClientRegistrationRequest;
+import ua.knu.csc.iss.mvpbank.dto.request.ClientResendConfirmEmailRequest;
 import ua.knu.csc.iss.mvpbank.dto.response.ClientAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.service.ClientAuthorisationService;
@@ -32,6 +33,11 @@ public class ClientAuthorisationController {
   @PostMapping("/client/confirm-email")
   public void confirmEmail(@RequestBody ClientEmailConfirmRequest request) {
     clientAuthorisationService.confirmEmail(request);
+  }
+
+  @PostMapping("/client/resend-email")
+  public void resendConfirmEmail(@RequestBody ClientResendConfirmEmailRequest request) {
+    clientAuthorisationService.resendConfirmEmail(request);
   }
 
   @GetMapping("/client/authorisation-status")

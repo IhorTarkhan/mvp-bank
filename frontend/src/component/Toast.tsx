@@ -2,10 +2,10 @@ import React, { ReactElement } from "react";
 import { Alert, Snackbar } from "@mui/material";
 
 type Props = {
-  text: string;
-  type: "success" | "info" | "warning" | "error";
+  children: string;
   isOpen: boolean;
   setIsOpen: (argument: boolean) => void;
+  type?: "success" | "info" | "warning" | "error";
   duration?: number;
   vertical?: "top" | "bottom";
   horizontal?: "left" | "center" | "right";
@@ -23,7 +23,7 @@ export const Toast = (props: Props): ReactElement => {
       }}
     >
       <Alert onClose={() => props.setIsOpen(false)} severity={props.type}>
-        {props.text}
+        {props.children}
       </Alert>
     </Snackbar>
   );

@@ -195,12 +195,9 @@ export const ClientRegistrationScreen = (): ReactElement => {
           </>
         )}
       </Formik>
-      <Toast
-        text={locale.registrationScreen.errors.duplicatingEmail}
-        type={"warning"}
-        isOpen={isWarning}
-        setIsOpen={setIsWarning}
-      />
+      <Toast type={"warning"} isOpen={isWarning} setIsOpen={setIsWarning}>
+        {locale.registrationScreen.errors.duplicatingEmail}
+      </Toast>
     </Box>
   );
 };

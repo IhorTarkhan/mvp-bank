@@ -12,7 +12,7 @@ export const ClientUnauthorizedHeader = (): ReactElement => {
 
   const pages = [
     {
-      name: locale.pages.about,
+      name: locale.header.pages.about,
       onClick: () => navigate(CLIENT_ABOUT_US_ROUTE),
       icon: <InfoIcon />,
     },

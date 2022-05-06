@@ -5,13 +5,13 @@ export const en = {
       english: "English",
       ukrainian: "Ukrainian",
     },
-  },
-  pages: {
-    about: "About us",
-  },
-  settings: {
-    myCabinet: "My cabinet",
-    logout: "Logout",
+    pages: {
+      about: "About us",
+    },
+    settings: {
+      myCabinet: "My cabinet",
+      logout: "Logout",
+    },
   },
   registrationScreen: {
     registrationLabel: "Registration",
@@ -38,7 +38,13 @@ export const en = {
       invalidCredentials: "Invalid credentials",
     },
   },
-  aboutUs: {
+  registrationSuccessScreen: {
+    title: "Please confirm email",
+    text: "You have successfully register in our super MVP Bank application. Please confirm your email by following link we sent you",
+    resendEmail: "Resend email",
+    emailSent: "Email Sent",
+  },
+  aboutUsScreen: {
     title: "About us",
   },
 };

@@ -10,7 +10,7 @@ public class EnLocale implements Locale {
     public String confirmEmailText() {
         return """
         <h4>Welcome new user of our super bank ;)</h4>
-        Please click thi link below to confirm your email:<br/>
+        Please click this link below to confirm your email:<br/>
         <a href="%s" target="_blank">Confirm email</a>
         """;
     }
