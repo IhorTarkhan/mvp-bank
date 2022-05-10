@@ -1,12 +1,12 @@
 import React, { ReactElement, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ClientAuthorizedNotConfirmedHeader } from "../component/header/ClientAuthorizedNotConfirmedHeader";
 import { useLocale } from "../i18n/i18n";
 import { Toast } from "../component/Toast";
 import { axios } from "../util/AxiosInterceptor";
 import { BACKEND_URL } from "../constant/environment";
 import { CLIENT_RESEND_CONFIRM_EMAIL_API } from "../constant/api";
+import { ClientHeader } from "../component/header/client/ClientHeader";
 
 const useStyles = makeStyles({
   root: {
@@ -42,7 +42,7 @@ export const ClientRegistrationSuccessScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
-      <ClientAuthorizedNotConfirmedHeader />
+      <ClientHeader />
       <Typography variant={"h4"}>{locale.title}</Typography>
       <Typography>{locale.text}</Typography>
       <Typography>

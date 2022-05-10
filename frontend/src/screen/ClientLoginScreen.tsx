@@ -28,7 +28,7 @@ import { ClientLoginRequest } from "../dto/request/ClientLoginRequest";
 import { VALID_EMAIL_REGEX } from "../constant/regex";
 import { useLocale } from "../i18n/i18n";
 import { MAIN_APP_COLOR } from "../constant/colors";
-import { ClientUnauthorizedHeader } from "../component/header/ClientUnauthorizedHeader";
+import { ClientHeader } from "../component/header/client/ClientHeader";
 
 const useStyles = makeStyles({
   root: {
@@ -85,6 +85,7 @@ export const ClientLoginScreen = (): ReactElement => {
           path: "/",
           expires: new Date(decoded.exp * 1000),
         });
+        window.location.reload();
       })
       .catch((reason: number) => {
         if (reason === 409) {
@@ -95,7 +96,7 @@ export const ClientLoginScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
-      <ClientUnauthorizedHeader />
+      <ClientHeader />
       <Typography variant={"h4"} marginBottom={"20px"}>
         {locale.loginScreen.loginLabel}
       </Typography>

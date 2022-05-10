@@ -6,23 +6,12 @@ import { axios } from "../util/AxiosInterceptor";
 import { BACKEND_URL } from "../constant/environment";
 import { CLIENT_CONFIRM_EMAIL_API } from "../constant/api";
 import { Spinner } from "../component/Spinner";
-import { ClientAuthorizedNotConfirmedHeader } from "../component/header/ClientAuthorizedNotConfirmedHeader";
-import { useCookies } from "react-cookie";
-import { CLIENT_JWT_COOKIE } from "../constant/cookie";
-import { ClientUnauthorizedHeader } from "../component/header/ClientUnauthorizedHeader";
+import { ClientHeader } from "../component/header/client/ClientHeader";
 
 export const ClientConfirmEmailScreen = (): ReactElement => {
   const params = useParams();
-  const [cookie] = useCookies([CLIENT_JWT_COOKIE]);
   const token: string = params[TOKEN_PARAM]!;
   const [isLoading, setIsLoading] = useState(true);
-
-  let Header: () => ReactElement;
-  if (cookie[CLIENT_JWT_COOKIE]) {
-    Header = ClientAuthorizedNotConfirmedHeader;
-  } else {
-    Header = ClientUnauthorizedHeader;
-  }
 
   const invalidLink = "Invalid confirm email link, todo"; // TODO
 
@@ -40,7 +29,7 @@ export const ClientConfirmEmailScreen = (): ReactElement => {
   if (isLoading) {
     return (
       <Container maxWidth={false}>
-        <Header />
+        <ClientHeader />
         <Spinner />
       </Container>
     );
@@ -48,7 +37,7 @@ export const ClientConfirmEmailScreen = (): ReactElement => {
 
   return (
     <Container maxWidth={false}>
-      <Header />
+      <ClientHeader />
       {invalidLink}
     </Container>
   );

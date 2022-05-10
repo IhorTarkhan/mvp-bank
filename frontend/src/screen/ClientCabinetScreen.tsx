@@ -1,11 +1,11 @@
 import React, { ReactElement } from "react";
 import { Container } from "@mui/material";
-import { ClientAuthorizedHeader } from "../component/header/ClientAuthorizedHeader";
+import { ClientHeader } from "../component/header/client/ClientHeader";
 
 export const ClientCabinetScreen = (): ReactElement => {
   return (
     <Container>
-      <ClientAuthorizedHeader />
+      <ClientHeader />
       Client Cabinet Screen
     </Container>
   );

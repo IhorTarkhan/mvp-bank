@@ -7,20 +7,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import { AccountCircle } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { Language, useLocale } from "../../i18n/i18n";
-import { MAIN_APP_COLOR, TEXT_ON_MAIN_COLOR } from "../../constant/colors";
-import { Logo } from "../Logo";
-import { AreaWithSideMenu } from "../AreaWithSideMenu";
-import { AriaWithPopupMenu } from "../AriaWithPopupMenu";
+import { Language, useLocale } from "../../../i18n/i18n";
+import { MAIN_APP_COLOR, TEXT_ON_MAIN_COLOR } from "../../../constant/colors";
+import { Logo } from "../../Logo";
+import { AreaWithSideMenu } from "../../AreaWithSideMenu";
+import { AriaWithPopupMenu } from "../../AriaWithPopupMenu";
 import { useNavigate } from "react-router-dom";
-import { CLIENT_HOME_ROUTE } from "../../constant/route";
+import { CLIENT_HOME_ROUTE } from "../../../constant/route";
 
 type Props = {
   settings?: { name: string; onClick: () => void; icon?: ReactElement }[];
   pages?: { name: string; onClick: () => void; icon?: ReactElement }[];
 };
 
-export const ClientAbstractHeader = (props: Props): ReactElement => {
+export const AbstractClientHeader = (props: Props): ReactElement => {
   const navigate = useNavigate();
   const [locale, setLanguage] = useLocale();
 

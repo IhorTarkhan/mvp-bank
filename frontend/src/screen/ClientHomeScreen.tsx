@@ -4,12 +4,12 @@ import {
   CLIENT_LOGIN_ROUTE,
   CLIENT_REGISTRATION_ROUTE,
 } from "../constant/route";
-import { ClientUnauthorizedHeader } from "../component/header/ClientUnauthorizedHeader";
+import { ClientHeader } from "../component/header/client/ClientHeader";
 
 export const ClientHomeScreen = (): ReactElement => {
   return (
     <Container maxWidth={false}>
-      <ClientUnauthorizedHeader />
+      <ClientHeader />
       Home Screen
       <br />
       <Link href={CLIENT_LOGIN_ROUTE}>login</Link>

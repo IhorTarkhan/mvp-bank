@@ -3,17 +3,17 @@ import { ReactElement } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useLocale } from "../../i18n/i18n";
-import { ClientAbstractHeader } from "./CleentAbstractHeader";
+import { useLocale } from "../../../i18n/i18n";
+import { AbstractClientHeader } from "./AbstractClientHeader";
 import { useNavigate } from "react-router-dom";
 import {
   CLIENT_ABOUT_US_ROUTE,
   CLIENT_CABINET_ROUTE,
-} from "../../constant/route";
+} from "../../../constant/route";
 import { useCookies } from "react-cookie";
-import { CLIENT_JWT_COOKIE } from "../../constant/cookie";
+import { CLIENT_JWT_COOKIE } from "../../../constant/cookie";
 
-export const ClientAuthorizedHeader = (): ReactElement => {
+export const VerifiedEmailAuthorizedClientHeader = (): ReactElement => {
   const [locale] = useLocale();
   const navigate = useNavigate();
   const [, , removeCookie] = useCookies([CLIENT_JWT_COOKIE]);
@@ -36,10 +36,11 @@ export const ClientAuthorizedHeader = (): ReactElement => {
       name: locale.header.settings.logout,
       onClick: () => {
         removeCookie(CLIENT_JWT_COOKIE, { path: "/" });
+        window.location.reload();
       },
       icon: <ExitToAppIcon />,
     },
   ];
 
-  return <ClientAbstractHeader pages={pages} settings={settings} />;
+  return <AbstractClientHeader pages={pages} settings={settings} />;
 };
