@@ -11,8 +11,8 @@ axios.interceptors.request.use((req: { headers: any; url: string }) => {
     .map((it) => it.substring(CLIENT_JWT_COOKIE.length + 1))
     .map((it) => it.split(",")[0].trim())
     .pop();
-    req.headers["Authorization"] = clientHeader ? "Bearer " + clientHeader : "";
-    return req;
+  req.headers["Authorization"] = clientHeader ? "Bearer " + clientHeader : "";
+  return req;
 });
 
 axios.interceptors.response.use(

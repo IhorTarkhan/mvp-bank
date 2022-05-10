@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { TOKEN_PARAM } from "../constant/routeParams";
+import { TOKEN_PARAM } from "../constant/route-params";
 import { Container } from "@mui/material";
 import { axios } from "../util/AxiosInterceptor";
 import { BACKEND_URL } from "../constant/environment";
