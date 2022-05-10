@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SuperAdminAuthorisationStatusResponse {
   private String email;
-  private boolean emailVerified;
 }

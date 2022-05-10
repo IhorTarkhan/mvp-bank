@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ua.knu.csc.iss.mvpbank.service.SendEmailService;
+import ua.knu.csc.iss.mvpbank.service.EmailService;
 
 @RestController
 @RequiredArgsConstructor
 public class TestRestController {
-  private final SendEmailService sendEmailService;
+  private final EmailService emailService;
 
   @GetMapping("/test")
   public String getTest() {
@@ -21,7 +21,7 @@ public class TestRestController {
       @RequestParam("to") String to,
       @RequestParam("subject") String subject,
       @RequestParam("text") String text) {
-    sendEmailService.sendTextEmail(to, subject, text);
+    emailService.sendTextEmail(to, subject, text);
     return "Hello MVP Bank";
   }
 
@@ -30,7 +30,7 @@ public class TestRestController {
       @RequestParam("to") String to,
       @RequestParam("subject") String subject,
       @RequestParam("text") String text) {
-    sendEmailService.sendTextEmailHtml(to, subject, text);
+    emailService.sendTextEmailHtml(to, subject, text);
     return "Hello MVP Bank";
   }
 }

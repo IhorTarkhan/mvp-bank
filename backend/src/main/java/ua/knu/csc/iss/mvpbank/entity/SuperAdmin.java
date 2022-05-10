@@ -30,9 +30,6 @@ public class SuperAdmin implements UserDetails {
   @Column(name = "password", nullable = false)
   private String password;
 
-  @Column(name = "email_verified", nullable = false)
-  private boolean emailVerified;
-
   @Column(name = "first_name")
   private String firstName;
 

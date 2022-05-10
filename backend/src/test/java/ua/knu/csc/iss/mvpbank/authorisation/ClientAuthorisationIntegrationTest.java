@@ -249,8 +249,8 @@ public class ClientAuthorisationIntegrationTest {
 
     doAnswer(
             invocation -> {
-              // get second argument (index in `getArgument`, starting from 0)
-              String newValue = invocation.getArgument(1).toString();
+              // get third argument (index in `getArgument`, starting from 0)
+              String newValue = invocation.getArgument(2).toString();
               token.set(newValue);
               return null;
             })
@@ -282,8 +282,8 @@ public class ClientAuthorisationIntegrationTest {
 
     doAnswer(
             invocation -> {
-              // get second argument (index in `getArgument`, starting from 0)
-              String newValue = invocation.getArgument(1).toString();
+              // get third argument (index in `getArgument`, starting from 0)
+              String newValue = invocation.getArgument(2).toString();
               token.set(newValue);
               return null;
             })

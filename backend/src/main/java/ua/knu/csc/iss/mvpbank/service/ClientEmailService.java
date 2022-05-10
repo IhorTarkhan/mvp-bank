@@ -12,12 +12,12 @@ import ua.knu.csc.iss.mvpbank.property.ApplicationProperty;
 @RequiredArgsConstructor
 public class ClientEmailService {
   private final ApplicationProperty applicationProperty;
-  private final SendEmailService sendEmailService;
+  private final EmailService emailService;
 
   public void sendConfirmEmail(Language language, String email, String token) {
     Locale locale = Locale.getInstance(language);
     String confirmLink = applicationProperty.getFrontendUrl() + "/client-confirm-email/" + token;
-    sendEmailService.sendTextEmailHtml(
+    emailService.sendTextEmailHtml(
         email, locale.confirmEmailTitle(), locale.confirmEmailText().formatted(confirmLink));
   }
 }
