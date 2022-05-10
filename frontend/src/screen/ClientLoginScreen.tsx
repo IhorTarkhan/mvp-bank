@@ -87,10 +87,8 @@ export const ClientLoginScreen = (): ReactElement => {
         });
         window.location.reload();
       })
-      .catch((reason: number) => {
-        if (reason === 409) {
-          setIsWarning(true);
-        }
+      .catch(() => {
+        setIsWarning(true);
       });
   };
 
