@@ -28,6 +28,8 @@ export const ua: typeof en = {
       passwordsNotMatch: "Паролі не співпадають",
       duplicatingEmail: "Користувач з таким Email вже існує!",
     },
+    recommendLoginPrefix: "Вже маєте акаунт? ",
+    recommendLoginLink: "Увійдіть зараз!",
   },
   loginScreen: {
     loginLabel: "Вхід",
@@ -39,6 +41,8 @@ export const ua: typeof en = {
       invalidEmailAddress: "Email некоректно вказаний",
       invalidCredentials: "Неправильні данні для входу",
     },
+    recommendSignUpPrefix: "Все ще не маєта акаунту? ",
+    recommendSignUpLink: "Зареєструйтесь зараз!",
   },
   registrationSuccessScreen: {
     title: "Будь ласка, підтвердьте електронну адресу",

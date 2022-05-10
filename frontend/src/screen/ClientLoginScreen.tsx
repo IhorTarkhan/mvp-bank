@@ -6,6 +6,7 @@ import {
   FormHelperText,
   IconButton,
   InputLabel,
+  Link,
   OutlinedInput,
   TextField,
   Typography,
@@ -29,6 +30,7 @@ import { VALID_EMAIL_REGEX } from "../constant/regex";
 import { useLocale } from "../i18n/i18n";
 import { MAIN_APP_COLOR } from "../constant/colors";
 import { ClientHeader } from "../component/header/client/ClientHeader";
+import { CLIENT_REGISTRATION_ROUTE } from "../constant/route";
 
 const useStyles = makeStyles({
   root: {
@@ -157,6 +159,12 @@ export const ClientLoginScreen = (): ReactElement => {
           </>
         )}
       </Formik>
+      <span>
+        {locale.loginScreen.recommendSignUpPrefix}
+        <Link href={CLIENT_REGISTRATION_ROUTE}>
+          {locale.loginScreen.recommendSignUpLink}
+        </Link>
+      </span>
       <Toast type={"warning"} isOpen={isWarning} setIsOpen={setIsWarning}>
         {locale.loginScreen.errors.invalidCredentials}
       </Toast>

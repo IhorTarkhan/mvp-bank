@@ -26,6 +26,8 @@ export const en = {
       passwordsNotMatch: "Passwords do not match",
       duplicatingEmail: "Email already using!",
     },
+    recommendLoginPrefix: "Already have the account? ",
+    recommendLoginLink: "Login, now!",
   },
   loginScreen: {
     loginLabel: "Login",
@@ -37,6 +39,8 @@ export const en = {
       invalidEmailAddress: "Invalid email address",
       invalidCredentials: "Invalid credentials",
     },
+    recommendSignUpPrefix: "Still have no account? ",
+    recommendSignUpLink: "Sign up, now!",
   },
   registrationSuccessScreen: {
     title: "Please confirm email",
