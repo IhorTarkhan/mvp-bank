@@ -9,7 +9,7 @@ import { ClientConfirmEmailScreen } from "../../screen/ClientConfirmEmailScreen"
 import { PREFIX_PARAM, TOKEN_PARAM } from "../../constant/route-params";
 import { ClientRegistrationSuccessScreen } from "../../screen/ClientRegistrationSuccessScreen";
 
-export const AuthorizedEmailNotVerifiedClientRouting = (): ReactElement => {
+export const NotVerifiedEmailAuthorizedClientRouting = (): ReactElement => {
   return (
     <BrowserRouter>
       <Routes>

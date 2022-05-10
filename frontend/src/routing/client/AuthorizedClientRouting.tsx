@@ -8,8 +8,8 @@ import { BACKEND_URL } from "../../constant/environment";
 import { useCookies } from "react-cookie";
 import { CLIENT_JWT_COOKIE } from "../../constant/cookie";
 import { Spinner } from "../../component/Spinner";
-import { AuthorizedEmailNotVerifiedClientRouting } from "./AuthorizedEmailNotVerifiedClientRouting";
-import { AuthorizedEmailVerifiedClientRouting } from "./AuthorizedEmailVerifiedClientRouting";
+import { NotVerifiedEmailAuthorizedClientRouting } from "./NotVerifiedEmailAuthorizedClientRouting";
+import { VerifiedEmailAuthorizedClientRouting } from "./VerifiedEmailAuthorizedClientRouting";
 
 export const AuthorizedClientRouting = (): ReactElement => {
   const [, , removeCookie] = useCookies([CLIENT_JWT_COOKIE]);
@@ -29,9 +29,9 @@ export const AuthorizedClientRouting = (): ReactElement => {
 
   if (client) {
     if (client.emailVerified) {
-      return <AuthorizedEmailVerifiedClientRouting />;
+      return <VerifiedEmailAuthorizedClientRouting />;
     } else {
-      return <AuthorizedEmailNotVerifiedClientRouting />;
+      return <NotVerifiedEmailAuthorizedClientRouting />;
     }
   } else {
     return <Spinner />;
