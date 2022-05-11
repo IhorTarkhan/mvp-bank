@@ -11,13 +11,11 @@ import { AxiosResponse } from "axios";
 type ClientContextData = {
   isLoading: boolean;
   client: ClientAuthorisationStatusResponse | null;
-  updateClient: () => void;
 };
 
 export const ClientContext = createContext<ClientContextData>({
   isLoading: true,
   client: null,
-  updateClient: () => {},
 });
 
 type Props = { children: ReactElement };
@@ -28,7 +26,7 @@ export const ClientProvider = (props: Props): ReactElement => {
   const [client, setClient] =
     useState<ClientAuthorisationStatusResponse | null>(null);
 
-  const updateClient = () => {
+  useEffect(() => {
     if (!cookie[CLIENT_JWT_COOKIE]) {
       setIsLoading(false);
       return;
@@ -45,18 +43,13 @@ export const ClientProvider = (props: Props): ReactElement => {
       .finally(() => {
         setIsLoading(false);
       });
-  };
-
-  useEffect(() => {
-    updateClient();
-  }, [removeCookie]);
+  }, [cookie, removeCookie]);
 
   return (
     <ClientContext.Provider
       value={{
         isLoading: isLoading,
         client: client,
-        updateClient: updateClient,
       }}
     >
       {props.children}
