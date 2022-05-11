@@ -211,7 +211,7 @@ public class ClientAuthorisationIntegrationTest {
     headers.set(AUTHORIZATION, bearer);
     ResponseEntity<ClientAuthorisationStatusResponse> response =
         restTemplate.exchange(
-            "/super-admin/authorisation-status",
+            "/admin/authorisation-status",
             GET,
             new HttpEntity<>(headers),
             ClientAuthorisationStatusResponse.class);

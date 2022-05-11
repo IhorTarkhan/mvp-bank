@@ -16,9 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ua.knu.csc.iss.mvpbank.entity.Client;
-import ua.knu.csc.iss.mvpbank.entity.SuperAdmin;
+import ua.knu.csc.iss.mvpbank.entity.Admin;
 import ua.knu.csc.iss.mvpbank.security.filter.ClientSecurityFilter;
-import ua.knu.csc.iss.mvpbank.security.filter.SuperAdminSecurityFilter;
+import ua.knu.csc.iss.mvpbank.security.filter.AdminSecurityFilter;
 
 import static org.springframework.http.HttpMethod.OPTIONS;
 
@@ -28,7 +28,7 @@ import static org.springframework.http.HttpMethod.OPTIONS;
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   private final ClientSecurityFilter clientSecurityFilter;
-  private final SuperAdminSecurityFilter superAdminSecurityFilter;
+  private final AdminSecurityFilter adminSecurityFilter;
   private final UserDetailsService userService;
 
   @Override
@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
         // add filters
         .addFilterBefore(clientSecurityFilter, UsernamePasswordAuthenticationFilter.class)
-        .addFilterBefore(superAdminSecurityFilter, UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(adminSecurityFilter, UsernamePasswordAuthenticationFilter.class)
         // permit OPTIONS request
         .authorizeRequests()
         .antMatchers(OPTIONS, "/**")
@@ -59,11 +59,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers("/client/**")
         .hasRole(Client.ROLE)
-        // set access to "SUPER_ADMIN" role
-        .antMatchers("/super-admin/register", "/super-admin/login", "/super-admin/confirm-email")
+        // set access to "ADMIN" role
+        .antMatchers("/admin/register", "/admin/login", "/admin/confirm-email")
         .permitAll()
-        .antMatchers("/super-admin/**")
-        .hasRole(SuperAdmin.ROLE)
+        .antMatchers("/admin/**")
+        .hasRole(Admin.ROLE)
         // permit all left request
         .anyRequest()
         .permitAll();

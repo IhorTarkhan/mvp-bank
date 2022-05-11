@@ -15,9 +15,9 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "super_admin")
-public class SuperAdmin implements UserDetails {
-  public static final String ROLE = "SUPER_ADMIN";
+@Table(name = "admin")
+public class Admin implements UserDetails {
+  public static final String ROLE = "ADMIN";
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SuperAdminAuthorisationStatusResponse {
+public class AdminAuthorisationStatusResponse {
   private String email;
 }
