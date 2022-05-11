@@ -15,10 +15,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ua.knu.csc.iss.mvpbank.entity.AdminRoles;
 import ua.knu.csc.iss.mvpbank.entity.Client;
-import ua.knu.csc.iss.mvpbank.entity.Admin;
-import ua.knu.csc.iss.mvpbank.security.filter.ClientSecurityFilter;
 import ua.knu.csc.iss.mvpbank.security.filter.AdminSecurityFilter;
+import ua.knu.csc.iss.mvpbank.security.filter.ClientSecurityFilter;
+
+import java.util.Arrays;
 
 import static org.springframework.http.HttpMethod.OPTIONS;
 
@@ -63,7 +65,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/admin/register", "/admin/login", "/admin/confirm-email")
         .permitAll()
         .antMatchers("/admin/**")
-        .hasRole(Admin.ROLE)
+        .hasAnyRole(Arrays.stream(AdminRoles.values()).map(AdminRoles::name).toArray(String[]::new))
         // permit all left request
         .anyRequest()
         .permitAll();
