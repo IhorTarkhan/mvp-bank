@@ -7,13 +7,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import { AccountCircle } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { Language, useLocale } from "../../i18n/i18n";
 import { MAIN_APP_COLOR, TEXT_ON_MAIN_COLOR } from "../../constant/colors";
 import { Logo } from "../Logo";
 import { AreaWithSideMenu } from "../AreaWithSideMenu";
 import { AriaWithPopupMenu } from "../AriaWithPopupMenu";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_HOME_ROUTE } from "../../constant/route";
+import { LanguagesInHeader } from "./LanguagesInHeader";
 
 type Props = {
   settings?: { name: string; onClick: () => void; icon?: ReactElement }[];
@@ -23,18 +23,6 @@ type Props = {
 
 export const AbstractHeader = (props: Props): ReactElement => {
   const navigate = useNavigate();
-  const [locale, setLanguage] = useLocale();
-
-  const languages = [
-    {
-      name: locale.header.language.english,
-      onClick: () => setLanguage(Language.EN),
-    },
-    {
-      name: locale.header.language.ukrainian,
-      onClick: () => setLanguage(Language.UA),
-    },
-  ];
 
   return (
     <>
@@ -81,12 +69,7 @@ export const AbstractHeader = (props: Props): ReactElement => {
               <Logo />
             </Box>
           </Box>
-          {props.disableLanguage || (
-            <AriaWithPopupMenu fields={languages}>
-              <>{locale.header.language.languageLabel}</>
-            </AriaWithPopupMenu>
-          )}
-
+          {props.disableLanguage || <LanguagesInHeader />}
           {props.settings && (
             <AriaWithPopupMenu fields={props.settings}>
               <IconButton style={{ color: TEXT_ON_MAIN_COLOR, marginLeft: 10 }}>
