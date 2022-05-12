@@ -4,7 +4,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useLocale } from "../../../i18n/i18n";
-import { AbstractClientHeader } from "./AbstractClientHeader";
+import { AbstractHeader } from "../AbstractHeader";
 import { useNavigate } from "react-router-dom";
 import {
   CLIENT_ABOUT_US_ROUTE,
@@ -42,5 +42,5 @@ export const VerifiedEmailAuthorizedClientHeader = (): ReactElement => {
     },
   ];
 
-  return <AbstractClientHeader pages={pages} settings={settings} />;
+  return <AbstractHeader pages={pages} settings={settings} />;
 };

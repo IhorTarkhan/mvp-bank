@@ -2,7 +2,7 @@ import * as React from "react";
 import { ReactElement } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import { useLocale } from "../../../i18n/i18n";
-import { AbstractClientHeader } from "./AbstractClientHeader";
+import { AbstractHeader } from "../AbstractHeader";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_ABOUT_US_ROUTE } from "../../../constant/route";
 
@@ -18,5 +18,5 @@ export const UnauthorizedClientHeader = (): ReactElement => {
     },
   ];
 
-  return <AbstractClientHeader pages={pages} />;
+  return <AbstractHeader pages={pages} />;
 };

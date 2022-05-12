@@ -39,6 +39,7 @@ export const ClientProvider = (props: Props): ReactElement => {
       })
       .catch(() => {
         removeCookie(CLIENT_JWT_COOKIE);
+        window.location.reload();
       })
       .finally(() => {
         setIsLoading(false);

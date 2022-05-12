@@ -2,7 +2,7 @@ import * as React from "react";
 import { ReactElement } from "react";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useLocale } from "../../../i18n/i18n";
-import { AbstractClientHeader } from "./AbstractClientHeader";
+import { AbstractHeader } from "../AbstractHeader";
 import { useCookies } from "react-cookie";
 import { CLIENT_JWT_COOKIE } from "../../../constant/cookie";
 
@@ -21,5 +21,5 @@ export const NotVerifiedEmailAuthorizedClientHeader = (): ReactElement => {
     },
   ];
 
-  return <AbstractClientHeader settings={settings} />;
+  return <AbstractHeader settings={settings} />;
 };
