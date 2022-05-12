@@ -26,7 +26,7 @@ public class ClientOneTimeAccessToken {
   @Column(name = "expires_at")
   private ZonedDateTime expiresAt;
 
-  @ManyToOne(targetEntity = Client.class, fetch = FetchType.LAZY)
+  @ManyToOne(targetEntity = Client.class)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn
   private Client client;

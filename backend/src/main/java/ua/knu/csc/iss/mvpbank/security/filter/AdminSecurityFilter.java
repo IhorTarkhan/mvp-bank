@@ -8,8 +8,7 @@ import ua.knu.csc.iss.mvpbank.security.JwtTokenProvider;
 @Component
 public class AdminSecurityFilter extends AbstractSecurityFilter {
   public AdminSecurityFilter(
-      @Autowired AdminRepository adminRepository,
-      @Autowired JwtTokenProvider jwtTokenProvider) {
-    super(adminRepository, jwtTokenProvider);
+      @Autowired AdminRepository adminRepository, @Autowired JwtTokenProvider jwtTokenProvider) {
+    super(adminRepository, jwtTokenProvider, "Authorization-Admin");
   }
 }

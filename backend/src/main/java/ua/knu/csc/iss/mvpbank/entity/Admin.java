@@ -36,6 +36,11 @@ public class Admin implements UserDetails {
   private List<AdminRoles> roles;
 
   @Override
+  public String getUsername() {
+    return getEmail();
+  }
+
+  @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).toList();
   }

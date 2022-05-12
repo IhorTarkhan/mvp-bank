@@ -19,12 +19,15 @@ import java.util.Optional;
 public abstract class AbstractSecurityFilter extends OncePerRequestFilter {
   private final JpaRepositoryImplementation<? extends UserDetails, Long> userRepository;
   private final JwtTokenProvider jwtTokenProvider;
+  private final String header;
 
   public AbstractSecurityFilter(
       JpaRepositoryImplementation<? extends UserDetails, Long> userRepository,
-      JwtTokenProvider jwtTokenProvider) {
+      JwtTokenProvider jwtTokenProvider,
+      String header) {
     this.userRepository = userRepository;
     this.jwtTokenProvider = jwtTokenProvider;
+    this.header = header;
   }
 
   @Override
@@ -38,7 +41,7 @@ public abstract class AbstractSecurityFilter extends OncePerRequestFilter {
   }
 
   private Optional<String> getJwtFromRequest(HttpServletRequest request) {
-    String bearerToken = request.getHeader("Authorization");
+    String bearerToken = request.getHeader(header);
     if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
       return Optional.of(bearerToken.substring(7));
     }
