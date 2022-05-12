@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import ua.knu.csc.iss.mvpbank.exceptions.NotFoundException;
-import ua.knu.csc.iss.mvpbank.repository.ClientRepository;
 import ua.knu.csc.iss.mvpbank.repository.AdminRepository;
+import ua.knu.csc.iss.mvpbank.repository.ClientRepository;
 
 import java.util.Optional;
 

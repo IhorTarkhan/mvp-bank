@@ -6,8 +6,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import ua.knu.csc.iss.mvpbank.dto.request.AdminLoginRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.AdminAuthorisationStatusResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.entity.Admin;
 import ua.knu.csc.iss.mvpbank.exceptions.NotFoundException;
 import ua.knu.csc.iss.mvpbank.repository.AdminRepository;
@@ -36,8 +36,6 @@ public class AdminAuthorisationService {
 
   public AdminAuthorisationStatusResponse getCurrentAdmin() {
     Admin currentAdmin = userSecurityService.getCurrentAdmin();
-    return AdminAuthorisationStatusResponse.builder()
-        .email(currentAdmin.getEmail())
-        .build();
+    return AdminAuthorisationStatusResponse.builder().email(currentAdmin.getEmail()).build();
   }
 }

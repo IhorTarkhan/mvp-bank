@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Table(name = "client_one_time_access_token")
-public class ClientOneTimeAccessToken {
+public class AdminOneTimeAccessToken {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
@@ -22,8 +22,8 @@ public class ClientOneTimeAccessToken {
   @Column(name = "token")
   private String token;
 
-  @ManyToOne(targetEntity = Client.class)
+  @ManyToOne(targetEntity = Admin.class, fetch = FetchType.LAZY)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JoinColumn
-  private Client client;
+  private Admin admin;
 }

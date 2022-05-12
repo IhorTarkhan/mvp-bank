@@ -43,8 +43,8 @@ public class ClientAuthorisationService {
     Client savedClient = clientRepository.save(newClient);
     ClientOneTimeAccessToken clientOneTimeAccessToken =
         clientOneTimeAccessTokenService.generateVerifyEmailToken(savedClient);
-    clientEmailService.sendConfirmEmail(request.getLanguage(),
-        savedClient.getEmail(), clientOneTimeAccessToken.getToken());
+    clientEmailService.sendConfirmEmail(
+        request.getLanguage(), savedClient.getEmail(), clientOneTimeAccessToken.getToken());
     return JwtResponse.builder()
         .authorization(jwtTokenProvider.generateToken(savedClient.getId().toString()))
         .build();
@@ -65,7 +65,6 @@ public class ClientAuthorisationService {
   public void confirmEmail(ClientEmailConfirmRequest request) {
     ClientOneTimeAccessToken oneTimeAccessToken =
         clientOneTimeAccessTokenService.findOneTimeAccessToken(request.getToken());
-    clientOneTimeAccessTokenService.checkIfValid(oneTimeAccessToken);
     Client currentClient = oneTimeAccessToken.getClient();
     currentClient.setEmailVerified(true);
     clientRepository.save(currentClient);
@@ -74,9 +73,9 @@ public class ClientAuthorisationService {
   public void resendConfirmEmail(ClientResendConfirmEmailRequest request) {
     Client currentClient = userSecurityService.getCurrentClient();
     ClientOneTimeAccessToken clientOneTimeAccessToken =
-            clientOneTimeAccessTokenService.generateVerifyEmailToken(currentClient);
-    clientEmailService.sendConfirmEmail(request.getLanguage(),
-            currentClient.getEmail(), clientOneTimeAccessToken.getToken());
+        clientOneTimeAccessTokenService.generateVerifyEmailToken(currentClient);
+    clientEmailService.sendConfirmEmail(
+        request.getLanguage(), currentClient.getEmail(), clientOneTimeAccessToken.getToken());
   }
 
   public ClientAuthorisationStatusResponse getCurrentClient() {
