@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ua.knu.csc.iss.mvpbank.dto.request.AdminLoginRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.AdminAuthorisationStatusResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
 import ua.knu.csc.iss.mvpbank.service.AdminAuthorisationService;
 
 @Slf4j

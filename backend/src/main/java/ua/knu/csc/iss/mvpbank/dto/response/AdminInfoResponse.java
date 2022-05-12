@@ -12,7 +12,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminAuthorisationStatusResponse {
+public class AdminInfoResponse {
+  private Long id;
+  private String username;
   private String email;
   private List<AdminRoles> roles;
 }

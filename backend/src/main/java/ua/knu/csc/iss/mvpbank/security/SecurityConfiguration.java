@@ -62,10 +62,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/client/**")
         .hasRole(Client.ROLE)
         // set access to "ADMIN" role
-        .antMatchers("/admin/register", "/admin/login", "/admin/confirm-email")
+        .antMatchers("/admin/login")
         .permitAll()
         .antMatchers("/admin/**")
         .hasAnyRole(Arrays.stream(AdminRoles.values()).map(AdminRoles::name).toArray(String[]::new))
+        .antMatchers("/super-admin/**")
+        .hasRole("SUPER_ADMIN")
         // permit all left request
         .anyRequest()
         .permitAll();

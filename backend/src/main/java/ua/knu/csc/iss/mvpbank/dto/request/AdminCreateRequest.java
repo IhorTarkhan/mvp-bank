@@ -1,4 +1,4 @@
-package ua.knu.csc.iss.mvpbank.dto.response;
+package ua.knu.csc.iss.mvpbank.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminAuthorisationStatusResponse {
+public class AdminCreateRequest {
+  private String username;
   private String email;
   private List<AdminRoles> roles;
 }
