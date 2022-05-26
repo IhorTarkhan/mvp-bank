@@ -6,11 +6,13 @@ import { AbstractHeader } from "../AbstractHeader";
 import { ADMIN_JWT_COOKIE } from "../../../constant/cookie";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useCookies } from "react-cookie";
-import InfoIcon from "@mui/icons-material/Info";
+import { useNavigate } from "react-router-dom";
+import { ADMIN_MANAGEMENT_ROUTE } from "../../../constant/route";
 
 export const AdminHeader = (): ReactElement => {
   const [, , removeCookie] = useCookies([ADMIN_JWT_COOKIE]);
   const adminContext = useContext(AdminContext);
+  const navigate = useNavigate();
 
   if (adminContext.isLoading || !adminContext.admin) {
     return <Spinner />;
@@ -18,13 +20,8 @@ export const AdminHeader = (): ReactElement => {
 
   const pages = [
     {
-      name: "test",
-      onClick: () => alert(1),
-      icon: <InfoIcon />,
-    },
-    {
-      name: "test2",
-      onClick: () => alert(2),
+      name: "Admins",
+      onClick: () => navigate(ADMIN_MANAGEMENT_ROUTE),
     },
   ];
 

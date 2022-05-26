@@ -21,7 +21,7 @@ export const AdminHomeScreen = (): ReactElement => {
       <Typography variant={"h5"}>Your roles</Typography>
       <List>
         {adminContext.admin.roles.map((role) => (
-          <ListItem>{role}</ListItem>
+          <ListItem key={role}>{role}</ListItem>
         ))}
       </List>
     </Container>

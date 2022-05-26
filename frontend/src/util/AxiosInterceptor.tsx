@@ -25,10 +25,9 @@ axios.interceptors.request.use((req: Request) => {
 axios.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: any) => {
-    console.error(error);
     if (error.toJSON().status === 500) {
       alert(500);
     }
-    return Promise.reject({ ...error }.response.status);
+    return Promise.reject({ ...error });
   }
 );

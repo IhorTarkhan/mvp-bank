@@ -101,8 +101,8 @@ export const ClientRegistrationScreen = (): ReactElement => {
         });
         window.location.reload();
       })
-      .catch((reason: number) => {
-        if (reason === 409) {
+      .catch((reason: any) => {
+        if (reason.response.status === 409) {
           setIsWarning(true);
         }
       });

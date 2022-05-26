@@ -6,7 +6,6 @@ import Toolbar from "@mui/material/Toolbar";
 import { MAIN_APP_COLOR } from "../../constant/colors";
 import { Logo } from "../Logo";
 import { useNavigate } from "react-router-dom";
-import { CLIENT_HOME_ROUTE } from "../../constant/route";
 import { LanguagesInHeader } from "./LanguagesInHeader";
 import { SettingsInHeader } from "./SettingsInHeader";
 import { PagesInMobileHeader } from "./PagesInMobileHeader";
@@ -25,35 +24,37 @@ export const AbstractHeader = (props: Props): ReactElement => {
     <>
       <AppBar>
         <Toolbar style={{ background: MAIN_APP_COLOR }}>
-          <Box display={["none", "none", "flex"]} flexGrow={1}>
-            <Box
-              marginRight={5}
-              width={56}
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate("/")}
-            >
-              <Logo />
-            </Box>
-            {props.pages && (
-              <Box display={"flex"} flexGrow={1}>
-                <PagesInDesktopHeader pages={props.pages} />
+          <>
+            <Box display={["none", "none", "flex"]} flexGrow={1}>
+              <Box
+                marginRight={5}
+                width={56}
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate("/")}
+              >
+                <Logo />
               </Box>
-            )}
-          </Box>
-          <Box display={["flex", "flex", "none"]} flexGrow={1}>
-            {props.pages && <PagesInMobileHeader pages={props.pages} />}
-            <Box
-              position={"fixed"}
-              width={56}
-              left={"calc(50% - 28px)"}
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate(CLIENT_HOME_ROUTE)}
-            >
-              <Logo />
+              {props.pages && (
+                <Box display={"flex"} flexGrow={1}>
+                  <PagesInDesktopHeader pages={props.pages} />
+                </Box>
+              )}
             </Box>
-          </Box>
-          {props.disableLanguage || <LanguagesInHeader />}
-          {props.settings && <SettingsInHeader settings={props.settings} />}
+            <Box display={["flex", "flex", "none"]} flexGrow={1}>
+              {props.pages && <PagesInMobileHeader pages={props.pages} />}
+              <Box
+                position={"fixed"}
+                width={56}
+                left={"calc(50% - 28px)"}
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate("/")}
+              >
+                <Logo />
+              </Box>
+            </Box>
+            {props.disableLanguage || <LanguagesInHeader />}
+            {props.settings && <SettingsInHeader settings={props.settings} />}
+          </>
         </Toolbar>
       </AppBar>
       <Toolbar style={{ marginBottom: 15 }} />
