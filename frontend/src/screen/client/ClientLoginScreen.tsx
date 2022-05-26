@@ -6,6 +6,7 @@ import {
   FormHelperText,
   IconButton,
   InputLabel,
+  Link,
   OutlinedInput,
   TextField,
   Typography,
@@ -14,19 +15,22 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Formik } from "formik";
 import { makeStyles } from "@mui/styles";
-import { FormicErrors } from "../util/FormicUtil";
-import { BACKEND_URL } from "../constant/environment";
-import { JwtResponse } from "../dto/response/JwtResponse";
-import { ADMIN_LOGIN_API } from "../constant/api";
+import { FormicErrors, getTranslateError } from "../../util/FormicUtil";
+import { BACKEND_URL } from "../../constant/environment";
+import { JwtResponse } from "../../dto/response/JwtResponse";
+import { CLIENT_LOGIN_API } from "../../constant/api";
 import { useCookies } from "react-cookie";
 import jwtDecode from "jwt-decode";
-import { ADMIN_JWT_COOKIE } from "../constant/cookie";
-import { axios } from "../util/AxiosInterceptor";
+import { CLIENT_JWT_COOKIE } from "../../constant/cookie";
+import { axios } from "../../util/AxiosInterceptor";
 import { AxiosResponse } from "axios";
-import { Toast } from "../component/Toast";
-import { AdminLoginRequest } from "../dto/request/AdminLoginRequest";
-import { VALID_EMAIL_REGEX } from "../constant/regex";
-import { MAIN_APP_COLOR } from "../constant/colors";
+import { Toast } from "../../component/Toast";
+import { ClientLoginRequest } from "../../dto/request/ClientLoginRequest";
+import { VALID_EMAIL_REGEX } from "../../constant/regex";
+import { useLocale } from "../../i18n/i18n";
+import { MAIN_APP_COLOR } from "../../constant/colors";
+import { ClientHeader } from "../../component/header/client/ClientHeader";
+import { CLIENT_REGISTRATION_ROUTE } from "../../constant/route";
 
 const useStyles = makeStyles({
   root: {
@@ -39,9 +43,10 @@ const useStyles = makeStyles({
   },
 });
 
-export const AdminLoginScreen = (): ReactElement => {
+export const ClientLoginScreen = (): ReactElement => {
   const classes = useStyles();
-  const [, setCookie] = useCookies([ADMIN_JWT_COOKIE]);
+  const [locale] = useLocale();
+  const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
   const [isWarning, setIsWarning] = useState(false);
 
   type FormikData = {
@@ -70,15 +75,15 @@ export const AdminLoginScreen = (): ReactElement => {
   };
 
   const submit = (values: FormikData) => {
-    const request: AdminLoginRequest = {
+    const request: ClientLoginRequest = {
       username: values.email,
       password: values.password,
     };
     axios
-      .post(BACKEND_URL + ADMIN_LOGIN_API, request)
+      .post(BACKEND_URL + CLIENT_LOGIN_API, request)
       .then((response: AxiosResponse<JwtResponse>) => {
         const decoded = jwtDecode<{ exp: number }>(response.data.authorization);
-        setCookie(ADMIN_JWT_COOKIE, response.data.authorization, {
+        setCookie(CLIENT_JWT_COOKIE, response.data.authorization, {
           path: "/",
           expires: new Date(decoded.exp * 1000),
         });
@@ -91,28 +96,35 @@ export const AdminLoginScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
+      <ClientHeader />
       <Typography variant={"h4"} marginBottom={"20px"}>
-        {"Admin login"}
+        {locale.loginScreen.loginLabel}
       </Typography>
       <Formik initialValues={initDate} validate={validate} onSubmit={submit}>
         {({ values, errors, touched, handleSubmit, setFieldValue }) => (
           <>
             <TextField
               variant={"outlined"}
-              label={"email"}
+              label={locale.loginScreen.emailLabel}
               value={values.email}
               onChange={(event) => setFieldValue("email", event.target.value)}
               error={!!(touched.email && errors.email)}
-              helperText={touched.email && errors.email ? errors.email : " "}
+              helperText={
+                touched.email && errors.email
+                  ? getTranslateError(locale.loginScreen.errors, errors.email)
+                  : " "
+              }
             />
             <FormControl
               variant={"outlined"}
               error={!!(touched.password && errors.password)}
             >
-              <InputLabel htmlFor={"password"}>password</InputLabel>
+              <InputLabel htmlFor={"password"}>
+                {locale.loginScreen.passwordLabel}
+              </InputLabel>
               <OutlinedInput
                 id={"password"}
-                label={"password"}
+                label={locale.loginScreen.passwordLabel}
                 type={values.isShowPassword ? "text" : "password"}
                 value={values.password}
                 onChange={(event) =>
@@ -129,7 +141,12 @@ export const AdminLoginScreen = (): ReactElement => {
                 }
               />
               <FormHelperText error id={"accountId-error"}>
-                {touched.password && errors.password ? errors.password : " "}
+                {touched.password && errors.password
+                  ? getTranslateError(
+                      locale.loginScreen.errors,
+                      errors.password
+                    )
+                  : " "}
               </FormHelperText>
             </FormControl>
             <Button
@@ -137,13 +154,19 @@ export const AdminLoginScreen = (): ReactElement => {
               onClick={() => handleSubmit()}
               style={{ background: MAIN_APP_COLOR }}
             >
-              Submit
+              {locale.loginScreen.submitLabel}
             </Button>
           </>
         )}
       </Formik>
+      <span>
+        {locale.loginScreen.recommendSignUpPrefix}
+        <Link href={CLIENT_REGISTRATION_ROUTE}>
+          {locale.loginScreen.recommendSignUpLink}
+        </Link>
+      </span>
       <Toast type={"warning"} isOpen={isWarning} setIsOpen={setIsWarning}>
-        Invalid credentials
+        {locale.loginScreen.errors.invalidCredentials}
       </Toast>
     </Box>
   );

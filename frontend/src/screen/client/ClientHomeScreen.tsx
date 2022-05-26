@@ -3,8 +3,8 @@ import { Container, Link } from "@mui/material";
 import {
   CLIENT_LOGIN_ROUTE,
   CLIENT_REGISTRATION_ROUTE,
-} from "../constant/route";
-import { ClientHeader } from "../component/header/client/ClientHeader";
+} from "../../constant/route";
+import { ClientHeader } from "../../component/header/client/ClientHeader";
 
 export const ClientHomeScreen = (): ReactElement => {
   return (

@@ -1,12 +1,12 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { TOKEN_PARAM } from "../constant/route-params";
+import { TOKEN_PARAM } from "../../constant/route-params";
 import { Container } from "@mui/material";
-import { axios } from "../util/AxiosInterceptor";
-import { BACKEND_URL } from "../constant/environment";
-import { CLIENT_CONFIRM_EMAIL_API } from "../constant/api";
-import { Spinner } from "../component/Spinner";
-import { ClientHeader } from "../component/header/client/ClientHeader";
+import { axios } from "../../util/AxiosInterceptor";
+import { BACKEND_URL } from "../../constant/environment";
+import { CLIENT_CONFIRM_EMAIL_API } from "../../constant/api";
+import { Spinner } from "../../component/Spinner";
+import { ClientHeader } from "../../component/header/client/ClientHeader";
 
 export const ClientConfirmEmailScreen = (): ReactElement => {
   const params = useParams();

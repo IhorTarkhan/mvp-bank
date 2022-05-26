@@ -5,8 +5,8 @@ import {
   CLIENT_ABOUT_US_ROUTE,
   CLIENT_CABINET_ROUTE,
 } from "../../constant/route";
-import { ClientCabinetScreen } from "../../screen/ClientCabinetScreen";
-import { ClientAboutUsScreen } from "../../screen/ClientAboutUsScreen";
+import { ClientCabinetScreen } from "../../screen/client/ClientCabinetScreen";
+import { ClientAboutUsScreen } from "../../screen/client/ClientAboutUsScreen";
 
 export const VerifiedEmailAuthorizedClientRouting = (): ReactElement => {
   return (
