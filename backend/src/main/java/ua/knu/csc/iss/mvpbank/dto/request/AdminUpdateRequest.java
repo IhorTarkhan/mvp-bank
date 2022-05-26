@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class AdminUpdateRequest {
   private Long id;
-  private String username;
-  private String email;
   private List<AdminRoles> roles;
+  private String password;
 }

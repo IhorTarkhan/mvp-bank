@@ -1,6 +1,7 @@
 package ua.knu.csc.iss.mvpbank.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.knu.csc.iss.mvpbank.dto.request.AdminCreateRequest;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SuperAdminManagementAdminService {
   private final AdminRepository adminRepository;
+  private final PasswordEncoder passwordEncoder;
   private final UserSecurityService userSecurityService;
 
   public List<AdminInfoResponse> getAdmins() {
@@ -39,6 +41,7 @@ public class SuperAdminManagementAdminService {
             .email(request.getEmail())
             .username(request.getUsername())
             .roles(request.getRoles())
+            .password(passwordEncoder.encode(request.getPassword()))
             .build();
     adminRepository.save(newAdmin);
   }
@@ -49,9 +52,8 @@ public class SuperAdminManagementAdminService {
         adminRepository
             .findById(request.getId())
             .orElseThrow(() -> new NotFoundException("Admin not found with id " + request.getId()));
-    admin.setEmail(request.getEmail());
-    admin.setUsername(request.getUsername());
     admin.setRoles(request.getRoles());
+    admin.setPassword(passwordEncoder.encode(request.getPassword()));
   }
 
   @Transactional

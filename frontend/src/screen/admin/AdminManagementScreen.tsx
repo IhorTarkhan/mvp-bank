@@ -22,12 +22,15 @@ import { AxiosResponse } from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
+import { AdminCreateRequest } from "../../dto/request/AdminCreateRequest";
+import { CreateAdminPopup } from "../../component/admin/CreateAdminPopup";
 
 export const AdminManagementScreen = (): ReactElement => {
   const adminContext = useContext(AdminContext);
   const [admins, setAdmins] = useState<AdminInfoResponse[] | null>(null);
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
 
-  const updateAdmins = () => {
+  const getAdmins = () => {
     axios
       .get(BACKEND_URL + SUPER_ADMIN_MANAGEMENT_ADMIN_API)
       .then((response: AxiosResponse<AdminInfoResponse[]>) => {
@@ -38,11 +41,22 @@ export const AdminManagementScreen = (): ReactElement => {
       });
   };
 
-  const deleteAdmins = (id: number) => {
+  const createAdmin = (request: AdminCreateRequest) => {
+    axios
+      .post(BACKEND_URL + SUPER_ADMIN_MANAGEMENT_ADMIN_API, request)
+      .then(() => {
+        getAdmins();
+      })
+      .catch((e: any) => {
+        console.error(e);
+      });
+  };
+
+  const deleteAdmin = (id: number) => {
     axios
       .delete(BACKEND_URL + SUPER_ADMIN_MANAGEMENT_ADMIN_API + "/" + id)
       .then(() => {
-        updateAdmins();
+        getAdmins();
       })
       .catch((error: any) => {
         if (error.response.status === 418) {
@@ -52,8 +66,17 @@ export const AdminManagementScreen = (): ReactElement => {
       });
   };
 
+  const canselCreate = () => {
+    setIsCreateOpen(false);
+  };
+
+  const agreeCreate = (request: AdminCreateRequest) => {
+    createAdmin(request);
+    setIsCreateOpen(false);
+  };
+
   useEffect(() => {
-    updateAdmins();
+    getAdmins();
   }, []);
 
   if (adminContext.isLoading || !adminContext.admin) {
@@ -67,7 +90,7 @@ export const AdminManagementScreen = (): ReactElement => {
     <Container>
       <AdminHeader />
       <Box display={"flex"} justifyContent={"end"}>
-        <ButtonBase onClick={() => alert("row.id")}>
+        <ButtonBase onClick={() => setIsCreateOpen(true)}>
           <AddIcon />
         </ButtonBase>
       </Box>
@@ -89,7 +112,7 @@ export const AdminManagementScreen = (): ReactElement => {
                   <ButtonBase onClick={() => alert(row.id)}>
                     <EditIcon />
                   </ButtonBase>
-                  <ButtonBase onClick={() => deleteAdmins(row.id)}>
+                  <ButtonBase onClick={() => deleteAdmin(row.id)}>
                     <DeleteIcon />
                   </ButtonBase>
                 </TableCell>
@@ -102,6 +125,11 @@ export const AdminManagementScreen = (): ReactElement => {
           </TableBody>
         </Table>
       </TableContainer>
+      <CreateAdminPopup
+        isOpen={isCreateOpen}
+        agree={agreeCreate}
+        cansel={canselCreate}
+      />
     </Container>
   );
 };

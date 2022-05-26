@@ -16,4 +16,5 @@ public class AdminCreateRequest {
   private String username;
   private String email;
   private List<AdminRoles> roles;
+  private String password;
 }
