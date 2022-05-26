@@ -12,6 +12,7 @@ import ua.knu.csc.iss.mvpbank.exceptions.IAmATeapotException;
 import ua.knu.csc.iss.mvpbank.exceptions.NotFoundException;
 import ua.knu.csc.iss.mvpbank.repository.AdminRepository;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,6 +24,7 @@ public class SuperAdminManagementAdminService {
 
   public List<AdminInfoResponse> getAdmins() {
     return adminRepository.findAll().stream()
+        .sorted(Comparator.comparing(Admin::getId))
         .map(
             entity ->
                 AdminInfoResponse.builder()
@@ -58,7 +60,7 @@ public class SuperAdminManagementAdminService {
 
   @Transactional
   public void deleteAdmin(Long id) {
-    if (userSecurityService.getCurrentAdmin().getId().equals(id)){
+    if (userSecurityService.getCurrentAdmin().getId().equals(id)) {
       throw new IAmATeapotException("You can not remove yourself");
     }
     adminRepository.deleteById(id);

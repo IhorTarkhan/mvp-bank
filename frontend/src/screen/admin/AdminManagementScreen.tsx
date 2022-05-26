@@ -24,11 +24,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import { AdminCreateRequest } from "../../dto/request/AdminCreateRequest";
 import { CreateAdminPopup } from "../../component/admin/CreateAdminPopup";
+import { AdminUpdateRequest } from "../../dto/request/AdminUpdateRequest";
+import { UpdateAdminPopup } from "../../component/admin/UpdateAdminPopup";
 
 export const AdminManagementScreen = (): ReactElement => {
   const adminContext = useContext(AdminContext);
   const [admins, setAdmins] = useState<AdminInfoResponse[] | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState<boolean>(false);
+  const [updatingAdmin, setUpdatingAdmin] = useState<AdminInfoResponse>();
 
   const getAdmins = () => {
     axios
@@ -52,6 +56,17 @@ export const AdminManagementScreen = (): ReactElement => {
       });
   };
 
+  const updateAdmin = (request: AdminUpdateRequest) => {
+    axios
+      .put(BACKEND_URL + SUPER_ADMIN_MANAGEMENT_ADMIN_API, request)
+      .then(() => {
+        getAdmins();
+      })
+      .catch((e: any) => {
+        console.error(e);
+      });
+  };
+
   const deleteAdmin = (id: number) => {
     axios
       .delete(BACKEND_URL + SUPER_ADMIN_MANAGEMENT_ADMIN_API + "/" + id)
@@ -66,6 +81,10 @@ export const AdminManagementScreen = (): ReactElement => {
       });
   };
 
+  const openCreatePopup = () => {
+    setIsCreateOpen(true);
+  };
+
   const canselCreate = () => {
     setIsCreateOpen(false);
   };
@@ -73,6 +92,20 @@ export const AdminManagementScreen = (): ReactElement => {
   const agreeCreate = (request: AdminCreateRequest) => {
     createAdmin(request);
     setIsCreateOpen(false);
+  };
+
+  const openUpdatePopup = (row: AdminInfoResponse) => {
+    setUpdatingAdmin(row);
+    setIsUpdateOpen(true);
+  };
+
+  const canselUpdate = () => {
+    setIsUpdateOpen(false);
+  };
+
+  const agreeUpdate = (request: AdminUpdateRequest) => {
+    updateAdmin(request);
+    setIsUpdateOpen(false);
   };
 
   useEffect(() => {
@@ -90,7 +123,7 @@ export const AdminManagementScreen = (): ReactElement => {
     <Container>
       <AdminHeader />
       <Box display={"flex"} justifyContent={"end"}>
-        <ButtonBase onClick={() => setIsCreateOpen(true)}>
+        <ButtonBase onClick={openCreatePopup}>
           <AddIcon />
         </ButtonBase>
       </Box>
@@ -109,7 +142,7 @@ export const AdminManagementScreen = (): ReactElement => {
             {admins.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>
-                  <ButtonBase onClick={() => alert(row.id)}>
+                  <ButtonBase onClick={() => openUpdatePopup(row)}>
                     <EditIcon />
                   </ButtonBase>
                   <ButtonBase onClick={() => deleteAdmin(row.id)}>
@@ -129,6 +162,12 @@ export const AdminManagementScreen = (): ReactElement => {
         isOpen={isCreateOpen}
         agree={agreeCreate}
         cansel={canselCreate}
+      />
+      <UpdateAdminPopup
+        isOpen={isUpdateOpen}
+        agree={agreeUpdate}
+        cansel={canselUpdate}
+        updatingAdmin={updatingAdmin}
       />
     </Container>
   );
