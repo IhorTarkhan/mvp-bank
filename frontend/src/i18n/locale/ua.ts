@@ -9,6 +9,7 @@ export const ua: typeof en = {
     },
     pages: {
       about: "Про нас",
+      requestSupport: "Запитати допомоги",
     },
     settings: {
       myCabinet: "Мій кабінет",
@@ -52,5 +53,11 @@ export const ua: typeof en = {
   },
   aboutUsScreen: {
     title: "Про нас",
+  },
+  requestSupportScreen: {
+    screenTitle: "Запросити допомого",
+    title: "Тема",
+    question: "Питання",
+    send: "Надіслати",
   },
 };

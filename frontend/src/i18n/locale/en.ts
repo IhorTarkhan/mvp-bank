@@ -7,6 +7,7 @@ export const en = {
     },
     pages: {
       about: "About us",
+      requestSupport: "Request support",
     },
     settings: {
       myCabinet: "My cabinet",
@@ -50,5 +51,11 @@ export const en = {
   },
   aboutUsScreen: {
     title: "About us",
+  },
+  requestSupportScreen: {
+    screenTitle: "Request support",
+    title: "Topic",
+    question: "Question",
+    send: "Send",
   },
 };
