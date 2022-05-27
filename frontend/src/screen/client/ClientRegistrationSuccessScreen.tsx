@@ -7,6 +7,7 @@ import { axios } from "../../util/AxiosInterceptor";
 import { BACKEND_URL } from "../../constant/environment";
 import { CLIENT_RESEND_CONFIRM_EMAIL_API } from "../../constant/api";
 import { ClientHeader } from "../../component/header/client/ClientHeader";
+import { ClientResendConfirmEmailRequest } from "../../dto/request/client/ClientResendConfirmEmailRequest";
 
 const useStyles = makeStyles({
   root: {
@@ -28,10 +29,11 @@ export const ClientRegistrationSuccessScreen = (): ReactElement => {
 
   const resendEmail = () => {
     setIsEmailSending((prevState) => !prevState);
+    const request: ClientResendConfirmEmailRequest = {
+      language: language,
+    };
     axios
-      .post(BACKEND_URL + CLIENT_RESEND_CONFIRM_EMAIL_API, {
-        language: language,
-      })
+      .post(BACKEND_URL + CLIENT_RESEND_CONFIRM_EMAIL_API, request)
       .then(() => {
         setIsMessageOpen(true);
       })

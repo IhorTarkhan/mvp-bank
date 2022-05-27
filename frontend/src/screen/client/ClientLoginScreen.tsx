@@ -25,7 +25,7 @@ import { CLIENT_JWT_COOKIE } from "../../constant/cookie";
 import { axios } from "../../util/AxiosInterceptor";
 import { AxiosResponse } from "axios";
 import { Toast } from "../../component/Toast";
-import { ClientLoginRequest } from "../../dto/request/ClientLoginRequest";
+import { ClientLoginRequest } from "../../dto/request/client/ClientLoginRequest";
 import { VALID_EMAIL_REGEX } from "../../constant/regex";
 import { useLocale } from "../../i18n/i18n";
 import { MAIN_APP_COLOR } from "../../constant/colors";

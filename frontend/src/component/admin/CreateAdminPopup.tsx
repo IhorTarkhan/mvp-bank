@@ -6,7 +6,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { AdminCreateRequest } from "../../dto/request/AdminCreateRequest";
+import { AdminCreateRequest } from "../../dto/request/admin/superadmin/AdminCreateRequest";
 import { AdminRoles } from "../../dto/AdminRoles";
 import {
   Checkbox,

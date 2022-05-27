@@ -6,7 +6,7 @@ import { axios } from "./AxiosInterceptor";
 import { BACKEND_URL } from "../constant/environment";
 import { ADMIN_AUTHORISATION_STATUS_API } from "../constant/api";
 import { AxiosResponse } from "axios";
-import { AdminAuthorisationStatusResponse } from "../dto/response/AdminAuthorisationStatusResponse";
+import { AdminAuthorisationStatusResponse } from "../dto/response/admin/AdminAuthorisationStatusResponse";
 
 type AdminContextData = {
   isLoading: boolean;

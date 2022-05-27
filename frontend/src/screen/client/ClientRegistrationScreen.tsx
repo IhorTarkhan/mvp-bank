@@ -18,7 +18,7 @@ import { makeStyles } from "@mui/styles";
 import { FormicErrors, getTranslateError } from "../../util/FormicUtil";
 import { BACKEND_URL } from "../../constant/environment";
 import { JwtResponse } from "../../dto/response/JwtResponse";
-import { ClientRegistrationRequest } from "../../dto/request/ClientRegistrationRequest";
+import { ClientRegistrationRequest } from "../../dto/request/client/ClientRegistrationRequest";
 import { CLIENT_REGISTER_API } from "../../constant/api";
 import { useCookies } from "react-cookie";
 import jwtDecode from "jwt-decode";

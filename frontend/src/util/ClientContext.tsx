@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createContext, ReactElement, useEffect, useState } from "react";
-import { ClientAuthorisationStatusResponse } from "../dto/response/ClientAuthorisationStatusResponse";
+import { ClientAuthorisationStatusResponse } from "../dto/response/client/ClientAuthorisationStatusResponse";
 import { CLIENT_JWT_COOKIE } from "../constant/cookie";
 import { useCookies } from "react-cookie";
 import { axios } from "./AxiosInterceptor";

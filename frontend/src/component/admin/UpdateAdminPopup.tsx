@@ -14,8 +14,8 @@ import {
   FormGroup,
   FormLabel,
 } from "@mui/material";
-import { AdminUpdateRequest } from "../../dto/request/AdminUpdateRequest";
-import { AdminInfoResponse } from "../../dto/response/AdminInfoResponse";
+import { AdminUpdateRequest } from "../../dto/request/admin/superadmin/AdminUpdateRequest";
+import { AdminInfoResponse } from "../../dto/response/admin/superadmin/AdminInfoResponse";
 import { AdminContext } from "../../util/AdminContext";
 
 interface Props {

@@ -14,7 +14,7 @@ import {
 import { AdminHeader } from "../../component/header/admin/AdminHeader";
 import { AdminContext } from "../../util/AdminContext";
 import { Spinner } from "../../component/Spinner";
-import { AdminInfoResponse } from "../../dto/response/AdminInfoResponse";
+import { AdminInfoResponse } from "../../dto/response/admin/superadmin/AdminInfoResponse";
 import { axios } from "../../util/AxiosInterceptor";
 import { BACKEND_URL } from "../../constant/environment";
 import { SUPER_ADMIN_MANAGEMENT_ADMIN_API } from "../../constant/api";
@@ -22,9 +22,9 @@ import { AxiosResponse } from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import { AdminCreateRequest } from "../../dto/request/AdminCreateRequest";
+import { AdminCreateRequest } from "../../dto/request/admin/superadmin/AdminCreateRequest";
 import { CreateAdminPopup } from "../../component/admin/CreateAdminPopup";
-import { AdminUpdateRequest } from "../../dto/request/AdminUpdateRequest";
+import { AdminUpdateRequest } from "../../dto/request/admin/superadmin/AdminUpdateRequest";
 import { UpdateAdminPopup } from "../../component/admin/UpdateAdminPopup";
 
 export const AdminManagementScreen = (): ReactElement => {
