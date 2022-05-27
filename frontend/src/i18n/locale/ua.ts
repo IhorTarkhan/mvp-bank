@@ -59,5 +59,6 @@ export const ua: typeof en = {
     title: "Тема",
     question: "Питання",
     send: "Надіслати",
+    requestSent: "Запит надіслано, адміністратор зв'яжиться з вами поштою",
   },
 };

@@ -57,5 +57,6 @@ export const en = {
     title: "Topic",
     question: "Question",
     send: "Send",
+    requestSent: "Request has sent, admin will contact with you by email",
   },
 };
