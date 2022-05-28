@@ -20,7 +20,9 @@ interface Props {
 export const OtherSupportRequestsTable = (props: Props): ReactElement => {
   return (
     <>
-      <Typography variant={"h6"}>Other requests</Typography>
+      <Typography variant={"h6"}>
+        Other requests, assigned to other admins
+      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

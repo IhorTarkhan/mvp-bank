@@ -47,11 +47,6 @@ export const RequestSupportScreen = (): ReactElement => {
       <AdminHeader />
       <Typography variant={"h4"}>Request of support</Typography>
       <br />
-      <UnassignedSupportRequestsTable
-        data={supportRequests.filter((r) => r.adminEmail === null)}
-        update={getSupportRequests}
-      />
-      <br />
       <AssignedForMeSupportRequestsTable
         data={supportRequests
           .filter((r) => r.adminEmail === adminContext.admin?.email)
@@ -59,15 +54,21 @@ export const RequestSupportScreen = (): ReactElement => {
         update={getSupportRequests}
       />
       <br />
-      <ClosedSupportRequestsTable
-        data={supportRequests.filter((r) => r.closed)}
+      <UnassignedSupportRequestsTable
+        data={supportRequests.filter((r) => r.adminEmail === null)}
         update={getSupportRequests}
       />
       <br />
       <OtherSupportRequestsTable
         data={supportRequests
           .filter((r) => r.adminEmail !== adminContext.admin?.email)
+          .filter((r) => r.adminEmail !== null)
           .filter((r) => !r.closed)}
+        update={getSupportRequests}
+      />
+      <br />
+      <ClosedSupportRequestsTable
+        data={supportRequests.filter((r) => r.closed)}
         update={getSupportRequests}
       />
     </Container>
