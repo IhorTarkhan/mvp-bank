@@ -7,7 +7,7 @@ export const ClientAboutUsScreen = (): ReactElement => {
   const [local] = useLocale();
 
   return (
-    <Container maxWidth={false}>
+    <Container>
       <ClientHeader />
       <Typography variant={"h4"}>{local.aboutUsScreen.title}</Typography>
     </Container>

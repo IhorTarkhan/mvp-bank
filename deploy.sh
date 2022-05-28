@@ -14,7 +14,6 @@ mv ".env" ".env.prod"
 mv ".env.tmp" ".env"
 ssh mvp_bank@ihor-tarkhan.com "rm -fr frontend/build"
 scp -r build mvp_bank@ihor-tarkhan.com:~/frontend/
-rm -fr node_modules
 rm -fr build
 
 cd ..

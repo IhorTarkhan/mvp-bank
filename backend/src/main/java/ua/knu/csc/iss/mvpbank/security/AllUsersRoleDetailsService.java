@@ -28,7 +28,6 @@ public class AllUsersRoleDetailsService implements UserDetailsService {
     if (admin.isPresent()) {
       return admin.get();
     }
-    // TODO on add new role - find in one more repository
     throw new NotFoundException("No user with email " + username);
   }
 }

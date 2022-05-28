@@ -7,13 +7,13 @@ import { BACKEND_URL } from "../../constant/environment";
 import { CLIENT_CONFIRM_EMAIL_API } from "../../constant/api";
 import { Spinner } from "../../component/Spinner";
 import { ClientHeader } from "../../component/header/client/ClientHeader";
+import { useLocale } from "../../i18n/i18n";
 
 export const ClientConfirmEmailScreen = (): ReactElement => {
   const params = useParams();
   const token: string = params[TOKEN_PARAM]!;
   const [isLoading, setIsLoading] = useState(true);
-
-  const invalidLink = "Invalid confirm email link, todo"; // TODO
+  const [locale] = useLocale();
 
   useEffect(() => {
     axios
@@ -28,7 +28,7 @@ export const ClientConfirmEmailScreen = (): ReactElement => {
 
   if (isLoading) {
     return (
-      <Container maxWidth={false}>
+      <Container>
         <ClientHeader />
         <Spinner />
       </Container>
@@ -36,9 +36,9 @@ export const ClientConfirmEmailScreen = (): ReactElement => {
   }
 
   return (
-    <Container maxWidth={false}>
+    <Container>
       <ClientHeader />
-      {invalidLink}
+      {locale.clientConfirmEmailScreen.invalid}
     </Container>
   );
 };

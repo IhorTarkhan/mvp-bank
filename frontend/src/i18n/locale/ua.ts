@@ -51,6 +51,10 @@ export const ua: typeof en = {
     resendEmail: "Надіслати знову",
     emailSent: "Лист надіслано",
   },
+  clientConfirmEmailScreen: {
+    invalid:
+      "Не вірне посилання для підтвердження вашої пошти, будь ласка, спробуйте ще раз",
+  },
   aboutUsScreen: {
     title: "Про нас",
   },

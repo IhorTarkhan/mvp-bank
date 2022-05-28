@@ -49,6 +49,9 @@ export const en = {
     resendEmail: "Resend email",
     emailSent: "Email Sent",
   },
+  clientConfirmEmailScreen: {
+    invalid: "Invalid link to confirm your email, please try again",
+  },
   aboutUsScreen: {
     title: "About us",
   },

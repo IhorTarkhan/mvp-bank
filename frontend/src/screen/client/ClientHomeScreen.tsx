@@ -8,7 +8,7 @@ import { ClientHeader } from "../../component/header/client/ClientHeader";
 
 export const ClientHomeScreen = (): ReactElement => {
   return (
-    <Container maxWidth={false}>
+    <Container>
       <ClientHeader />
       Home Screen
       <br />
