@@ -37,6 +37,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     width: "300px",
     marginInline: "auto",
+    marginTop: "30px",
     rowGap: "7px",
   },
 });
