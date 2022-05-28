@@ -10,8 +10,8 @@ import ua.knu.csc.iss.mvpbank.dto.request.client.ClientEmailConfirmRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.client.ClientLoginRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.client.ClientRegistrationRequest;
 import ua.knu.csc.iss.mvpbank.dto.request.client.ClientResendConfirmEmailRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.client.ClientAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.dto.response.JwtResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.client.ClientAuthorisationStatusResponse;
 import ua.knu.csc.iss.mvpbank.entity.Client;
 import ua.knu.csc.iss.mvpbank.entity.ClientOneTimeAccessToken;
 import ua.knu.csc.iss.mvpbank.exceptions.ConflictException;
@@ -19,8 +19,6 @@ import ua.knu.csc.iss.mvpbank.exceptions.NotFoundException;
 import ua.knu.csc.iss.mvpbank.repository.ClientRepository;
 import ua.knu.csc.iss.mvpbank.security.JwtTokenProvider;
 import ua.knu.csc.iss.mvpbank.service.UserSecurityService;
-import ua.knu.csc.iss.mvpbank.service.client.ClientEmailService;
-import ua.knu.csc.iss.mvpbank.service.client.ClientOneTimeAccessTokenService;
 
 @Slf4j
 @Service
@@ -33,6 +31,7 @@ public class ClientAuthorisationService {
   private final UserSecurityService userSecurityService;
   private final ClientOneTimeAccessTokenService clientOneTimeAccessTokenService;
   private final ClientEmailService clientEmailService;
+  private final CreditCardNumberGenerator creditCardNumberGenerator;
 
   public JwtResponse register(ClientRegistrationRequest request) {
     if (clientRepository.findByEmail(request.getUsername()).isPresent())
@@ -42,6 +41,7 @@ public class ClientAuthorisationService {
             .email(request.getUsername())
             .password(passwordEncoder.encode(request.getPassword()))
             .emailVerified(false)
+            .cardNumber(creditCardNumberGenerator.generate())
             .build();
     Client savedClient = clientRepository.save(newClient);
     ClientOneTimeAccessToken clientOneTimeAccessToken =

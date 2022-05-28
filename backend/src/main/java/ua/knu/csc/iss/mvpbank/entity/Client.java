@@ -39,6 +39,9 @@ public class Client implements UserDetails {
   @Column(name = "last_name")
   private String lastName;
 
+  @Column(name = "card_number")
+  private String cardNumber;
+
   @Override
   public String getUsername() {
     return getEmail();
