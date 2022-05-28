@@ -38,6 +38,7 @@ public class AdminAuthorisationService {
   public AdminAuthorisationStatusResponse getCurrentAdmin() {
     Admin currentAdmin = userSecurityService.getCurrentAdmin();
     return AdminAuthorisationStatusResponse.builder()
+        .id(currentAdmin.getId())
         .email(currentAdmin.getEmail())
         .roles(currentAdmin.getRoles())
         .build();

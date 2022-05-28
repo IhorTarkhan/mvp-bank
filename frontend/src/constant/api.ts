@@ -7,3 +7,7 @@ export const CLIENT_AUTHORISATION_STATUS_API = "/client/authorisation-status";
 export const ADMIN_LOGIN_API = "/admin/login";
 export const ADMIN_AUTHORISATION_STATUS_API = "/admin/authorisation-status";
 export const SUPER_ADMIN_MANAGEMENT_ADMIN_API = "/super-admin/admin";
+export const SUPPORT_SUPPORT_REQUEST_API = "/support/request";
+export const SUPPORT_SUPPORT_REQUEST_ACCEPT_API =
+  "/support/request/accept-for-me";
+export const SUPPORT_SUPPORT_REQUEST_CANCEL_API = "/support/request/cancel";

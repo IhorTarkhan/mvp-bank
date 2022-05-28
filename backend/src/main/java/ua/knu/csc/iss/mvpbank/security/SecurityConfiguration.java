@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   }
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception  {
+  protected void configure(HttpSecurity http) throws Exception {
     http
         // disable csrf
         .csrf()
@@ -69,7 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/super-admin/**")
         .hasRole("SUPER_ADMIN")
         .antMatchers("/support/**")
-        .hasRole("SUPER_SUPPORT")
+        .hasRole("SUPPORT")
         .antMatchers("/client-manager/**")
         .hasRole("SUPER_CLIENT_MANAGER")
         // permit all left request

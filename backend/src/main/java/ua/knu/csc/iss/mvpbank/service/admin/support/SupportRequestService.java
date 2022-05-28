@@ -7,9 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.knu.csc.iss.mvpbank.dto.request.client.ClientSupportRequest;
 import ua.knu.csc.iss.mvpbank.dto.response.admin.support.SupportResponseResponse;
 import ua.knu.csc.iss.mvpbank.entity.SupportRequest;
+import ua.knu.csc.iss.mvpbank.exceptions.NotFoundException;
 import ua.knu.csc.iss.mvpbank.repository.SupportRequestRepository;
 import ua.knu.csc.iss.mvpbank.service.UserSecurityService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -26,6 +28,7 @@ public class SupportRequestService {
             .client(userSecurityService.getCurrentClient())
             .title(request.getTitle())
             .question(request.getQuestion())
+            .createdAt(LocalDateTime.now())
             .isClosed(false)
             .build();
     supportRequestRepository.save(newEntity);
@@ -40,9 +43,28 @@ public class SupportRequestService {
                     .id(entity.getId())
                     .title(entity.getTitle())
                     .question(entity.getQuestion())
-                    .clientId(entity.getClient().getId())
-                    .adminId(entity.getAdmin() != null ? entity.getAdmin().getId() : null)
+                    .createdAt(entity.getCreatedAt())
+                    .clientEmail(entity.getClient().getEmail())
+                    .adminEmail(entity.getAdmin() != null ? entity.getAdmin().getEmail() : null)
                     .build())
         .toList();
+  }
+
+  @Transactional
+  public void acceptForMeSupportRequest(Long id) {
+    SupportRequest supportRequest =
+        supportRequestRepository
+            .findById(id)
+            .orElseThrow(() -> new NotFoundException("No SupportRequest with id = " + id));
+    supportRequest.setAdmin(userSecurityService.getCurrentAdmin());
+  }
+
+  @Transactional
+  public void cancelSupportRequest(Long id) {
+    SupportRequest supportRequest =
+        supportRequestRepository
+            .findById(id)
+            .orElseThrow(() -> new NotFoundException("No SupportRequest with id = " + id));
+    supportRequest.setClosed(true);
   }
 }

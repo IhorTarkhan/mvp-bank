@@ -3,6 +3,7 @@ package ua.knu.csc.iss.mvpbank.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,6 +23,9 @@ public class SupportRequest {
 
   @Column(name = "question")
   private String question;
+
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
 
   @Column(name = "is_closed")
   private boolean isClosed;

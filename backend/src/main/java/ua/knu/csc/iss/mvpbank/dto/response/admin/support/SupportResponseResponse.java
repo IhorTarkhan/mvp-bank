@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -13,6 +15,7 @@ public class SupportResponseResponse {
   private Long id;
   private String title;
   private String question;
-  private Long clientId;
-  private Long adminId;
+  private LocalDateTime createdAt;
+  private String clientEmail;
+  private String adminEmail;
 }

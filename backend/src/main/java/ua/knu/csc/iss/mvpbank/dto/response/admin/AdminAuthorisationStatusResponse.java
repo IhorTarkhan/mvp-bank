@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdminAuthorisationStatusResponse {
+  private Long id;
   private String email;
   private List<AdminRoles> roles;
 }

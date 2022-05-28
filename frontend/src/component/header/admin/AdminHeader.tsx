@@ -7,7 +7,10 @@ import { ADMIN_JWT_COOKIE } from "../../../constant/cookie";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { ADMIN_MANAGEMENT_ROUTE } from "../../../constant/route";
+import {
+  ADMIN_MANAGEMENT_ROUTE,
+  ADMIN_SUPPORT_REQUESTS_ROUTE,
+} from "../../../constant/route";
 
 export const AdminHeader = (): ReactElement => {
   const [, , removeCookie] = useCookies([ADMIN_JWT_COOKIE]);
@@ -22,6 +25,10 @@ export const AdminHeader = (): ReactElement => {
     {
       name: "Admins",
       onClick: () => navigate(ADMIN_MANAGEMENT_ROUTE),
+    },
+    {
+      name: "Request support",
+      onClick: () => navigate(ADMIN_SUPPORT_REQUESTS_ROUTE),
     },
   ];
 

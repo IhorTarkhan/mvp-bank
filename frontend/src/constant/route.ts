@@ -9,3 +9,4 @@ export const CLIENT_CONFIRM_EMAIL_ROUTE = "/client-confirm-email";
 export const ADMIN_LOGIN_ROUTE = "/admin-login";
 export const ADMIN_HOME_ROUTE = "/";
 export const ADMIN_MANAGEMENT_ROUTE = "/admins";
+export const ADMIN_SUPPORT_REQUESTS_ROUTE = "/support-requests";

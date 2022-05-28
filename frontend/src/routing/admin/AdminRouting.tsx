@@ -3,9 +3,14 @@ import { ReactElement, useContext } from "react";
 import { Spinner } from "../../component/Spinner";
 import { AdminContext } from "../../util/AdminContext";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { ADMIN_HOME_ROUTE, ADMIN_MANAGEMENT_ROUTE } from "../../constant/route";
+import {
+  ADMIN_HOME_ROUTE,
+  ADMIN_MANAGEMENT_ROUTE,
+  ADMIN_SUPPORT_REQUESTS_ROUTE,
+} from "../../constant/route";
 import { AdminHomeScreen } from "../../screen/admin/AdminHomeScreen";
-import { AdminManagementScreen } from "../../screen/admin/AdminManagementScreen";
+import { AdminManagementScreen } from "../../screen/admin/superadmin/AdminManagementScreen";
+import { RequestSupportScreen } from "../../screen/admin/support/RequestSupportScreen";
 
 export const AdminRouting = (): ReactElement => {
   const adminContext = useContext(AdminContext);
@@ -21,6 +26,10 @@ export const AdminRouting = (): ReactElement => {
         <Route
           path={ADMIN_MANAGEMENT_ROUTE}
           element={<AdminManagementScreen />}
+        />
+        <Route
+          path={ADMIN_SUPPORT_REQUESTS_ROUTE}
+          element={<RequestSupportScreen />}
         />
         <Route path={"/*"} element={<Navigate to={ADMIN_HOME_ROUTE} />} />
       </Routes>

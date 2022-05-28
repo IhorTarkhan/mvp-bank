@@ -2,6 +2,7 @@ export type SupportResponseResponse = {
   id: number;
   title: string;
   question: string;
-  clientId: number;
-  adminId: number;
+  createdAt: Date;
+  clientEmail: string;
+  adminEmail: string | null;
 };
