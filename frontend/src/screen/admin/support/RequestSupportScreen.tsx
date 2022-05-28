@@ -1,17 +1,17 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
 import { AdminHeader } from "../../../component/header/admin/AdminHeader";
-import { AdminContext } from "../../../util/AdminContext";
 import { Spinner } from "../../../component/Spinner";
 import { axios } from "../../../util/AxiosInterceptor";
 import { BACKEND_URL } from "../../../constant/environment";
-import {
-  SUPPORT_SUPPORT_REQUEST_API,
-  SUPPORT_SUPPORT_REQUEST_CANCEL_API,
-} from "../../../constant/api";
+import { SUPPORT_SUPPORT_REQUEST_API } from "../../../constant/api";
 import { AxiosResponse } from "axios";
 import { SupportResponseResponse } from "../../../dto/response/admin/support/SupportResponseResponse";
 import { UnassignedSupportRequestsTable } from "../../../component/support/UnassignedSupportRequestsTable";
+import { AssignedForMeSupportRequestsTable } from "../../../component/support/AssignedForMeSupportRequestsTable";
+import { AdminContext } from "../../../util/AdminContext";
+import { ClosedSupportRequestsTable } from "../../../component/support/ClosedSupportRequestsTable";
+import { OtherSupportRequestsTable } from "../../../component/support/OtherSupportRequestsTable";
 
 export const RequestSupportScreen = (): ReactElement => {
   const adminContext = useContext(AdminContext);
@@ -24,17 +24,6 @@ export const RequestSupportScreen = (): ReactElement => {
       .get(BACKEND_URL + SUPPORT_SUPPORT_REQUEST_API)
       .then((response: AxiosResponse<SupportResponseResponse[]>) => {
         setSupportRequests(response.data);
-      })
-      .catch((e: any) => {
-        console.error(e);
-      });
-  };
-
-  const cancelSupportRequests = (id: number) => {
-    axios
-      .put(BACKEND_URL + SUPPORT_SUPPORT_REQUEST_CANCEL_API + "/" + id)
-      .then(() => {
-        getSupportRequests();
       })
       .catch((e: any) => {
         console.error(e);
@@ -59,7 +48,26 @@ export const RequestSupportScreen = (): ReactElement => {
       <Typography variant={"h4"}>Request of support</Typography>
       <br />
       <UnassignedSupportRequestsTable
-        allRequests={supportRequests}
+        data={supportRequests.filter((r) => r.adminEmail === null)}
+        update={getSupportRequests}
+      />
+      <br />
+      <AssignedForMeSupportRequestsTable
+        data={supportRequests
+          .filter((r) => r.adminEmail === adminContext.admin?.email)
+          .filter((r) => !r.closed)}
+        update={getSupportRequests}
+      />
+      <br />
+      <ClosedSupportRequestsTable
+        data={supportRequests.filter((r) => r.closed)}
+        update={getSupportRequests}
+      />
+      <br />
+      <OtherSupportRequestsTable
+        data={supportRequests
+          .filter((r) => r.adminEmail !== adminContext.admin?.email)
+          .filter((r) => !r.closed)}
         update={getSupportRequests}
       />
     </Container>

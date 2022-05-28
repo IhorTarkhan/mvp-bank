@@ -46,6 +46,7 @@ public class SupportRequestService {
                     .createdAt(entity.getCreatedAt())
                     .clientEmail(entity.getClient().getEmail())
                     .adminEmail(entity.getAdmin() != null ? entity.getAdmin().getEmail() : null)
+                    .isClosed(entity.isClosed())
                     .build())
         .toList();
   }

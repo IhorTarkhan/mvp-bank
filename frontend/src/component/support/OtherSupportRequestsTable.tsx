@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import {
-  Button,
   Paper,
   Table,
   TableBody,
@@ -10,9 +9,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { axios } from "../../util/AxiosInterceptor";
-import { BACKEND_URL } from "../../constant/environment";
-import { SUPPORT_SUPPORT_REQUEST_ACCEPT_API } from "../../constant/api";
 import { SupportResponseResponse } from "../../dto/response/admin/support/SupportResponseResponse";
 import moment from "moment";
 
@@ -21,21 +17,10 @@ interface Props {
   update: () => void;
 }
 
-export const UnassignedSupportRequestsTable = (props: Props): ReactElement => {
-  const acceptSupportRequests = (id: number) => {
-    axios
-      .put(BACKEND_URL + SUPPORT_SUPPORT_REQUEST_ACCEPT_API + "/" + id)
-      .then(() => {
-        props.update();
-      })
-      .catch((e: any) => {
-        console.error(e);
-      });
-  };
-
+export const OtherSupportRequestsTable = (props: Props): ReactElement => {
   return (
     <>
-      <Typography variant={"h6"}>Unassigned requests</Typography>
+      <Typography variant={"h6"}>Other requests</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -45,7 +30,7 @@ export const UnassignedSupportRequestsTable = (props: Props): ReactElement => {
               <TableCell>Title</TableCell>
               <TableCell width={"300px"}>Question</TableCell>
               <TableCell>Client Email</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Admin</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -58,15 +43,7 @@ export const UnassignedSupportRequestsTable = (props: Props): ReactElement => {
                 <TableCell>{row.title}</TableCell>
                 <TableCell width={"300px"}>{row.question}</TableCell>
                 <TableCell>{row.clientEmail}</TableCell>
-                <TableCell>
-                  <Button
-                    variant={"outlined"}
-                    color={"secondary"}
-                    onClick={() => acceptSupportRequests(row.id)}
-                  >
-                    Accept
-                  </Button>
-                </TableCell>
+                <TableCell>{row.adminEmail}</TableCell>
               </TableRow>
             ))}
           </TableBody>

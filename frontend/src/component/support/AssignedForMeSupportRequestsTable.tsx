@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { axios } from "../../util/AxiosInterceptor";
 import { BACKEND_URL } from "../../constant/environment";
-import { SUPPORT_SUPPORT_REQUEST_ACCEPT_API } from "../../constant/api";
+import { SUPPORT_SUPPORT_REQUEST_CANCEL_API } from "../../constant/api";
 import { SupportResponseResponse } from "../../dto/response/admin/support/SupportResponseResponse";
 import moment from "moment";
 
@@ -21,10 +21,12 @@ interface Props {
   update: () => void;
 }
 
-export const UnassignedSupportRequestsTable = (props: Props): ReactElement => {
-  const acceptSupportRequests = (id: number) => {
+export const AssignedForMeSupportRequestsTable = (
+  props: Props
+): ReactElement => {
+  const cancelSupportRequests = (id: number) => {
     axios
-      .put(BACKEND_URL + SUPPORT_SUPPORT_REQUEST_ACCEPT_API + "/" + id)
+      .put(BACKEND_URL + SUPPORT_SUPPORT_REQUEST_CANCEL_API + "/" + id)
       .then(() => {
         props.update();
       })
@@ -35,7 +37,7 @@ export const UnassignedSupportRequestsTable = (props: Props): ReactElement => {
 
   return (
     <>
-      <Typography variant={"h6"}>Unassigned requests</Typography>
+      <Typography variant={"h6"}>Assigned for me requests</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -61,10 +63,10 @@ export const UnassignedSupportRequestsTable = (props: Props): ReactElement => {
                 <TableCell>
                   <Button
                     variant={"outlined"}
-                    color={"secondary"}
-                    onClick={() => acceptSupportRequests(row.id)}
+                    color={"error"}
+                    onClick={() => cancelSupportRequests(row.id)}
                   >
-                    Accept
+                    Cancel
                   </Button>
                 </TableCell>
               </TableRow>

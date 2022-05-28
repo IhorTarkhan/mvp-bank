@@ -5,4 +5,5 @@ export type SupportResponseResponse = {
   createdAt: Date;
   clientEmail: string;
   adminEmail: string | null;
+  closed: boolean;
 };

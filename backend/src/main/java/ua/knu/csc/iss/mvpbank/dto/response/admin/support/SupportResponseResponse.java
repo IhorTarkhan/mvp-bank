@@ -18,4 +18,5 @@ public class SupportResponseResponse {
   private LocalDateTime createdAt;
   private String clientEmail;
   private String adminEmail;
+  private boolean isClosed;
 }
