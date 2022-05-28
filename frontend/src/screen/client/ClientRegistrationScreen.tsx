@@ -51,6 +51,8 @@ export const ClientRegistrationScreen = (): ReactElement => {
 
   type FormikData = {
     email: string;
+    firstName: string;
+    lastName: string;
     password: string;
     confirmPassword: string;
     isShowPassword: boolean;
@@ -59,6 +61,8 @@ export const ClientRegistrationScreen = (): ReactElement => {
   const initDate: FormikData = {
     email: "",
     password: "",
+    firstName: "",
+    lastName: "",
     confirmPassword: "",
     isShowPassword: false,
   };
@@ -69,6 +73,12 @@ export const ClientRegistrationScreen = (): ReactElement => {
       errors.email = "required";
     } else if (!VALID_EMAIL_REGEX.test(values.email)) {
       errors.email = "invalidEmailAddress";
+    }
+    if (!values.firstName) {
+      errors.firstName = "required";
+    }
+    if (!values.lastName) {
+      errors.lastName = "required";
     }
     if (!values.password) {
       errors.password = "required";
@@ -88,6 +98,8 @@ export const ClientRegistrationScreen = (): ReactElement => {
   const submit = (values: FormikData) => {
     const request: ClientRegistrationRequest = {
       username: values.email,
+      firstName: values.firstName,
+      lastName: values.lastName,
       password: values.password,
       language: language,
     };
@@ -128,6 +140,40 @@ export const ClientRegistrationScreen = (): ReactElement => {
                   ? getTranslateError(
                       locale.registrationScreen.errors,
                       errors.email
+                    )
+                  : " "
+              }
+            />
+            <TextField
+              variant={"outlined"}
+              label={locale.registrationScreen.firstNameLabel}
+              value={values.firstName}
+              onChange={(event) =>
+                setFieldValue("firstName", event.target.value)
+              }
+              error={!!(touched.firstName && errors.firstName)}
+              helperText={
+                touched.firstName && errors.firstName
+                  ? getTranslateError(
+                      locale.registrationScreen.errors,
+                      errors.firstName
+                    )
+                  : " "
+              }
+            />
+            <TextField
+              variant={"outlined"}
+              label={locale.registrationScreen.lastNameLabel}
+              value={values.lastName}
+              onChange={(event) =>
+                setFieldValue("lastName", event.target.value)
+              }
+              error={!!(touched.lastName && errors.lastName)}
+              helperText={
+                touched.lastName && errors.lastName
+                  ? getTranslateError(
+                      locale.registrationScreen.errors,
+                      errors.lastName
                     )
                   : " "
               }

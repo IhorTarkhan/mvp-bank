@@ -12,6 +12,8 @@ import ua.knu.csc.iss.mvpbank.locales.Language;
 @AllArgsConstructor
 public class ClientRegistrationRequest {
   private String username;
+  private String firstName;
+  private String lastName;
   private String password;
   private Language language;
 }

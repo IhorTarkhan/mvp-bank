@@ -35,6 +35,8 @@ export const en = {
   registrationScreen: {
     registrationLabel: "Registration",
     emailLabel: "Email",
+    firstNameLabel: "First name",
+    lastNameLabel: "Last name",
     passwordLabel: "Password",
     confirmPasswordLabel: "Confirm password",
     submitLabel: "Submit",

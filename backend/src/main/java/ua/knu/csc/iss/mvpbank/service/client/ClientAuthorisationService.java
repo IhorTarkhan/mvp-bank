@@ -39,6 +39,8 @@ public class ClientAuthorisationService {
     Client newClient =
         Client.builder()
             .email(request.getUsername())
+            .firstName(request.getFirstName())
+            .lastName(request.getLastName())
             .password(passwordEncoder.encode(request.getPassword()))
             .emailVerified(false)
             .cardNumber(creditCardNumberGenerator.generate())

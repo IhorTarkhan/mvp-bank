@@ -37,6 +37,8 @@ export const ua: typeof en = {
   registrationScreen: {
     registrationLabel: "Реєстрація",
     emailLabel: "Email",
+    firstNameLabel: "Імʼя",
+    lastNameLabel: "Фамілія",
     passwordLabel: "Пароль",
     confirmPasswordLabel: "Підтвердити пароль",
     submitLabel: "Підтвердити реєстрацію",
