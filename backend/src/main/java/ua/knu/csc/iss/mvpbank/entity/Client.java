@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -41,6 +42,9 @@ public class Client implements UserDetails {
 
   @Column(name = "card_number")
   private String cardNumber;
+
+  @Column(name = "amount")
+  private BigDecimal amount;
 
   @Override
   public String getUsername() {

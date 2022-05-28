@@ -20,6 +20,8 @@ import ua.knu.csc.iss.mvpbank.repository.ClientRepository;
 import ua.knu.csc.iss.mvpbank.security.JwtTokenProvider;
 import ua.knu.csc.iss.mvpbank.service.UserSecurityService;
 
+import java.math.BigDecimal;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -44,6 +46,7 @@ public class ClientAuthorisationService {
             .password(passwordEncoder.encode(request.getPassword()))
             .emailVerified(false)
             .cardNumber(creditCardNumberGenerator.generate())
+            .amount(BigDecimal.valueOf(1000))
             .build();
     Client savedClient = clientRepository.save(newClient);
     ClientOneTimeAccessToken clientOneTimeAccessToken =
@@ -88,9 +91,11 @@ public class ClientAuthorisationService {
     return ClientAuthorisationStatusResponse.builder()
         .id(currentClient.getId())
         .email(currentClient.getEmail())
-        .firstNme(currentClient.getFirstName())
+        .firstName(currentClient.getFirstName())
         .lastName(currentClient.getLastName())
+        .cardNumber(currentClient.getCardNumber())
         .emailVerified(currentClient.isEmailVerified())
+        .amount(currentClient.getAmount())
         .build();
   }
 }

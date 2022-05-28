@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -12,7 +14,9 @@ import lombok.NoArgsConstructor;
 public class ClientAuthorisationStatusResponse {
   private Long id;
   private String email;
-  private String firstNme;
+  private String firstName;
+  private String cardNumber;
   private String lastName;
   private boolean emailVerified;
+  private BigDecimal amount;
 }

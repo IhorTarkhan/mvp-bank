@@ -3,5 +3,7 @@ export type ClientAuthorisationStatusResponse = {
   email: string;
   firstName: string;
   lastName: string;
+  cardNumber: string;
   emailVerified: boolean;
+  amount: number;
 };
