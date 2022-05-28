@@ -30,7 +30,7 @@ import { useLocale } from "../../i18n/i18n";
 import { VALID_EMAIL_REGEX } from "../../constant/regex";
 import { MAIN_APP_COLOR } from "../../constant/colors";
 import { ClientHeader } from "../../component/header/client/ClientHeader";
-import { CLIENT_LOGIN_ROUTE } from "../../constant/route";
+import { CLIENT_HOME_ROUTE } from "../../constant/route";
 
 const useStyles = makeStyles({
   root: {
@@ -196,7 +196,7 @@ export const ClientRegistrationScreen = (): ReactElement => {
       </Formik>
       <span>
         {locale.registrationScreen.recommendLoginPrefix}
-        <Link href={CLIENT_LOGIN_ROUTE}>
+        <Link href={CLIENT_HOME_ROUTE}>
           {locale.registrationScreen.recommendLoginLink}
         </Link>
       </span>

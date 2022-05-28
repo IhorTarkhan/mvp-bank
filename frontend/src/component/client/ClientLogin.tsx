@@ -24,26 +24,24 @@ import jwtDecode from "jwt-decode";
 import { CLIENT_JWT_COOKIE } from "../../constant/cookie";
 import { axios } from "../../util/AxiosInterceptor";
 import { AxiosResponse } from "axios";
-import { Toast } from "../../component/Toast";
+import { Toast } from "../Toast";
 import { ClientLoginRequest } from "../../dto/request/client/ClientLoginRequest";
 import { VALID_EMAIL_REGEX } from "../../constant/regex";
 import { useLocale } from "../../i18n/i18n";
 import { MAIN_APP_COLOR } from "../../constant/colors";
-import { ClientHeader } from "../../component/header/client/ClientHeader";
 import { CLIENT_REGISTRATION_ROUTE } from "../../constant/route";
 
 const useStyles = makeStyles({
   root: {
     display: "flex",
     flexDirection: "column",
-    maxWidth: "500px",
+    width: "300px",
     marginInline: "auto",
-    marginTop: "100px",
     rowGap: "7px",
   },
 });
 
-export const ClientLoginScreen = (): ReactElement => {
+export const ClientLogin = (): ReactElement => {
   const classes = useStyles();
   const [locale] = useLocale();
   const [, setCookie] = useCookies([CLIENT_JWT_COOKIE]);
@@ -96,22 +94,24 @@ export const ClientLoginScreen = (): ReactElement => {
 
   return (
     <Box className={classes.root}>
-      <ClientHeader />
-      <Typography variant={"h4"} marginBottom={"20px"}>
-        {locale.loginScreen.loginLabel}
+      <Typography variant={"h5"} marginBottom={"20px"}>
+        {locale.homeScreen.login.loginLabel}
       </Typography>
       <Formik initialValues={initDate} validate={validate} onSubmit={submit}>
         {({ values, errors, touched, handleSubmit, setFieldValue }) => (
           <>
             <TextField
               variant={"outlined"}
-              label={locale.loginScreen.emailLabel}
+              label={locale.homeScreen.login.emailLabel}
               value={values.email}
               onChange={(event) => setFieldValue("email", event.target.value)}
               error={!!(touched.email && errors.email)}
               helperText={
                 touched.email && errors.email
-                  ? getTranslateError(locale.loginScreen.errors, errors.email)
+                  ? getTranslateError(
+                      locale.homeScreen.login.errors,
+                      errors.email
+                    )
                   : " "
               }
             />
@@ -120,11 +120,11 @@ export const ClientLoginScreen = (): ReactElement => {
               error={!!(touched.password && errors.password)}
             >
               <InputLabel htmlFor={"password"}>
-                {locale.loginScreen.passwordLabel}
+                {locale.homeScreen.login.passwordLabel}
               </InputLabel>
               <OutlinedInput
                 id={"password"}
-                label={locale.loginScreen.passwordLabel}
+                label={locale.homeScreen.login.passwordLabel}
                 type={values.isShowPassword ? "text" : "password"}
                 value={values.password}
                 onChange={(event) =>
@@ -143,7 +143,7 @@ export const ClientLoginScreen = (): ReactElement => {
               <FormHelperText error id={"accountId-error"}>
                 {touched.password && errors.password
                   ? getTranslateError(
-                      locale.loginScreen.errors,
+                      locale.homeScreen.login.errors,
                       errors.password
                     )
                   : " "}
@@ -154,19 +154,19 @@ export const ClientLoginScreen = (): ReactElement => {
               onClick={() => handleSubmit()}
               style={{ background: MAIN_APP_COLOR }}
             >
-              {locale.loginScreen.submitLabel}
+              {locale.homeScreen.login.submitLabel}
             </Button>
           </>
         )}
       </Formik>
       <span>
-        {locale.loginScreen.recommendSignUpPrefix}
+        {locale.homeScreen.login.recommendSignUpPrefix}
         <Link href={CLIENT_REGISTRATION_ROUTE}>
-          {locale.loginScreen.recommendSignUpLink}
+          {locale.homeScreen.login.recommendSignUpLink}
         </Link>
       </span>
       <Toast type={"warning"} isOpen={isWarning} setIsOpen={setIsWarning}>
-        {locale.loginScreen.errors.invalidCredentials}
+        {locale.homeScreen.login.errors.invalidCredentials}
       </Toast>
     </Box>
   );

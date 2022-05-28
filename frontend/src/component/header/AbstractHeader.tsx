@@ -45,7 +45,9 @@ export const AbstractHeader = (props: Props): ReactElement => {
               <Box
                 position={"fixed"}
                 width={56}
-                left={"calc(50% - 28px)"}
+                height={56}
+                left={"calc(50% - 28px)"} // - 50% of width
+                top={"14px"} // 25% of height
                 style={{ cursor: "pointer" }}
                 onClick={() => navigate("/")}
               >

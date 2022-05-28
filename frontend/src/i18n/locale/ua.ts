@@ -16,6 +16,24 @@ export const ua: typeof en = {
       logout: "Вихід",
     },
   },
+  homeScreen: {
+    aboutUs: {
+      title: "Про нас",
+    },
+    login: {
+      loginLabel: "Вхід",
+      emailLabel: "Email",
+      passwordLabel: "Пароль",
+      submitLabel: "Увійти",
+      errors: {
+        required: "Обовязкове поле",
+        invalidEmailAddress: "Email некоректно вказаний",
+        invalidCredentials: "Неправильні данні для входу",
+      },
+      recommendSignUpPrefix: "Все ще не маєта акаунту? ",
+      recommendSignUpLink: "Зареєструйтесь зараз!",
+    },
+  },
   registrationScreen: {
     registrationLabel: "Реєстрація",
     emailLabel: "Email",
@@ -32,19 +50,6 @@ export const ua: typeof en = {
     recommendLoginPrefix: "Вже маєте акаунт? ",
     recommendLoginLink: "Увійдіть зараз!",
   },
-  loginScreen: {
-    loginLabel: "Вхід",
-    emailLabel: "Email",
-    passwordLabel: "Пароль",
-    submitLabel: "Ввійти",
-    errors: {
-      required: "Обовязкове поле",
-      invalidEmailAddress: "Email некоректно вказаний",
-      invalidCredentials: "Неправильні данні для входу",
-    },
-    recommendSignUpPrefix: "Все ще не маєта акаунту? ",
-    recommendSignUpLink: "Зареєструйтесь зараз!",
-  },
   registrationSuccessScreen: {
     title: "Будь ласка, підтвердьте електронну адресу",
     text: "Ви успішно зареєструвалися в нашій супер програмі MVP Bank. Будь ласка, підтвердьте свою електронну пошту, перейшовши за посиланням, яке ми вам надіслали",
@@ -55,11 +60,8 @@ export const ua: typeof en = {
     invalid:
       "Не вірне посилання для підтвердження вашої пошти, будь ласка, спробуйте ще раз",
   },
-  aboutUsScreen: {
-    title: "Про нас",
-  },
   requestSupportScreen: {
-    screenTitle: "Запросити допомого",
+    screenTitle: "Запросити допомогу",
     title: "Тема",
     question: "Питання",
     send: "Надіслати",

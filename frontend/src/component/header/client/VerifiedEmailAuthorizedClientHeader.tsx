@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ReactElement } from "react";
-import InfoIcon from "@mui/icons-material/Info";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -8,7 +7,6 @@ import { useLocale } from "../../../i18n/i18n";
 import { AbstractHeader } from "../AbstractHeader";
 import { useNavigate } from "react-router-dom";
 import {
-  CLIENT_ABOUT_US_ROUTE,
   CLIENT_CABINET_ROUTE,
   CLIENT_SUPPORT_REQUEST_ROUTE,
 } from "../../../constant/route";
@@ -21,11 +19,6 @@ export const VerifiedEmailAuthorizedClientHeader = (): ReactElement => {
   const [, , removeCookie] = useCookies([CLIENT_JWT_COOKIE]);
 
   const pages = [
-    {
-      name: locale.header.pages.about,
-      onClick: () => navigate(CLIENT_ABOUT_US_ROUTE),
-      icon: <InfoIcon />,
-    },
     {
       name: locale.header.pages.requestSupport,
       onClick: () => navigate(CLIENT_SUPPORT_REQUEST_ROUTE),

@@ -14,6 +14,24 @@ export const en = {
       logout: "Logout",
     },
   },
+  homeScreen: {
+    aboutUs: {
+      title: "About us",
+    },
+    login: {
+      loginLabel: "Login",
+      emailLabel: "Email",
+      passwordLabel: "Password",
+      submitLabel: "Submit",
+      errors: {
+        required: "Required",
+        invalidEmailAddress: "Invalid email address",
+        invalidCredentials: "Invalid credentials",
+      },
+      recommendSignUpPrefix: "Still have no account? ",
+      recommendSignUpLink: "Sign up, now!",
+    },
+  },
   registrationScreen: {
     registrationLabel: "Registration",
     emailLabel: "Email",
@@ -30,19 +48,6 @@ export const en = {
     recommendLoginPrefix: "Already have the account? ",
     recommendLoginLink: "Login, now!",
   },
-  loginScreen: {
-    loginLabel: "Login",
-    emailLabel: "Email",
-    passwordLabel: "Password",
-    submitLabel: "Submit",
-    errors: {
-      required: "Required",
-      invalidEmailAddress: "Invalid email address",
-      invalidCredentials: "Invalid credentials",
-    },
-    recommendSignUpPrefix: "Still have no account? ",
-    recommendSignUpLink: "Sign up, now!",
-  },
   registrationSuccessScreen: {
     title: "Please confirm email",
     text: "You have successfully register in our super MVP Bank application. Please confirm your email by following link we sent you",
@@ -52,9 +57,7 @@ export const en = {
   clientConfirmEmailScreen: {
     invalid: "Invalid link to confirm your email, please try again",
   },
-  aboutUsScreen: {
-    title: "About us",
-  },
+
   requestSupportScreen: {
     screenTitle: "Request support",
     title: "Topic",
