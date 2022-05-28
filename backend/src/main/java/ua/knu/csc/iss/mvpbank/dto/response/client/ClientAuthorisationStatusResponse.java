@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientAuthorisationStatusResponse {
+  private Long id;
   private String email;
+  private String firstNme;
+  private String lastName;
   private boolean emailVerified;
 }

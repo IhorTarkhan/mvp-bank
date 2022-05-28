@@ -86,7 +86,10 @@ public class ClientAuthorisationService {
   public ClientAuthorisationStatusResponse getCurrentClient() {
     Client currentClient = userSecurityService.getCurrentClient();
     return ClientAuthorisationStatusResponse.builder()
+        .id(currentClient.getId())
         .email(currentClient.getEmail())
+        .firstNme(currentClient.getFirstName())
+        .lastName(currentClient.getLastName())
         .emailVerified(currentClient.isEmailVerified())
         .build();
   }
