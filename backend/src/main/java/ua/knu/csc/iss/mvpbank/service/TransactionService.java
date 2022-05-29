@@ -19,6 +19,7 @@ public class TransactionService {
 
   @Transactional
   public void process(Long id) {
+    transactionRepository.flush();
     Transaction transaction =
         transactionRepository
             .findById(id)
@@ -30,6 +31,9 @@ public class TransactionService {
     }
     if (clientFrom.getAmount().compareTo(transaction.getAmount()) < 0) {
       throw new BadRequestException("Not enough money");
+    }
+    if (transaction.getAccepted() != null) {
+      throw new BadRequestException("Already process");
     }
     clientFrom.setAmount(clientFrom.getAmount().subtract(transaction.getAmount()));
     clientTo.setAmount(clientTo.getAmount().add(transaction.getAmount()));

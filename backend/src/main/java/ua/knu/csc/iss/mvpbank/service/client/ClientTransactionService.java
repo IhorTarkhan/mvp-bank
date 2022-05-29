@@ -51,6 +51,7 @@ public class ClientTransactionService {
             .amount(request.getAmount())
             .build();
     Transaction savedTransaction = transactionRepository.save(newTransaction);
+    transactionRepository.flush();
     tryToAccept(savedTransaction);
   }
 

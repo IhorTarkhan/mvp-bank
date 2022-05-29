@@ -6,11 +6,13 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import {
   ADMIN_HOME_ROUTE,
   ADMIN_MANAGEMENT_ROUTE,
+  ADMIN_MANAGER_TRANSACTIONS_ROUTE,
   ADMIN_SUPPORT_REQUESTS_ROUTE,
 } from "../../constant/route";
 import { AdminHomeScreen } from "../../screen/admin/AdminHomeScreen";
 import { AdminManagementScreen } from "../../screen/admin/superadmin/AdminManagementScreen";
 import { RequestSupportScreen } from "../../screen/admin/support/RequestSupportScreen";
+import { ManagerTransactionScreen } from "../../screen/admin/manager/ManagerTransactionScreen";
 
 export const AdminRouting = (): ReactElement => {
   const adminContext = useContext(AdminContext);
@@ -30,6 +32,10 @@ export const AdminRouting = (): ReactElement => {
         <Route
           path={ADMIN_SUPPORT_REQUESTS_ROUTE}
           element={<RequestSupportScreen />}
+        />
+        <Route
+          path={ADMIN_MANAGER_TRANSACTIONS_ROUTE}
+          element={<ManagerTransactionScreen />}
         />
         <Route path={"/*"} element={<Navigate to={ADMIN_HOME_ROUTE} />} />
       </Routes>

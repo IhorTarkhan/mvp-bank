@@ -12,3 +12,8 @@ export const SUPPORT_SUPPORT_REQUEST_API = "/support/request";
 export const SUPPORT_SUPPORT_REQUEST_ACCEPT_API =
   "/support/request/accept-for-me";
 export const SUPPORT_SUPPORT_REQUEST_CANCEL_API = "/support/request/cancel";
+export const MANAGER_TRANSACTION_API = "/client-manager/transaction";
+export const MANAGER_TRANSACTION_ACCEPT_API =
+  "/client-manager/transaction/accept";
+export const MANAGER_TRANSACTION_CLOSE_API =
+  "/client-manager/transaction/close";

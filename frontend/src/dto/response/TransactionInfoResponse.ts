@@ -1,4 +1,4 @@
-export type ClientTransactionResponse = {
+export type TransactionInfoResponse = {
   id: number;
   idFrom: number;
   usernameFrom: string;

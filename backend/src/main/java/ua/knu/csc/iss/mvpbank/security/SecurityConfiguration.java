@@ -71,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/support/**")
         .hasRole("SUPPORT")
         .antMatchers("/client-manager/**")
-        .hasRole("SUPER_CLIENT_MANAGER")
+        .hasRole("CLIENT_MANAGER")
         // permit all left request
         .anyRequest()
         .permitAll();

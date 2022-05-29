@@ -9,6 +9,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import {
   ADMIN_MANAGEMENT_ROUTE,
+  ADMIN_MANAGER_TRANSACTIONS_ROUTE,
   ADMIN_SUPPORT_REQUESTS_ROUTE,
 } from "../../../constant/route";
 
@@ -29,6 +30,10 @@ export const AdminHeader = (): ReactElement => {
     {
       name: "Request support",
       onClick: () => navigate(ADMIN_SUPPORT_REQUESTS_ROUTE),
+    },
+    {
+      name: "Transaction management",
+      onClick: () => navigate(ADMIN_MANAGER_TRANSACTIONS_ROUTE),
     },
   ];
 

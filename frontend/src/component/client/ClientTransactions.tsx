@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { ClientContext } from "../../util/ClientContext";
 import { Spinner } from "../Spinner";
-import { ClientTransactionResponse } from "../../dto/response/client/ClientTransactionResponse";
+import { TransactionInfoResponse } from "../../dto/response/TransactionInfoResponse";
 import { axios } from "../../util/AxiosInterceptor";
 import { BACKEND_URL } from "../../constant/environment";
 import { CLIENT_TRANSACTION_API } from "../../constant/api";
@@ -35,13 +35,12 @@ import moment from "moment";
 export const ClientTransactions = (): ReactElement => {
   const userContext = useContext(ClientContext);
   const [locale] = useLocale();
-  const [transactions, setTransactions] =
-    useState<ClientTransactionResponse[]>();
+  const [transactions, setTransactions] = useState<TransactionInfoResponse[]>();
   const [isWarning, setIsWarning] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const getStatusIcon = (transaction: ClientTransactionResponse) => {
+  const getStatusIcon = (transaction: TransactionInfoResponse) => {
     if (transaction.accepted === null) {
       return <DownloadingIcon color={"info"} />;
     }
@@ -52,7 +51,7 @@ export const ClientTransactions = (): ReactElement => {
     return <CloseIcon color={"error"} />;
   };
 
-  const getDirectionIcon = (transaction: ClientTransactionResponse) => {
+  const getDirectionIcon = (transaction: TransactionInfoResponse) => {
     if (transaction.idFrom === userContext.client?.id) {
       return <ArrowForwardIcon color={"info"} />;
     }
@@ -63,7 +62,7 @@ export const ClientTransactions = (): ReactElement => {
     return <></>;
   };
 
-  const getOtherUsername = (transaction: ClientTransactionResponse) => {
+  const getOtherUsername = (transaction: TransactionInfoResponse) => {
     if (transaction.idFrom === userContext.client?.id) {
       return transaction.usernameTo;
     }
@@ -87,7 +86,7 @@ export const ClientTransactions = (): ReactElement => {
   const getTransactions = () => {
     axios
       .get(BACKEND_URL + CLIENT_TRANSACTION_API)
-      .then((response: AxiosResponse<ClientTransactionResponse[]>) => {
+      .then((response: AxiosResponse<TransactionInfoResponse[]>) => {
         setTransactions(response.data);
       })
       .catch((e: any) => {
