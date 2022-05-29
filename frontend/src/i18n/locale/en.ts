@@ -32,6 +32,19 @@ export const en = {
       recommendSignUpLink: "Sign up, now!",
     },
   },
+  cabinetScreen: {
+    transactionsTitle: "Your transactions",
+    toCardTitle: "To Card",
+    amountTitle: "Amount",
+    transferTitle: "Transfer",
+    success: "Success",
+    noTransactionTitle: "You have no transactions yet",
+    errors: {
+      required: "Required",
+      incorrectCardNumber: "Incorrect card number",
+      notEnoughMoney: "Not enough money",
+    },
+  },
   registrationScreen: {
     registrationLabel: "Registration",
     emailLabel: "Email",

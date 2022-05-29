@@ -5,6 +5,7 @@ import { ClientContext } from "../../util/ClientContext";
 import { Spinner } from "../../component/Spinner";
 import { ClientPersonalInfo } from "../../component/client/ClientPersonalInfo";
 import { ClientCard } from "../../component/client/ClientCard";
+import { ClientTransactions } from "../../component/client/ClientTransactions";
 
 export const ClientCabinetScreen = (): ReactElement => {
   const userContext = useContext(ClientContext);
@@ -31,7 +32,10 @@ export const ClientCabinetScreen = (): ReactElement => {
           justifyContent={"center"}
           flexDirection={"row"}
         >
-          <ClientCard />
+          <Box>
+            <ClientCard />
+            <ClientTransactions />
+          </Box>
         </Box>
       </Box>
     </Container>

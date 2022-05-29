@@ -34,6 +34,19 @@ export const ua: typeof en = {
       recommendSignUpLink: "Зареєструйтесь зараз!",
     },
   },
+  cabinetScreen: {
+    transactionsTitle: "Ваші минулі транзакції",
+    toCardTitle: "На карту",
+    amountTitle: "Сумма",
+    transferTitle: "Перевести",
+    success: "Успіх",
+    noTransactionTitle: "У вас ще немає трансакцій",
+    errors: {
+      required: "Обовязкове поле",
+      incorrectCardNumber: "Невірний момер рахунку",
+      notEnoughMoney: "недостатньо коштів",
+    },
+  },
   registrationScreen: {
     registrationLabel: "Реєстрація",
     emailLabel: "Email",
