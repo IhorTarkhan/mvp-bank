@@ -12,6 +12,7 @@ import {
   ADMIN_MANAGER_TRANSACTIONS_ROUTE,
   ADMIN_SUPPORT_REQUESTS_ROUTE,
 } from "../../../constant/route";
+import { AdminRoles } from "../../../dto/AdminRoles";
 
 export const AdminHeader = (): ReactElement => {
   const [, , removeCookie] = useCookies([ADMIN_JWT_COOKIE]);
@@ -22,20 +23,30 @@ export const AdminHeader = (): ReactElement => {
     return <Spinner />;
   }
 
-  const pages = [
+  const tmp = [
     {
       name: "Admins",
-      onClick: () => navigate(ADMIN_MANAGEMENT_ROUTE),
+      navigate: ADMIN_MANAGEMENT_ROUTE,
+      roleRequired: AdminRoles.SUPER_ADMIN,
     },
     {
       name: "Request support",
-      onClick: () => navigate(ADMIN_SUPPORT_REQUESTS_ROUTE),
+      navigate: ADMIN_SUPPORT_REQUESTS_ROUTE,
+      roleRequired: AdminRoles.SUPPORT,
     },
     {
       name: "Transaction management",
-      onClick: () => navigate(ADMIN_MANAGER_TRANSACTIONS_ROUTE),
+      navigate: ADMIN_MANAGER_TRANSACTIONS_ROUTE,
+      roleRequired: AdminRoles.CLIENT_MANAGER,
     },
   ];
+
+  const pages = tmp
+    .filter((t) => adminContext.admin?.roles.includes(t.roleRequired))
+    .map((t) => ({
+      name: t.name,
+      onClick: () => navigate(t.navigate),
+    }));
 
   const settings = [
     {
