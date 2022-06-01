@@ -2,11 +2,15 @@ package ua.knu.csc.iss.mvpbank.service.admin.manager;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.knu.csc.iss.mvpbank.dto.response.TransactionInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.admin.manager.ManagerTransactionsHistoryByUserResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.admin.manager.ManagerTransactionsInfoResponse;
+import ua.knu.csc.iss.mvpbank.entity.Client;
+import ua.knu.csc.iss.mvpbank.entity.Transaction;
 import ua.knu.csc.iss.mvpbank.repository.TransactionRepository;
 import ua.knu.csc.iss.mvpbank.service.TransactionService;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -14,23 +18,60 @@ public class ManagerTransactionService {
   private final TransactionRepository transactionRepository;
   private final TransactionService transactionService;
 
-  public List<TransactionInfoResponse> getAllTransactions() {
-    return transactionRepository.findAll().stream()
-        .sorted((o1, o2) -> o2.getTime().compareTo(o1.getTime()))
-        .map(
-            e ->
-                TransactionInfoResponse.builder()
-                    .id(e.getId())
-                    .idFrom(e.getClientFrom().getId())
-                    .usernameFrom(
-                        e.getClientFrom().getFirstName() + " " + e.getClientFrom().getLastName())
-                    .idTo(e.getClientTo().getId())
-                    .usernameTo(
-                        e.getClientTo().getFirstName() + " " + e.getClientTo().getLastName())
-                    .amount(e.getAmount())
-                    .time(e.getTime())
-                    .accepted(e.getAccepted())
-                    .build())
+  public List<ManagerTransactionsInfoResponse> getAllTransactions() {
+    var resultMap = new HashMap<Client, ManagerTransactionsInfoResponse>();
+    List<Transaction> database = transactionRepository.findAll();
+    for (Transaction transaction : database) {
+      Client clientFrom = transaction.getClientFrom();
+      Client clientTo = transaction.getClientTo();
+
+      var responseFrom =
+          resultMap.getOrDefault(
+              clientFrom,
+              ManagerTransactionsInfoResponse.builder()
+                  .userId(clientFrom.getId())
+                  .userFullName(clientFrom.getFirstName() + " " + clientFrom.getLastName())
+                  .history(new ArrayList<>())
+                  .build());
+      responseFrom
+          .getHistory()
+          .add(
+              ManagerTransactionsHistoryByUserResponse.builder()
+                  .id(transaction.getId())
+                  .fromCurrentUser(true)
+                  .otherUserId(clientTo.getId())
+                  .otherUserFullName(clientTo.getFirstName() + " " + clientTo.getLastName())
+                  .amount(transaction.getAmount())
+                  .time(transaction.getTime())
+                  .accepted(transaction.getAccepted())
+                  .build());
+      resultMap.put(clientFrom, responseFrom);
+
+      var responseTo =
+          resultMap.getOrDefault(
+              clientTo,
+              ManagerTransactionsInfoResponse.builder()
+                  .userId(clientTo.getId())
+                  .userFullName(clientTo.getFirstName() + " " + clientTo.getLastName())
+                  .history(new ArrayList<>())
+                  .build());
+      responseTo
+          .getHistory()
+          .add(
+              ManagerTransactionsHistoryByUserResponse.builder()
+                  .id(transaction.getId())
+                  .fromCurrentUser(false)
+                  .otherUserId(clientFrom.getId())
+                  .otherUserFullName(clientFrom.getFirstName() + " " + clientFrom.getLastName())
+                  .amount(transaction.getAmount())
+                  .time(transaction.getTime())
+                  .accepted(transaction.getAccepted())
+                  .build());
+      resultMap.put(clientTo, responseTo);
+    }
+    return resultMap.entrySet().stream()
+        .sorted(Comparator.comparing(o -> o.getKey().getId()))
+        .map(Map.Entry::getValue)
         .toList();
   }
 

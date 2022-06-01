@@ -3,7 +3,7 @@ package ua.knu.csc.iss.mvpbank.controller.admin.manager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ua.knu.csc.iss.mvpbank.dto.response.TransactionInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.admin.manager.ManagerTransactionsInfoResponse;
 import ua.knu.csc.iss.mvpbank.service.admin.manager.ManagerTransactionService;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class ManagerTransactionController {
   private final ManagerTransactionService managerTransactionService;
 
   @GetMapping
-  public List<TransactionInfoResponse> getAllTransactions() {
+  public List<ManagerTransactionsInfoResponse> getAllTransactions() {
     return managerTransactionService.getAllTransactions();
   }
 

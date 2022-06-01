@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.knu.csc.iss.mvpbank.dto.request.client.ClientTransactionRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.TransactionInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.client.TransactionInfoResponse;
 import ua.knu.csc.iss.mvpbank.entity.Client;
 import ua.knu.csc.iss.mvpbank.entity.Transaction;
 import ua.knu.csc.iss.mvpbank.exceptions.BadRequestException;

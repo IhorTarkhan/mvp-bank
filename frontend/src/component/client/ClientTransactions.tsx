@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { ClientContext } from "../../util/ClientContext";
 import { Spinner } from "../Spinner";
-import { TransactionInfoResponse } from "../../dto/response/TransactionInfoResponse";
+import { TransactionInfoResponse } from "../../dto/response/client/TransactionInfoResponse";
 import { axios } from "../../util/AxiosInterceptor";
 import { BACKEND_URL } from "../../constant/environment";
 import { CLIENT_TRANSACTION_API } from "../../constant/api";

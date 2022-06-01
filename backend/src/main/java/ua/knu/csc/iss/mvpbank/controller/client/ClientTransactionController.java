@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ua.knu.csc.iss.mvpbank.dto.request.client.ClientTransactionRequest;
-import ua.knu.csc.iss.mvpbank.dto.response.TransactionInfoResponse;
+import ua.knu.csc.iss.mvpbank.dto.response.client.TransactionInfoResponse;
 import ua.knu.csc.iss.mvpbank.service.client.ClientTransactionService;
 
 import java.util.List;
